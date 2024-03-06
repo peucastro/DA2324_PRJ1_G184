@@ -4,11 +4,16 @@
 #include "../inc/Graph.hpp"
 #include "../inc/Node.hpp"
 #include <string>
+#include <fstream>
+#include <sstream>
 
-class WaterSupplyNetwork
+class WaterNetwork
 {
 public:
-    WaterSupplyNetwork(const std::string reservoir_filename, const std::string stations_filename, const std::string cities_filename, const std::string pipes_filename);
+    WaterNetwork();
+    WaterNetwork(const std::string reservoirs_filename, const std::string stations_filename, const std::string cities_filename, const std::string pipes_filename);
+
+    Graph<Node> *getNetworkGraph() const;
 
 private:
     Graph<Node> *network;

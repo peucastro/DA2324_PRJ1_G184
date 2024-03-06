@@ -6,7 +6,9 @@
 class Node
 {
 public:
-    Node();
+    Node();                                                                                                                                          // Default constructor
+    Node(const unsigned char &type, const std::string &code, const std::string &reservoir, const std::string &municipality, const int &maxDelivery); // Reservoir constructor
+    Node(const unsigned char &type, const std::string &code);                                                                                        // Station constructor
 
     // Getters for common attributes
     size_t getType() const;
@@ -21,9 +23,12 @@ public:
     int getDemand() const;
     int getPopulation() const;
 
+    //  Operators overload
+    bool operator==(const Node &other);
+
 private:
     // Common attributes
-    size_t type; // 0 -> Reservoir  ;  1 -> Station  ;  2 -> City
+    unsigned char type; // 0 -> Reservoir  ;  1 -> Station  ;  2 -> City
     std::string code;
 
     // Reservoir exclusive attributes
