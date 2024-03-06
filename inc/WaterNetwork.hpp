@@ -12,7 +12,6 @@ class WaterNetwork
 public:
     WaterNetwork();
     WaterNetwork(const std::string reservoirs_filename, const std::string stations_filename, const std::string cities_filename, const std::string pipes_filename);
-
     Graph<Node> *getNetworkGraph() const;
 
 private:

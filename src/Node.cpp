@@ -8,6 +8,8 @@ Node::Node(const unsigned char &type, const std::string &code) : type(1), code(c
 
 Node::Node(const unsigned char &type, const std::string &code, const std::string &municipality, const int &demand) : type(2), code(code), municipality(municipality), demand(demand) {}
 
+Node::Node(const std::string &code) : code(code) {}
+
 size_t Node::getType() const
 {
     return type;

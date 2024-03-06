@@ -39,6 +39,17 @@ void testStations(WaterNetwork *wn)
     }
     cout << '\n';
 }
+void testPipes(WaterNetwork *wn)
+{
+    cout << "Pipes:\n";
+    for (const Vertex<Node> *v : wn->getNetworkGraph()->getVertexSet())
+    {
+        for(const Edge<Node>* e : v->getAdj()){
+            cout << e->getOrig()->getInfo().getCode() << "->" << e->getDest()->getInfo().getCode() << ':' << e->getWeight() << 'l' << '\n';
+        }
+    }
+    cout << '\n';
+}
 
 int main()
 {
@@ -49,7 +60,7 @@ int main()
         testReservoirs(&wn);
         testStations(&wn);
         testCities(&wn);
-
+        testPipes(&wn);
         cout << "Compiled successfully!\n";
         return 0;
     }

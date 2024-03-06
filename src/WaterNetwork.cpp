@@ -57,6 +57,34 @@ WaterNetwork::WaterNetwork(const std::string reservoirs_filename, const std::str
 
         network->addVertex(new_city);
     }
+
+    ifstream pipes_file(pipes_filename);
+    if (!pipes_file.is_open())
+        throw runtime_error("Pipes file does not exist!");
+
+    getline(pipes_file, line);
+    while (getline(pipes_file, line))
+    {
+        istringstream iss(line);
+        string source_str, target_str, cap_str, dir_str;
+        getline(getline(getline(getline(iss, source_str, ','), target_str, ','), cap_str, ','), dir_str, '\r');
+
+        double cap = std::stod(cap_str);
+
+        Node source_node(source_str);
+        Node target_node(target_str);
+
+        Vertex<Node>* source_v = network->findVertex(source_node);
+        Vertex<Node>* target_v = network->findVertex(target_node);
+
+        if(dir_str == "1"){
+            source_v->addEdge(target_v, cap);
+        }
+        else{
+            source_v->addEdge(target_v, cap);
+            target_v->addEdge(source_v, cap);
+        }
+    }
 }
 
 Graph<Node> *WaterNetwork::getNetworkGraph() const
