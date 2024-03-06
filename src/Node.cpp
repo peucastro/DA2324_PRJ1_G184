@@ -6,6 +6,8 @@ Node::Node(const unsigned char &type, const std::string &code, const std::string
 
 Node::Node(const unsigned char &type, const std::string &code) : type(1), code(code) {}
 
+Node::Node(const unsigned char &type, const std::string &code, const std::string &municipality, const int &demand) : type(2), code(code), municipality(municipality), demand(demand) {}
+
 size_t Node::getType() const
 {
     return type;

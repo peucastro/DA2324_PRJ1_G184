@@ -9,6 +9,7 @@ public:
     Node();                                                                                                                                          // Default constructor
     Node(const unsigned char &type, const std::string &code, const std::string &reservoir, const std::string &municipality, const int &maxDelivery); // Reservoir constructor
     Node(const unsigned char &type, const std::string &code);                                                                                        // Station constructor
+    Node(const unsigned char &type, const std::string &code, const std::string &municipality, const int &demand);                                     // Cities constructor
 
     // Getters for common attributes
     size_t getType() const;
