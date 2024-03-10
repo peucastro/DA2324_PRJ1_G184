@@ -10,7 +10,7 @@ void clearScreen()
 #endif
 }
 
-App::App(WaterNetwork &waternetwowk)
+App::App(WaterNetwork &waternetwork)
 {
     this->waternetwork = waternetwork;
     clearScreen();
@@ -73,7 +73,7 @@ void App::statisticsMenu()
     vector<Node> cities;
     vector<Edge<Node> *> pipes;
 
-    /*for (Vertex<Node> *v : waternetwork.getNetworkGraph()->getVertexSet())
+    for (Vertex<Node> *v : waternetwork.getNetworkGraph()->getVertexSet())
     {
         if (v->getInfo().getType() == 0)
             reservoirs.push_back(v->getInfo());
@@ -84,7 +84,7 @@ void App::statisticsMenu()
 
         for (Edge<Node> *e : v->getAdj())
             pipes.push_back(e);
-    }*/
+    }
 
     cout << "=================================================================================================" << endl
          << reservoirs.size() << " reservoirs:" << endl;
