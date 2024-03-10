@@ -44,20 +44,22 @@ WaterNetwork::WaterNetwork(const std::string reservoirs_filename, const std::str
 
     // Parse cities file
     ifstream cities_file(cities_filename);
-    if(!cities_file.is_open())
+    if (!cities_file.is_open())
         throw runtime_error("Cities file does not exist!");
+
     getline(cities_file, line);
     while (getline(cities_file, line))
     {
         istringstream iss(line);
         string municipality_str, id_str, code_str, demand_str, population_str;
-        getline(getline(getline(getline(getline(iss, municipality_str, ','), id_str, ','), code_str, ','), demand_str, ','),population_str, '\r');
+        getline(getline(getline(getline(getline(iss, municipality_str, ','), id_str, ','), code_str, ','), demand_str, ','), population_str, '\r');
 
         Node new_city(2, code_str, municipality_str, stoi(demand_str));
 
         network->addVertex(new_city);
     }
 
+    // Parse pipes file
     ifstream pipes_file(pipes_filename);
     if (!pipes_file.is_open())
         throw runtime_error("Pipes file does not exist!");
@@ -74,13 +76,15 @@ WaterNetwork::WaterNetwork(const std::string reservoirs_filename, const std::str
         Node source_node(source_str);
         Node target_node(target_str);
 
-        Vertex<Node>* source_v = network->findVertex(source_node);
-        Vertex<Node>* target_v = network->findVertex(target_node);
+        Vertex<Node> *source_v = network->findVertex(source_node);
+        Vertex<Node> *target_v = network->findVertex(target_node);
 
-        if(dir_str == "1"){
+        if (dir_str == "1")
+        {
             source_v->addEdge(target_v, cap);
         }
-        else{
+        else
+        {
             source_v->addEdge(target_v, cap);
             target_v->addEdge(source_v, cap);
         }
@@ -90,4 +94,16 @@ WaterNetwork::WaterNetwork(const std::string reservoirs_filename, const std::str
 Graph<Node> *WaterNetwork::getNetworkGraph() const
 {
     return network;
+}
+
+Vertex<Node> *createSuperSource(Graph<Node> *g)
+{
+    // TODO
+    return nullptr;
+}
+
+double WaterNetwork::singleSinkFlow(const std::string &city_code)
+{
+    // TODO
+    return 0.0;
 }
