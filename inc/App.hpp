@@ -9,6 +9,7 @@ public:
     App(WaterNetwork &waternetwowk);
 
     void mainMenu();
+    void goBackMainMenu();
     void statisticsMenu();
     void maxFlowMenu();
 

@@ -11,13 +11,15 @@ class WaterNetwork
 public:
     WaterNetwork();
     WaterNetwork(const std::string reservoirs_filename, const std::string stations_filename, const std::string cities_filename, const std::string pipes_filename);
+    ~WaterNetwork();
     Graph<Node> *getNetworkGraph() const;
-    double singleSinkFlow(const std::string &city_code);
+    double singleSinkFlow(const std::string &city_code) const;
+    std::vector<std::pair<std::string, double>> multiSinkFlow() const;
 
 private:
     Graph<Node> *network;
 };
 
-Vertex<Node> *createSuperSource(Graph<Node> *g);
+Node createSuperSource(Graph<Node> *g);
 
 #endif

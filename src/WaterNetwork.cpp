@@ -3,7 +3,7 @@ using namespace std;
 
 WaterNetwork::WaterNetwork() {}
 
-WaterNetwork::WaterNetwork(const std::string reservoirs_filename, const std::string stations_filename, const std::string cities_filename, const std::string pipes_filename)
+WaterNetwork::WaterNetwork(const string reservoirs_filename, const string stations_filename, const string cities_filename, const string pipes_filename)
 {
     network = new Graph<Node>();
     string line;
@@ -71,7 +71,7 @@ WaterNetwork::WaterNetwork(const std::string reservoirs_filename, const std::str
         string source_str, target_str, cap_str, dir_str;
         getline(getline(getline(getline(iss, source_str, ','), target_str, ','), cap_str, ','), dir_str, '\r');
 
-        double cap = std::stod(cap_str);
+        double cap = stod(cap_str);
 
         Node source_node(source_str);
         Node target_node(target_str);
@@ -89,6 +89,16 @@ WaterNetwork::WaterNetwork(const std::string reservoirs_filename, const std::str
             target_v->addEdge(source_v, cap);
         }
     }
+
+    reservoirs_file.close();
+    stations_file.close();
+    cities_file.close();
+    pipes_file.close();
+}
+
+WaterNetwork::~WaterNetwork()
+{
+    delete network;
 }
 
 Graph<Node> *WaterNetwork::getNetworkGraph() const
@@ -96,14 +106,64 @@ Graph<Node> *WaterNetwork::getNetworkGraph() const
     return network;
 }
 
-Vertex<Node> *createSuperSource(Graph<Node> *g)
+Node createSuperSource(Graph<Node> *g)
 {
-    // TODO
-    return nullptr;
+    Node superNode(0, "superSource", "superSource", "superSource", numeric_limits<int>::max());
+    g->addVertex(superNode);
+    Vertex<Node> *superSource = g->findVertex(superNode);
+
+    for (Vertex<Node> *v : g->getVertexSet())
+        if (v->getInfo().getType() == 0 && v->getInfo().getCode() != "superSource")
+            superSource->addEdge(v, numeric_limits<int>::max());
+
+    return superNode;
 }
 
-double WaterNetwork::singleSinkFlow(const std::string &city_code)
+double WaterNetwork::singleSinkFlow(const string &city_code) const
 {
-    // TODO
-    return 0.0;
+    Node s = createSuperSource(network);
+    Node t(city_code);
+    edmondsKarp(network, s, t);
+
+    double flow = 0;
+    Vertex<Node> *sink_vertex = network->findVertex(t);
+    for (Edge<Node> *e : sink_vertex->getIncoming())
+        flow += e->getFlow();
+
+    for (Vertex<Node> *v : network->getVertexSet())
+    {
+        v->setVisited(false);
+        v->setPath(nullptr);
+
+        for (Edge<Node> *e : v->getAdj())
+            e->setFlow(0);
+        for (Edge<Node> *e : v->getIncoming())
+            e->setFlow(0);
+    }
+    network->removeVertex(s);
+
+    return flow;
+}
+
+vector<pair<string, double>> WaterNetwork::multiSinkFlow() const
+{
+    vector<pair<string, double>> res;
+    double flow;
+
+    ofstream out("../out/maxFlow.csv");
+    if (!out.is_open())
+        throw runtime_error("Error opening the output file.");
+
+    for (Vertex<Node> *v : network->getVertexSet())
+    {
+        if (v->getInfo().getType() == 2 && v->getInfo().getCode() != "superSource")
+        {
+            flow = singleSinkFlow(v->getInfo().getCode());
+            res.push_back(make_pair(v->getInfo().getCode(), flow));
+            out << v->getInfo().getCode() << ',' << flow << '\r';
+        }
+    }
+
+    out.close();
+    return res;
 }

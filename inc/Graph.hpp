@@ -508,7 +508,7 @@ std::vector<T> Graph<T>::dfs() const
 template <class T>
 std::vector<T> Graph<T>::dfs(const T &source) const
 {
-    std::vector<int> res;
+    std::vector<T> res;
     // Get the source vertex
     auto s = findVertex(source);
     if (s == nullptr)
@@ -554,7 +554,7 @@ void Graph<T>::dfsVisit(Vertex<T> *v, std::vector<T> &res) const
 template <class T>
 std::vector<T> Graph<T>::bfs(const T &source) const
 {
-    std::vector<int> res;
+    std::vector<T> res;
     // Get the source vertex
     auto s = findVertex(source);
     if (s == nullptr)
@@ -653,7 +653,7 @@ bool Graph<T>::dfsIsDAG(Vertex<T> *v) const
 template <class T>
 std::vector<T> Graph<T>::topsort() const
 {
-    std::vector<int> res;
+    std::vector<T> res;
 
     for (auto v : vertexSet)
     {
@@ -800,7 +800,7 @@ void augmentFlowAlongPath(Vertex<T> *s, Vertex<T> *t, double f)
 
 // Main function implementing the Edmonds-Karp algorithm
 template <class T>
-void edmondsKarp(Graph<T> *g, int source, int target)
+void edmondsKarp(Graph<T> *g, T source, T target)
 {
     // Find source and target vertices in the graph
     Vertex<T> *s = g->findVertex(source);

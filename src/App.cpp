@@ -66,6 +66,29 @@ void App::mainMenu()
     }
 }
 
+void App::goBackMainMenu()
+{
+    unsigned int option;
+    cout << "[0] Go back to the main menu." << endl
+         << endl;
+
+    while (true)
+    {
+        cout << "-> ", cin >> option;
+        if (option == 0)
+        {
+            clearScreen();
+            mainMenu();
+            break;
+        }
+        else
+        {
+            cout << "Invalid option, please try again:" << endl
+                 << endl;
+        }
+    }
+}
+
 void App::statisticsMenu()
 {
     vector<Node> reservoirs;
@@ -99,33 +122,15 @@ void App::statisticsMenu()
     cout << "=================================================================================================" << endl
          << cities.size() << " cities:" << endl;
     for (const Node &c : cities)
-        cout << c.getMunicipality() << endl;
+        cout << '[' << c.getCode() << "] " << c.getMunicipality() << endl;
 
     cout << "=================================================================================================" << endl
          << pipes.size() << " pipes:" << endl;
     for (const Edge<Node> *p : pipes)
-        cout << p->getOrig() << " --" << p->getWeight() << "--> " << p->getDest() << endl;
+        cout << p->getOrig()->getInfo().getCode() << " --- " << p->getWeight() << "l ---> " << p->getDest()->getInfo().getCode() << endl;
     cout << "=================================================================================================" << endl;
 
-    unsigned int option;
-    cout << "[0] Go back to the main menu." << endl
-         << endl;
-
-    while (true)
-    {
-        cout << "-> ", cin >> option;
-        if (option == 0)
-        {
-            clearScreen();
-            mainMenu();
-            break;
-        }
-        else
-        {
-            cout << "Invalid option, please try again:" << endl
-                 << endl;
-        }
-    }
+    goBackMainMenu();
 }
 
 void App::maxFlowMenu()
@@ -144,7 +149,28 @@ void App::maxFlowMenu()
     {
     case 1:
     {
-        cout << "todo...\n";
+        clearScreen();
+        vector<pair<string, double>> pairs;
+
+        try
+        {
+            pairs = waternetwork.multiSinkFlow();
+        }
+        catch (const std::exception &e)
+        {
+            clearScreen();
+            std::cerr << e.what() << '\n';
+            mainMenu();
+        }
+
+        cout << "=================================================================================================" << endl
+             << "Maximum amount of water that can reach each city:" << endl;
+        for (const pair<string, double> &p : pairs)
+            cout << p.first << ',' << p.second << endl;
+        cout << endl
+             << "You can also check this information in the output folder (maxFLow.csv)." << endl
+             << "=================================================================================================" << endl;
+        goBackMainMenu();
         break;
     }
     case 2:
@@ -156,9 +182,25 @@ void App::maxFlowMenu()
         cin >> city_code;
 
         Node city_node(city_code);
-        double flow = waternetwork.singleSinkFlow(city_code);
+        Vertex<Node> *city_vertex = waternetwork.getNetworkGraph()->findVertex(city_node);
+        double flow;
 
-        cout << "The maximum amount of water that can reach " << city_code << " is " << flow << endl;
+        try
+        {
+            flow = waternetwork.singleSinkFlow(city_code);
+        }
+        catch (const std::exception &e)
+        {
+            clearScreen();
+            std::cerr << e.what() << '\n';
+            mainMenu();
+        }
+
+        cout << endl
+             << "=================================================================================================" << endl
+             << "The maximum amount of water that can reach " << city_vertex->getInfo().getMunicipality() << " is " << flow << endl
+             << "=================================================================================================" << endl;
+        goBackMainMenu();
         break;
     }
     case 0:

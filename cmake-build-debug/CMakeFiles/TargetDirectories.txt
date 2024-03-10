@@ -1,3 +1,0 @@
-D:/UPorto/DA/project1/DA2324_PRJ1_G184/cmake-build-debug/CMakeFiles/DA2324_PRJ1_G184.dir
-D:/UPorto/DA/project1/DA2324_PRJ1_G184/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/UPorto/DA/project1/DA2324_PRJ1_G184/cmake-build-debug/CMakeFiles/rebuild_cache.dir
