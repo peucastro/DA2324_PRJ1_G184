@@ -112,7 +112,7 @@ void App::statisticsMenu()
     cout << "=================================================================================================" << endl
          << reservoirs.size() << " reservoirs:" << endl;
     for (const Node &r : reservoirs)
-        cout << r.getReservoir() << endl;
+        cout << '[' << r.getCode() << "] " << r.getReservoir() << endl;
 
     cout << "=================================================================================================" << endl
          << stations.size() << " stations:" << endl;
@@ -154,7 +154,7 @@ void App::maxFlowMenu()
 
         try
         {
-            pairs = waternetwork.multiSinkFlow();
+            pairs = waternetwork.multiSinkMaxFlow();
         }
         catch (const std::exception &e)
         {
@@ -187,7 +187,7 @@ void App::maxFlowMenu()
 
         try
         {
-            flow = waternetwork.singleSinkFlow(city_code);
+            flow = waternetwork.singleSinkMaxFlow(city_code);
         }
         catch (const std::exception &e)
         {

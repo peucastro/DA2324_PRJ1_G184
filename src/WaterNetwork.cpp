@@ -114,12 +114,12 @@ Node createSuperSource(Graph<Node> *g)
 
     for (Vertex<Node> *v : g->getVertexSet())
         if (v->getInfo().getType() == 0 && v->getInfo().getCode() != "superSource")
-            superSource->addEdge(v, numeric_limits<int>::max());
+            superSource->addEdge(v, INF);
 
     return superNode;
 }
 
-double WaterNetwork::singleSinkFlow(const string &city_code) const
+double WaterNetwork::singleSinkMaxFlow(const string &city_code) const
 {
     Node s = createSuperSource(network);
     Node t(city_code);
@@ -145,24 +145,59 @@ double WaterNetwork::singleSinkFlow(const string &city_code) const
     return flow;
 }
 
-vector<pair<string, double>> WaterNetwork::multiSinkFlow() const
+Node createSuperSink(Graph<Node> *g)
+{
+    Node superNode(2, "superSink", "superSink", numeric_limits<int>::max());
+    g->addVertex(superNode);
+    Vertex<Node> *superSink = g->findVertex(superNode);
+
+    for (Vertex<Node> *v : g->getVertexSet())
+        if (v->getInfo().getType() == 2 && v->getInfo().getCode() != "superSink")
+            v->addEdge(superSink, INF);
+
+    return superNode;
+}
+
+vector<pair<string, double>> WaterNetwork::multiSinkMaxFlow() const
 {
     vector<pair<string, double>> res;
     double flow;
 
-    ofstream out("../out/maxFlow.csv");
-    if (!out.is_open())
-        throw runtime_error("Error opening the output file.");
+    Node s = createSuperSource(network);
+    Node t = createSuperSink(network);
+    edmondsKarp(network, s, t);
+
+    filesystem::path outputPath("../out");
+    if (!filesystem::exists(outputPath))
+        filesystem::create_directories(outputPath);
+    ofstream out("../out/MaxFlow.csv");
+    out.clear();
+    out << "CityCode,Flow\r";
 
     for (Vertex<Node> *v : network->getVertexSet())
     {
-        if (v->getInfo().getType() == 2 && v->getInfo().getCode() != "superSource")
+        flow = 0.0;
+        if (v->getInfo().getType() == 2 && v->getInfo().getCode() != "superSink")
         {
-            flow = singleSinkFlow(v->getInfo().getCode());
+            for (Edge<Node> *e : v->getIncoming())
+                flow += e->getFlow();
             res.push_back(make_pair(v->getInfo().getCode(), flow));
             out << v->getInfo().getCode() << ',' << flow << '\r';
         }
     }
+
+    for (Vertex<Node> *v : network->getVertexSet())
+    {
+        v->setVisited(false);
+        v->setPath(nullptr);
+
+        for (Edge<Node> *e : v->getAdj())
+            e->setFlow(0);
+        for (Edge<Node> *e : v->getIncoming())
+            e->setFlow(0);
+    }
+    network->removeVertex(s);
+    network->removeVertex(t);
 
     out.close();
     return res;
