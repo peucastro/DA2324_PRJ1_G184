@@ -151,6 +151,7 @@ void App::maxFlowMenu()
     {
         clearScreen();
         vector<pair<string, double>> pairs;
+        double totalFlow = 0.0;
 
         try
         {
@@ -166,8 +167,13 @@ void App::maxFlowMenu()
         cout << "=================================================================================================" << endl
              << "Maximum amount of water that can reach each city:" << endl;
         for (const pair<string, double> &p : pairs)
+        {
             cout << p.first << ',' << p.second << endl;
+            totalFlow += p.second;
+        }
         cout << endl
+             << "Toal flow: " << totalFlow << endl
+             << endl
              << "You can also check this information in the output folder (maxFLow.csv)." << endl
              << "=================================================================================================" << endl;
         goBackMainMenu();

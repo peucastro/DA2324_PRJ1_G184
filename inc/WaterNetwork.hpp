@@ -21,6 +21,12 @@ private:
     Graph<Node> *network;
 };
 
+void testAndVisit(std::queue<Vertex<Node> *> &q, Edge<Node> *e, Vertex<Node> *w, double residual);
+bool findAugmentingPath(Graph<Node> *g, Vertex<Node> *s, Vertex<Node> *t);
+double findMinResidualAlongPath(Vertex<Node> *s, Vertex<Node> *t);
+void augmentFlowAlongPath(Vertex<Node> *s, Vertex<Node> *t, double f);
+void edmondsKarp(Graph<Node> *g, Node source, Node target);
+
 Node createSuperSource(Graph<Node> *g);
 Node createSuperSink(Graph<Node> *g);
 

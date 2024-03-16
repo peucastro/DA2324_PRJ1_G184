@@ -12,18 +12,22 @@ public:
     Node(const unsigned char &type, const std::string &code, const std::string &municipality, const int &demand);                                     // Cities constructor
     Node(const std::string &code); //Simple constructor to find nodes
 
-    // Getters for common attributes
+    // Methods for common attributes
     size_t getType() const;
     std::string getCode() const;
 
-    // Getters for reservoir exclusive attributes
+    // Methods for reservoir exclusive attributes
     std::string getReservoir() const;
     std::string getMunicipality() const;
     int getMaxDelivery() const;
+    int getUsedDelivery() const;
+    void setUsedDelivery(const int &new_delivery);
 
-    // Getters for city exclusive attributes
+    // Methods for city exclusive attributes
     int getDemand() const;
     int getPopulation() const;
+    int getCurrentFlow() const;
+    void setCurrentFlow(const int &new_flow);
 
     //  Operators overload
     bool operator==(const Node &other);
@@ -37,9 +41,11 @@ private:
     std::string reservoir;
     std::string municipality;
     int maxDelivery;
+    int usedDelivery;
 
     // City exclusive attributes
     int demand;
+    int currentFlow;
     int population;
 };
 

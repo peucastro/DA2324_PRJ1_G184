@@ -7,7 +7,7 @@ int main()
 {
     try
     {
-        WaterNetwork waternetwork("../test/Reservoirs_Madeira.csv", "../test/Stations_Madeira.csv", "../test/Cities_Madeira.csv", "../test/Pipes_Madeira.csv");
+        WaterNetwork waternetwork("../data/Reservoir.csv", "../data/Stations.csv", "../data/Cities.csv", "../data/Pipes.csv");
         App app(waternetwork);
     }
     catch (const std::exception &e)

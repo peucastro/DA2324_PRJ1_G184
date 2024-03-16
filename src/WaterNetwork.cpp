@@ -106,6 +106,149 @@ Graph<Node> *WaterNetwork::getNetworkGraph() const
     return network;
 }
 
+void testAndVisit(queue<Vertex<Node> *> &q, Edge<Node> *e, Vertex<Node> *w, double residual)
+{
+    // Check if the vertex 'w' is not visited and there is residual capacity
+    if (!w->isVisited() && residual > 0)
+    {
+        // If 'w' is a reservoir, check if it's already saturated
+        if (w->getInfo().getType() == 0 && w->getInfo().getMaxDelivery() == w->getInfo().getUsedDelivery())
+            return;
+
+        // If 'w' is a city, check if the demand is already satisfied
+        else if (w->getInfo().getType() == 2 && (w->getInfo().getDemand() == w->getInfo().getCurrentFlow() || w->getInfo().getCurrentFlow() > w->getInfo().getDemand()))
+            return;
+
+        // Mark 'w' as visited, set the path through which it was reached, and enqueue it
+        w->setVisited(true);
+        w->setPath(e);
+        q.push(w);
+    }
+}
+
+bool findAugmentingPath(Graph<Node> *g, Vertex<Node> *s, Vertex<Node> *t)
+{
+    // Mark all vertices as not visited
+    for (Vertex<Node> *v : g->getVertexSet())
+    {
+        // If 'v' is a reservoir, check if it's already saturated
+        if (v->getInfo().getType() == 0 && v->getInfo().getMaxDelivery() == v->getInfo().getUsedDelivery())
+            v->setVisited(true);
+
+        // If 'v' is a city, check if the demand is already satisfied
+        if (v->getInfo().getType() == 2 && (v->getInfo().getDemand() == v->getInfo().getCurrentFlow() || v->getInfo().getCurrentFlow() > v->getInfo().getDemand()))
+            v->setVisited(true);
+
+        else
+            v->setVisited(false);
+    }
+
+    // Mark the source vertex as visited and enqueue it
+    s->setVisited(true);
+    queue<Vertex<Node> *> q;
+    q.push(s);
+
+    // BFS to find an augmenting path
+    while (!q.empty() && !t->isVisited())
+    {
+        Vertex<Node> *v = q.front();
+        q.pop();
+
+        // Process outgoing edges
+        for (Edge<Node> *e : v->getAdj())
+            testAndVisit(q, e, e->getDest(), e->getWeight() - e->getFlow());
+        // Process incoming edges
+        for (Edge<Node> *e : v->getIncoming())
+            testAndVisit(q, e, e->getOrig(), e->getFlow());
+    }
+    // Return true if a path to the target is found, false otherwise
+    return t->isVisited();
+}
+
+// Function to find the minimum residual capacity along the augmenting path
+double findMinResidualAlongPath(Vertex<Node> *s, Vertex<Node> *t)
+{
+    double f = INF;
+    // Traverse the augmenting path to find the minimum residual capacity
+    for (Vertex<Node> *v = t; v != s;)
+    {
+        Edge<Node> *e = v->getPath();
+        if (e->getDest() == v)
+        {
+            f = min(f, e->getWeight() - e->getFlow());
+            // If the destination vertex is a city, consider its demand
+            if (e->getDest()->getInfo().getType() == 2)
+                f = min(f, (double)e->getDest()->getInfo().getDemand());
+            v = e->getOrig();
+        }
+        else
+        {
+            f = min(f, e->getFlow());
+            // If the origin vertex is a reservoir, consider it's the residual capacity
+            if (e->getOrig()->getInfo().getType() == 0)
+                f = min(f, (double)(e->getOrig()->getInfo().getMaxDelivery() - e->getOrig()->getInfo().getUsedDelivery()));
+            v = e->getDest();
+        }
+    }
+    // Return the minimum residual capacity
+    return f;
+}
+
+// Function to augment flow along the augmenting path with the given flow value
+void augmentFlowAlongPath(Vertex<Node> *s, Vertex<Node> *t, double f)
+{
+    // Traverse the augmenting path and update the flow values accordingly
+    for (Vertex<Node> *v = t; v != s;)
+    {
+        Edge<Node> *e = v->getPath();
+        double flow = e->getFlow();
+        if (e->getDest() == v)
+        {
+            // Update flow and current flow for destination vertex
+            e->setFlow(flow + f);
+            if (v->getInfo().getType() == 2) // City
+                v->getInfo().setCurrentFlow(v->getInfo().getCurrentFlow() + f);
+            else if (v->getInfo().getType() == 0) // Reservoir
+                v->getInfo().setUsedDelivery(v->getInfo().getUsedDelivery() + f);
+            v = e->getOrig(); // Move to the origin of the edge
+        }
+        else
+        {
+            // Update flow and current flow for origin vertex
+            e->setFlow(flow - f);
+            if (v->getInfo().getType() == 2) // City
+                v->getInfo().setCurrentFlow(v->getInfo().getCurrentFlow() - f);
+            else if (v->getInfo().getType() == 0) // Reservoir
+                v->getInfo().setUsedDelivery(v->getInfo().getUsedDelivery() - f);
+            v = e->getDest(); // Move to the destination of the edge
+        }
+    }
+}
+
+// Main function implementing the Edmonds-Karp algorithm
+void edmondsKarp(Graph<Node> *g, Node source, Node target)
+{
+    // Find source and target vertices in the graph
+    Vertex<Node> *s = g->findVertex(source);
+    Vertex<Node> *t = g->findVertex(target);
+
+    // Validate source and target vertices
+    if (s == nullptr || t == nullptr || s == t)
+        throw logic_error("Invalid source and/or target vertex");
+
+    // Initialize flow on all edges to 0
+    for (Vertex<Node> *v : g->getVertexSet())
+        for (Edge<Node> *e : v->getAdj())
+            e->setFlow(0);
+
+    // While there is an augmenting path, augment the flow along the path
+    while (findAugmentingPath(g, s, t))
+    {
+        double f = findMinResidualAlongPath(s, t);
+        augmentFlowAlongPath(s, t, f);
+    }
+}
+
 Node createSuperSource(Graph<Node> *g)
 {
     Node superNode(0, "superSource", "superSource", "superSource", numeric_limits<int>::max());
@@ -115,6 +258,19 @@ Node createSuperSource(Graph<Node> *g)
     for (Vertex<Node> *v : g->getVertexSet())
         if (v->getInfo().getType() == 0 && v->getInfo().getCode() != "superSource")
             superSource->addEdge(v, INF);
+
+    return superNode;
+}
+
+Node createSuperSink(Graph<Node> *g)
+{
+    Node superNode(2, "superSink", "superSink", numeric_limits<int>::max());
+    g->addVertex(superNode);
+    Vertex<Node> *superSink = g->findVertex(superNode);
+
+    for (Vertex<Node> *v : g->getVertexSet())
+        if (v->getInfo().getType() == 2 && v->getInfo().getCode() != "superSink")
+            v->addEdge(superSink, INF);
 
     return superNode;
 }
@@ -143,19 +299,6 @@ double WaterNetwork::singleSinkMaxFlow(const string &city_code) const
     network->removeVertex(s);
 
     return flow;
-}
-
-Node createSuperSink(Graph<Node> *g)
-{
-    Node superNode(2, "superSink", "superSink", numeric_limits<int>::max());
-    g->addVertex(superNode);
-    Vertex<Node> *superSink = g->findVertex(superNode);
-
-    for (Vertex<Node> *v : g->getVertexSet())
-        if (v->getInfo().getType() == 2 && v->getInfo().getCode() != "superSink")
-            v->addEdge(superSink, INF);
-
-    return superNode;
 }
 
 vector<pair<string, double>> WaterNetwork::multiSinkMaxFlow() const
