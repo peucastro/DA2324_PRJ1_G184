@@ -12,6 +12,7 @@ public:
     void goBackMainMenu();
     void statisticsMenu();
     void maxFlowMenu();
+    void waterNeedsMenu();
 
 private:
     WaterNetwork waternetwork;

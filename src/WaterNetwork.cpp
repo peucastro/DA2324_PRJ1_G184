@@ -345,3 +345,42 @@ vector<pair<string, double>> WaterNetwork::multiSinkMaxFlow() const
     out.close();
     return res;
 }
+
+vector<pair<string, double>> WaterNetwork::multiWaterNeeds() const
+{
+    vector<pair<string, double>> res;
+    double flow;
+
+    Node s = createSuperSource(network);
+    Node t = createSuperSink(network);
+    edmondsKarp(network, s, t);
+
+    filesystem::path outputPath("../out");
+    if (!filesystem::exists(outputPath))
+        filesystem::create_directories(outputPath);
+    ofstream out("../out/MaxFlow.csv");
+    out.clear();
+    out << "CityCode,Flow\r";
+
+    for (Vertex<Node> *v : network->getVertexSet())
+    {
+        flow = 0.0;
+
+    }
+
+    for (Vertex<Node> *v : network->getVertexSet())
+    {
+        v->setVisited(false);
+        v->setPath(nullptr);
+
+        for (Edge<Node> *e : v->getAdj())
+            e->setFlow(0);
+        for (Edge<Node> *e : v->getIncoming())
+            e->setFlow(0);
+    }
+    network->removeVertex(s);
+    network->removeVertex(t);
+
+    out.close();
+    return res;
+}

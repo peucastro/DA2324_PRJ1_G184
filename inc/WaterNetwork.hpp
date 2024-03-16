@@ -16,6 +16,7 @@ public:
     Graph<Node> *getNetworkGraph() const;
     double singleSinkMaxFlow(const std::string &city_code) const;
     std::vector<std::pair<std::string, double>> multiSinkMaxFlow() const;
+    std::vector<std::pair<std::string, double>> multiWaterNeeds() const;
 
 private:
     Graph<Node> *network;

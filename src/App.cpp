@@ -26,7 +26,8 @@ void App::mainMenu()
          << endl
          << "[1] Check the water supply network statistics" << endl
          << "[2] See the maximum amount of water that can reach each or a specific city." << endl
-         << "[3] todo..." << endl
+         << "[3] Verify if the network configuration meets the water needs of its customer" << endl
+         << "[4] todo..." << endl
          << "[0] Exit" << endl
          << "=================================================================================================" << endl
          << "-> ";
@@ -48,6 +49,12 @@ void App::mainMenu()
         break;
     }
     case 3:
+    {
+        clearScreen();
+        waterNeedsMenu();
+        break;
+    }
+    case 4:
     {
         cout << "todo...\n";
         break;
@@ -222,5 +229,69 @@ void App::maxFlowMenu()
              << endl;
         maxFlowMenu();
     }
+    }
+}
+
+void App::waterNeedsMenu(){
+    unsigned int option_type;
+    cout << "=================================================================================================" << endl
+         << "Select an option:" << endl
+         << "[1] Check if the network meet the water needs of each city." << endl
+         << "[2] Check if the network meet the water needs of a specific city." << endl
+         << "[0] Go back to the main menu." << endl
+         << "=================================================================================================" << endl
+         << "-> ";
+    cin >> option_type;
+
+    switch (option_type) {
+        case 1: {
+            clearScreen();
+            vector<pair<string, double>> pairs;
+            double totalFlow = 0.0;
+
+            try
+            {
+                pairs = waternetwork.multiWaterNeeds();
+            }
+            catch (const std::exception &e)
+            {
+                clearScreen();
+                std::cerr << e.what() << '\n';
+                mainMenu();
+            }
+
+            cout << "=================================================================================================" << endl
+                 << "Maximum amount of water that can reach each city minus demand:" << endl;
+            for (const pair<string, double> &p : pairs)
+            {
+                cout << p.first << ',' << p.second << endl;
+                totalFlow += p.second;
+            }
+            cout << endl
+                 << "Toal flow: " << totalFlow << endl
+                 << endl
+                 << "You can also check this information in the output folder (maxFLow.csv)." << endl
+                 << "=================================================================================================" << endl;
+            goBackMainMenu();
+            break;
+        }
+        case 2: {
+            cout << "Yet to be implemented" << endl;
+            goBackMainMenu();
+            break;
+        }
+        case 0:
+        {
+            clearScreen();
+            mainMenu();
+            break;
+        }
+        default:
+        {
+            clearScreen();
+            cout << "Invalid option! Please try again:" << endl
+                 << endl;
+            waterNeedsMenu();
+        }
     }
 }
