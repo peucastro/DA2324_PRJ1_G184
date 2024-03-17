@@ -32,6 +32,10 @@ public:
     Edge<T> *getPath() const;
     std::vector<Edge<T> *> getIncoming() const;
 
+    double getCurrentFlow();
+    void setCurrentFlow(double cur);
+    double getUsedDelivery();
+    void setUsedDelivery(double used);
     void setInfo(T info);
     void setVisited(bool visited);
     void setProcesssing(bool processing);
@@ -51,6 +55,8 @@ protected:
     bool processing = false; // used by isDAG (in addition to the visited attribute)
     unsigned int indegree;   // used by topsort
     double dist = 0;
+    double currentFlow = 0;
+    double usedDelivery = 0;
     Edge<T> *path = nullptr;
 
     std::vector<Edge<T> *> incoming; // incoming edges
@@ -203,7 +209,26 @@ T Vertex<T>::getInfo() const
 {
     return this->info;
 }
-
+template <class T>
+double Vertex<T>::getCurrentFlow()
+{
+    return this->currentFlow;
+}
+template <class T>
+void Vertex<T>::setCurrentFlow(double cur)
+{
+    this->currentFlow = cur;
+}
+template <class T>
+double Vertex<T>::getUsedDelivery()
+{
+    return this->usedDelivery;
+}
+template <class T>
+void Vertex<T>::setUsedDelivery(double used)
+{
+    this->usedDelivery = used;
+}
 template <class T>
 std::vector<Edge<T> *> Vertex<T>::getAdj() const
 {

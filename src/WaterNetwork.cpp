@@ -112,11 +112,11 @@ void testAndVisit(queue<Vertex<Node> *> &q, Edge<Node> *e, Vertex<Node> *w, doub
     if (!w->isVisited() && residual > 0)
     {
         // If 'w' is a reservoir, check if it's already saturated
-        if (w->getInfo().getType() == 0 && w->getInfo().getMaxDelivery() == w->getInfo().getUsedDelivery())
+        if (w->getInfo().getType() == 0 && w->getInfo().getMaxDelivery() == w->getUsedDelivery())
             return;
 
         // If 'w' is a city, check if the demand is already satisfied
-        else if (w->getInfo().getType() == 2 && (w->getInfo().getDemand() == w->getInfo().getCurrentFlow() || w->getInfo().getCurrentFlow() > w->getInfo().getDemand()))
+        else if (w->getInfo().getType() == 2 && (w->getInfo().getDemand() == w->getCurrentFlow() || w->getCurrentFlow() > w->getInfo().getDemand()))
             return;
 
         // Mark 'w' as visited, set the path through which it was reached, and enqueue it
@@ -132,11 +132,11 @@ bool findAugmentingPath(Graph<Node> *g, Vertex<Node> *s, Vertex<Node> *t)
     for (Vertex<Node> *v : g->getVertexSet())
     {
         // If 'v' is a reservoir, check if it's already saturated
-        if (v->getInfo().getType() == 0 && v->getInfo().getMaxDelivery() == v->getInfo().getUsedDelivery())
+        if (v->getInfo().getType() == 0 && v->getInfo().getMaxDelivery() == v->getUsedDelivery())
             v->setVisited(true);
 
         // If 'v' is a city, check if the demand is already satisfied
-        if (v->getInfo().getType() == 2 && (v->getInfo().getDemand() == v->getInfo().getCurrentFlow() || v->getInfo().getCurrentFlow() > v->getInfo().getDemand()))
+        if (v->getInfo().getType() == 2 && (v->getInfo().getDemand() == v->getCurrentFlow() || v->getCurrentFlow() > v->getInfo().getDemand()))
             v->setVisited(true);
 
         else
@@ -178,7 +178,7 @@ double findMinResidualAlongPath(Vertex<Node> *s, Vertex<Node> *t)
             f = min(f, e->getWeight() - e->getFlow());
             // If the destination vertex is a city, consider its demand
             if (e->getDest()->getInfo().getType() == 2)
-                f = min(f, (double)e->getDest()->getInfo().getDemand());
+                f = min(f, (double)(e->getDest()->getInfo().getDemand()-e->getDest()->getCurrentFlow()));
             v = e->getOrig();
         }
         else
@@ -186,7 +186,7 @@ double findMinResidualAlongPath(Vertex<Node> *s, Vertex<Node> *t)
             f = min(f, e->getFlow());
             // If the origin vertex is a reservoir, consider it's the residual capacity
             if (e->getOrig()->getInfo().getType() == 0)
-                f = min(f, (double)(e->getOrig()->getInfo().getMaxDelivery() - e->getOrig()->getInfo().getUsedDelivery()));
+                f = min(f, (double)(e->getOrig()->getInfo().getMaxDelivery() - e->getOrig()->getUsedDelivery()));
             v = e->getDest();
         }
     }
@@ -207,9 +207,12 @@ void augmentFlowAlongPath(Vertex<Node> *s, Vertex<Node> *t, double f)
             // Update flow and current flow for destination vertex
             e->setFlow(flow + f);
             if (v->getInfo().getType() == 2) // City
-                v->getInfo().setCurrentFlow(v->getInfo().getCurrentFlow() + f);
+                {
+                    v->setCurrentFlow(v->getCurrentFlow() + f);
+
+                }
             else if (v->getInfo().getType() == 0) // Reservoir
-                v->getInfo().setUsedDelivery(v->getInfo().getUsedDelivery() + f);
+                v->setUsedDelivery(v->getUsedDelivery() + f);
             v = e->getOrig(); // Move to the origin of the edge
         }
         else
@@ -217,9 +220,9 @@ void augmentFlowAlongPath(Vertex<Node> *s, Vertex<Node> *t, double f)
             // Update flow and current flow for origin vertex
             e->setFlow(flow - f);
             if (v->getInfo().getType() == 2) // City
-                v->getInfo().setCurrentFlow(v->getInfo().getCurrentFlow() - f);
+                v->setCurrentFlow(v->getCurrentFlow() - f);
             else if (v->getInfo().getType() == 0) // Reservoir
-                v->getInfo().setUsedDelivery(v->getInfo().getUsedDelivery() - f);
+                v->setUsedDelivery(v->getUsedDelivery() - f);
             v = e->getDest(); // Move to the destination of the edge
         }
     }
@@ -317,6 +320,12 @@ vector<pair<string, double>> WaterNetwork::multiSinkMaxFlow() const
     out.clear();
     out << "CityCode,Flow\r";
 
+    for (Vertex<Node> *v : network->getVertexSet()){
+        for(Edge<Node> * e : v->getAdj()){
+            cout << e->getOrig()->getInfo().getCode() << " -> " << e->getDest()->getInfo().getCode() << " = " << e->getFlow() << '/' << e->getWeight() << '\n';
+        }
+    }
+
     for (Vertex<Node> *v : network->getVertexSet())
     {
         flow = 0.0;
@@ -324,15 +333,17 @@ vector<pair<string, double>> WaterNetwork::multiSinkMaxFlow() const
         {
             for (Edge<Node> *e : v->getIncoming())
                 flow += e->getFlow();
+                
             res.push_back(make_pair(v->getInfo().getCode(), flow));
             out << v->getInfo().getCode() << ',' << flow << '\r';
         }
     }
-
     for (Vertex<Node> *v : network->getVertexSet())
     {
         v->setVisited(false);
         v->setPath(nullptr);
+        v->setCurrentFlow(0);
+        v->setUsedDelivery(0);
 
         for (Edge<Node> *e : v->getAdj())
             e->setFlow(0);
