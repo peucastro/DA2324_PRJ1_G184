@@ -172,7 +172,7 @@ void App::maxFlowMenu()
         }
 
         cout << "=================================================================================================" << endl
-             << "Maximum amount of water that can reach each city minus demand:" << endl;
+             << "Maximum amount of water that can reach each city:" << endl;
         for (const pair<string, double> &p : pairs)
         {
             cout << p.first << ',' << p.second << endl;
