@@ -278,15 +278,45 @@ void App::waterNeedsMenu(){
                 totalFlow += p.second;
             }
             cout << endl
-                 << "Total flow of water from reservoirs insufficient for city demands: " << totalFlow << endl
+                 << "Total amount of water flow in deficit: " << totalFlow << endl
                  << endl
                  << "=================================================================================================" << endl;
             goBackMainMenu();
             break;
         }
         case 2: {
-            cout << "Yet to be implemented" << endl;
-            goBackMainMenu();
+            clearScreen();
+            string city_code;
+            cout << "Inform the selected city code:" << endl
+                 << "-> ";
+            cin >> city_code;
+
+            Node city_node(city_code);
+            Vertex<Node> *city_vertex = waternetwork.getNetworkGraph()->findVertex(city_node);
+
+            double flow;
+            try
+            {
+                flow = waternetwork.singleSinkMaxFlow(city_code);
+            }
+            catch (const std::exception &e)
+            {
+                clearScreen();
+                std::cerr << e.what() << '\n';
+                mainMenu();
+            }
+
+            int waterDefict = abs(static_cast<int>(flow) - city_vertex->getInfo().getDemand());
+
+            cout << endl
+                 << "=================================================================================================" << endl
+                 << "The city " << city_vertex->getInfo().getMunicipality();
+                 (waterDefict == 0) ? cout << "can " : cout << " can't"
+                 " be supplied by the desired water rate level. " << endl;
+
+                 if (waterDefict != 0) cout << "The water flow in deficit is " << waterDefict << endl
+                 << "=================================================================================================" << endl;
+                 goBackMainMenu();
             break;
         }
         case 0:
