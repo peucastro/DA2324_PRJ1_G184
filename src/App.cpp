@@ -259,18 +259,27 @@ void App::waterNeedsMenu(){
                 std::cerr << e.what() << '\n';
                 mainMenu();
             }
-
-            cout << "=================================================================================================" << endl
-                 << "Maximum amount of water that can reach each city minus demand:" << endl;
+            cout << "=================================================================================================" << endl;
+            cout << setw(6) << left << "Cities " << setw(25) << left << "| Enough water supplied?" << "| Residual demand:" << endl;
+            cout << "----------------------------------------------------" << endl;
             for (const pair<string, double> &p : pairs)
             {
-                cout << p.first << ',' << p.second << endl;
+                cout << setw(18) << left << p.first;
+
+                if (p.second != 0) {
+                    cout << setw(20) << left << "no";
+                } else {
+                    cout << setw(20) << left << "yes";
+                }
+
+                if (p.second == 0){
+                    cout << "--" << endl;
+                } else cout << p.second << endl;
                 totalFlow += p.second;
             }
             cout << endl
-                 << "Toal flow: " << totalFlow << endl
+                 << "Total flow of water from reservoirs insufficient for city demands: " << totalFlow << endl
                  << endl
-                 << "You can also check this information in the output folder (maxFLow.csv)." << endl
                  << "=================================================================================================" << endl;
             goBackMainMenu();
             break;
