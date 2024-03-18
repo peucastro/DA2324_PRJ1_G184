@@ -178,7 +178,7 @@ double findMinResidualAlongPath(Vertex<Node> *s, Vertex<Node> *t)
             f = min(f, e->getWeight() - e->getFlow());
             // If the destination vertex is a city, consider its demand
             if (e->getDest()->getInfo().getType() == 2)
-                f = min(f, (double)(e->getDest()->getInfo().getDemand()-e->getDest()->getCurrentFlow()));
+                f = min(f, (double)(e->getDest()->getInfo().getDemand() - e->getDest()->getCurrentFlow()));
             v = e->getOrig();
         }
         else
@@ -207,10 +207,7 @@ void augmentFlowAlongPath(Vertex<Node> *s, Vertex<Node> *t, double f)
             // Update flow and current flow for destination vertex
             e->setFlow(flow + f);
             if (v->getInfo().getType() == 2) // City
-                {
-                    v->setCurrentFlow(v->getCurrentFlow() + f);
-
-                }
+                v->setCurrentFlow(v->getCurrentFlow() + f);
             else if (v->getInfo().getType() == 0) // Reservoir
                 v->setUsedDelivery(v->getUsedDelivery() + f);
             v = e->getOrig(); // Move to the origin of the edge
@@ -320,12 +317,6 @@ vector<pair<string, double>> WaterNetwork::multiSinkMaxFlow() const
     out.clear();
     out << "CityCode,Flow\r";
 
-    for (Vertex<Node> *v : network->getVertexSet()){
-        for(Edge<Node> * e : v->getAdj()){
-            cout << e->getOrig()->getInfo().getCode() << " -> " << e->getDest()->getInfo().getCode() << " = " << e->getFlow() << '/' << e->getWeight() << '\n';
-        }
-    }
-
     for (Vertex<Node> *v : network->getVertexSet())
     {
         flow = 0.0;
@@ -333,7 +324,7 @@ vector<pair<string, double>> WaterNetwork::multiSinkMaxFlow() const
         {
             for (Edge<Node> *e : v->getIncoming())
                 flow += e->getFlow();
-                
+
             res.push_back(make_pair(v->getInfo().getCode(), flow));
             out << v->getInfo().getCode() << ',' << flow << '\r';
         }
@@ -377,6 +368,8 @@ vector<pair<string, double>> WaterNetwork::multiWaterNeeds() const
     {
         v->setVisited(false);
         v->setPath(nullptr);
+        v->setCurrentFlow(0);
+        v->setUsedDelivery(0);
 
         for (Edge<Node> *e : v->getAdj())
             e->setFlow(0);
