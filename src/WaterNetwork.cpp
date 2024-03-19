@@ -278,11 +278,12 @@ Node createSuperSink(Graph<Node> *g)
 double WaterNetwork::singleSinkMaxFlow(const string &city_code) const
 {
     Node s = createSuperSource(network);
-    Node t(city_code);
+    Node t = createSuperSink(network);
     edmondsKarp(network, s, t);
 
-    double flow = 0;
-    Vertex<Node> *sink_vertex = network->findVertex(t);
+    Node city(city_code);
+    double flow = 0.0;
+    Vertex<Node> *sink_vertex = network->findVertex(city);
     for (Edge<Node> *e : sink_vertex->getIncoming())
         flow += e->getFlow();
 
@@ -290,6 +291,8 @@ double WaterNetwork::singleSinkMaxFlow(const string &city_code) const
     {
         v->setVisited(false);
         v->setPath(nullptr);
+        v->setCurrentFlow(0);
+        v->setUsedDelivery(0);
 
         for (Edge<Node> *e : v->getAdj())
             e->setFlow(0);
@@ -297,6 +300,7 @@ double WaterNetwork::singleSinkMaxFlow(const string &city_code) const
             e->setFlow(0);
     }
     network->removeVertex(s);
+    network->removeVertex(t);
 
     return flow;
 }

@@ -311,11 +311,12 @@ void App::waterNeedsMenu(){
             cout << endl
                  << "=================================================================================================" << endl
                  << "The city " << city_vertex->getInfo().getMunicipality();
-                 (waterDefict == 0) ? cout << "can " : cout << " can't"
-                 " be supplied by the desired water rate level. " << endl;
+                 if (waterDefict != 0) cout << " can't";
+                 else cout << " can";
+                 cout << " be supplied by the desired water rate level. " << endl;
 
-                 if (waterDefict != 0) cout << "The water flow in deficit is " << waterDefict << endl
-                 << "=================================================================================================" << endl;
+                 if (waterDefict != 0) cout << "The water flow in deficit is " << waterDefict << endl;
+                 cout << "=================================================================================================" << endl;
                  goBackMainMenu();
             break;
         }
