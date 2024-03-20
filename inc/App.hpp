@@ -13,6 +13,7 @@ public:
     void statisticsMenu();
     void maxFlowMenu();
     void waterNeedsMenu();
+    void reservoirImpactMenu();
 
 private:
     WaterNetwork waternetwork;

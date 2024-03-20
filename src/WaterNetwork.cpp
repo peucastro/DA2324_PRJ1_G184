@@ -275,6 +275,24 @@ Node createSuperSink(Graph<Node> *g)
     return superNode;
 }
 
+void resetGraph(Graph<Node> *g, const Node &s, const Node &t)
+{
+    for (Vertex<Node> *v : g->getVertexSet())
+    {
+        v->setVisited(false);
+        v->setPath(nullptr);
+        v->setCurrentFlow(0);
+        v->setUsedDelivery(0);
+
+        for (Edge<Node> *e : v->getAdj())
+            e->setFlow(0);
+        for (Edge<Node> *e : v->getIncoming())
+            e->setFlow(0);
+    }
+    g->removeVertex(s);
+    g->removeVertex(t);
+}
+
 double WaterNetwork::singleSinkMaxFlow(const string &city_code) const
 {
     Node s = createSuperSource(network);
@@ -287,21 +305,7 @@ double WaterNetwork::singleSinkMaxFlow(const string &city_code) const
     for (Edge<Node> *e : sink_vertex->getIncoming())
         flow += e->getFlow();
 
-    for (Vertex<Node> *v : network->getVertexSet())
-    {
-        v->setVisited(false);
-        v->setPath(nullptr);
-        v->setCurrentFlow(0);
-        v->setUsedDelivery(0);
-
-        for (Edge<Node> *e : v->getAdj())
-            e->setFlow(0);
-        for (Edge<Node> *e : v->getIncoming())
-            e->setFlow(0);
-    }
-    network->removeVertex(s);
-    network->removeVertex(t);
-
+    resetGraph(network, s, t);
     return flow;
 }
 
@@ -333,21 +337,8 @@ vector<pair<string, double>> WaterNetwork::multiSinkMaxFlow() const
             out << v->getInfo().getCode() << ',' << flow << '\r';
         }
     }
-    for (Vertex<Node> *v : network->getVertexSet())
-    {
-        v->setVisited(false);
-        v->setPath(nullptr);
-        v->setCurrentFlow(0);
-        v->setUsedDelivery(0);
 
-        for (Edge<Node> *e : v->getAdj())
-            e->setFlow(0);
-        for (Edge<Node> *e : v->getIncoming())
-            e->setFlow(0);
-    }
-    network->removeVertex(s);
-    network->removeVertex(t);
-
+    resetGraph(network, s, t);
     out.close();
     return res;
 }
@@ -360,28 +351,73 @@ vector<pair<string, double>> WaterNetwork::multiWaterNeeds() const
     Node t = createSuperSink(network);
     edmondsKarp(network, s, t);
 
+    filesystem::path outputPath("../out");
+    if (!filesystem::exists(outputPath))
+        filesystem::create_directories(outputPath);
+    ofstream out("../out/WaterNeeds.csv");
+    out.clear();
+    out << "CityCode,WaterDeficit\r";
+
     for (Vertex<Node> *v : network->getVertexSet())
     {
         if (v->getInfo().getType() == 2 && v->getInfo().getCode() != "superSink")
         {
             res.push_back(make_pair(v->getInfo().getCode(), abs(v->getCurrentFlow() - v->getInfo().getDemand())));
+            out << v->getInfo().getCode() << ',' << abs(v->getCurrentFlow() - v->getInfo().getDemand()) << '\r';
         }
     }
 
-    for (Vertex<Node> *v : network->getVertexSet())
+    resetGraph(network, s, t);
+    return res;
+}
+
+vector<pair<string, double>> WaterNetwork::evaluateReservoirImpact(const string &reservoir_code) const
+{
+    vector<pair<string, double>> res;
+    Node reservoir(reservoir_code);
+    Vertex<Node> *reservoir_vertex = network->findVertex(reservoir);
+
+    if (reservoir_vertex == nullptr || reservoir_vertex->getInfo().getType() != 0)
+        throw runtime_error("Please inform a valid reservoir code.");
+    reservoir = reservoir_vertex->getInfo();
+
+    vector<pair<string, double>> previousDeficit;
+    /*if (filesystem::exists("../out/WaterNeeds.csv"))
     {
-        v->setVisited(false);
-        v->setPath(nullptr);
-        v->setCurrentFlow(0);
-        v->setUsedDelivery(0);
+        ifstream waterneeds_file("../out/WaterNeeds.csv");
+        if (!waterneeds_file.is_open())
+            throw runtime_error("WaterNeeds.csv file could not be opened!");
+        cout << "FILE EXISTS\n"; // funciona!!!!!
 
-        for (Edge<Node> *e : v->getAdj())
-            e->setFlow(0);
-        for (Edge<Node> *e : v->getIncoming())
-            e->setFlow(0);
+        string line;
+        getline(waterneeds_file, line);
+        cout << line; // não funciona!!!!!
+        while (getline(waterneeds_file, line))
+        {
+            istringstream iss(line);
+            string cityCode;
+            double waterDeficit;
+            getline(iss, cityCode, ',');
+            iss >> waterDeficit;
+
+            cout << "line:" << cityCode << ',' << waterDeficit << '\n'; // não funciona !!!!!
+            previousDeficit.push_back(make_pair(cityCode, waterDeficit));
+        }
+        waterneeds_file.close();
     }
-    network->removeVertex(s);
-    network->removeVertex(t);
+    else*/
+        previousDeficit = multiWaterNeeds();
 
+    reservoir_vertex->setUsedDelivery(reservoir_vertex->getInfo().getMaxDelivery());
+    vector<pair<string, double>> currentDeficit = multiWaterNeeds();
+
+    for (size_t i = 0; i < previousDeficit.size(); i++)
+    {
+        double diff = previousDeficit[i].second - currentDeficit[i].second;
+        res.push_back(make_pair(previousDeficit[i].first, diff));
+        cout << "CITY: " << previousDeficit[i].first << "  ;  PREV DEFICIT: " << previousDeficit[i].second << "  ;  CURR DEFICIT: " << currentDeficit[i].second << '\n';
+    }
+
+    reservoir_vertex->setUsedDelivery(0);
     return res;
 }

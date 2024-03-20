@@ -32,10 +32,10 @@ public:
     Edge<T> *getPath() const;
     std::vector<Edge<T> *> getIncoming() const;
 
-    double getCurrentFlow();
-    void setCurrentFlow(double cur);
-    double getUsedDelivery();
-    void setUsedDelivery(double used);
+    double getCurrentFlow() const;
+    void setCurrentFlow(const double &cur);
+    double getUsedDelivery() const;
+    void setUsedDelivery(const double &used);
     void setInfo(T info);
     void setVisited(bool visited);
     void setProcesssing(bool processing);
@@ -210,22 +210,22 @@ T Vertex<T>::getInfo() const
     return this->info;
 }
 template <class T>
-double Vertex<T>::getCurrentFlow()
+double Vertex<T>::getCurrentFlow() const
 {
     return this->currentFlow;
 }
 template <class T>
-void Vertex<T>::setCurrentFlow(double cur)
+void Vertex<T>::setCurrentFlow(const double &cur)
 {
     this->currentFlow = cur;
 }
 template <class T>
-double Vertex<T>::getUsedDelivery()
+double Vertex<T>::getUsedDelivery() const
 {
     return this->usedDelivery;
 }
 template <class T>
-void Vertex<T>::setUsedDelivery(double used)
+void Vertex<T>::setUsedDelivery(const double &used)
 {
     this->usedDelivery = used;
 }
