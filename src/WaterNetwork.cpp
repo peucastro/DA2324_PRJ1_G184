@@ -382,30 +382,26 @@ vector<pair<string, double>> WaterNetwork::evaluateReservoirImpact(const string 
     reservoir = reservoir_vertex->getInfo();
 
     vector<pair<string, double>> previousDeficit;
-    /*if (filesystem::exists("../out/WaterNeeds.csv"))
+    if (filesystem::exists("../out/WaterNeeds.csv"))
     {
         ifstream waterneeds_file("../out/WaterNeeds.csv");
         if (!waterneeds_file.is_open())
             throw runtime_error("WaterNeeds.csv file could not be opened!");
-        cout << "FILE EXISTS\n"; // funciona!!!!!
 
         string line;
-        getline(waterneeds_file, line);
-        cout << line; // não funciona!!!!!
-        while (getline(waterneeds_file, line))
+        waterneeds_file >> line;
+        while (waterneeds_file >> line)
         {
             istringstream iss(line);
-            string cityCode;
-            double waterDeficit;
-            getline(iss, cityCode, ',');
-            iss >> waterDeficit;
+            string cityCode, waterDeficit_str;
+            getline(getline(iss, cityCode, ','), waterDeficit_str, '\r');
+            double waterDeficit = stod(waterDeficit_str);
 
-            cout << "line:" << cityCode << ',' << waterDeficit << '\n'; // não funciona !!!!!
             previousDeficit.push_back(make_pair(cityCode, waterDeficit));
         }
         waterneeds_file.close();
     }
-    else*/
+    else
         previousDeficit = multiWaterNeeds();
 
     reservoir_vertex->setUsedDelivery(reservoir_vertex->getInfo().getMaxDelivery());
