@@ -18,6 +18,7 @@ public:
     std::vector<std::pair<std::string, double>> multiSinkMaxFlow() const;                                         // T2.1
     std::vector<std::pair<std::string, double>> multiWaterNeeds() const;                                          // T2.2
     std::vector<std::pair<std::string, double>> evaluateReservoirImpact(const std::string &reservoir_code) const; // T3.1
+    void evaluatePipelineImpact(const std::string &city_code) const; // T3.3
 
 private:
     Graph<Node> *network;

@@ -14,6 +14,7 @@ public:
     void maxFlowMenu();
     void waterNeedsMenu();
     void reservoirImpactMenu();
+    void pipeImpactMenu();
 
 private:
     WaterNetwork waternetwork;

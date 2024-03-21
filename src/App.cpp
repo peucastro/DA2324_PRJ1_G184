@@ -28,7 +28,7 @@ void App::mainMenu()
          << "[2] See the maximum amount of water that can reach each or a specific city." << endl
          << "[3] Verify if the network configuration meets the water needs of its customer" << endl
          << "[4] Evaluate the network resiliency if a reservoir gets out of commission." << endl
-         << "[5] todo..." << endl
+         << "[5] Evaluate the city resiliency if a pipeline gets ruptured" << endl
          << "[0] Exit" << endl
          << "=================================================================================================" << endl
          << "-> ";
@@ -63,7 +63,8 @@ void App::mainMenu()
     }
     case 5:
     {
-        cout << "todo...\n";
+        clearScreen();
+        pipeImpactMenu();
         break;
     }
     case 0:
@@ -170,7 +171,7 @@ void App::maxFlowMenu()
         try
         {
             pairs = waternetwork.multiSinkMaxFlow();
-        }
+        }  
         catch (const std::exception &e)
         {
             clearScreen();
@@ -398,6 +399,28 @@ void App::reservoirImpactMenu()
          << "Total impact amount: " << totalImpact << endl
          << endl
          << "=================================================================================================" << endl;
+
+    goBackMainMenu();
+}
+void App::pipeImpactMenu()
+{
+    string city_code;
+    vector<pair<string, double>> pairs;
+    double totalImpact;
+    cout << "Please inform the selected city code:" << endl
+         << "-> ";
+    cin >> city_code;
+
+    try
+    {
+        waternetwork.evaluatePipelineImpact(city_code);
+    }
+    catch (const std::exception &e)
+    {
+        clearScreen();
+        std::cerr << e.what() << '\n';
+        mainMenu();
+    }
 
     goBackMainMenu();
 }
