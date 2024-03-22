@@ -202,6 +202,8 @@ void App::maxFlowMenu()
              << "-> ";
         cin >> city_code;
 
+        city_code = upperCase(city_code);
+
         Node city_node(city_code);
         Vertex<Node> *city_vertex = waternetwork.getNetworkGraph()->findVertex(city_node);
         double flow;
@@ -311,6 +313,8 @@ void App::waterNeedsMenu()
              << "-> ";
         cin >> city_code;
 
+        city_code = upperCase(city_code);
+
         Node city_node(city_code);
         Vertex<Node> *city_vertex = waternetwork.getNetworkGraph()->findVertex(city_node);
 
@@ -368,6 +372,8 @@ void App::reservoirImpactMenu()
          << "-> ";
     cin >> reservoir_code;
 
+    reservoir_code = upperCase(reservoir_code);
+
     try
     {
         pairs = waternetwork.evaluateReservoirImpact(reservoir_code);
@@ -410,6 +416,7 @@ void App::pipeImpactMenu()
     cout << "Please inform the selected city code:" << endl
          << "-> ";
     cin >> city_code;
+    city_code = upperCase(city_code);
 
     try
     {
@@ -423,4 +430,12 @@ void App::pipeImpactMenu()
     }
 
     goBackMainMenu();
+}
+
+std::string App::upperCase(const std::string &str) {
+    string s;
+    for (char c : str) {
+        s += toupper(c);
+    }
+    return s;
 }

@@ -7,7 +7,7 @@ class App
 {
 public:
     App(WaterNetwork &waternetwowk);
-
+    std::string upperCase(const std::string &str);
     void mainMenu();
     void goBackMainMenu();
     void statisticsMenu();
