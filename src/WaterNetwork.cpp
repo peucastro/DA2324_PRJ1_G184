@@ -327,14 +327,10 @@ vector<pair<string, double>> WaterNetwork::multiSinkMaxFlow() const
 
     for (Vertex<Node> *v : network->getVertexSet())
     {
-        flow = 0.0;
         if (v->getInfo().getType() == 2 && v->getInfo().getCode() != "superSink")
         {
-            for (Edge<Node> *e : v->getIncoming())
-                flow += e->getFlow();
-
-            res.push_back(make_pair(v->getInfo().getCode(), flow));
-            out << v->getInfo().getCode() << ',' << flow << '\r';
+            res.push_back(make_pair(v->getInfo().getCode(), v->getCurrentFlow()));
+            out << v->getInfo().getCode() << ',' << v->getCurrentFlow() << '\r';
         }
     }
 
@@ -417,42 +413,47 @@ vector<pair<string, double>> WaterNetwork::evaluateReservoirImpact(const string 
     reservoir_vertex->setUsedDelivery(0);
     return res;
 }
-void WaterNetwork::evaluatePipelineImpact(const std::string &city_code) const{
+void WaterNetwork::evaluatePipelineImpact(const std::string &city_code) const
+{
 
     Node city(city_code);
-    Vertex<Node> * city_vertex = network->findVertex(city);
+    Vertex<Node> *city_vertex = network->findVertex(city);
 
     if (city_vertex == nullptr || city_vertex->getInfo().getType() != 2)
         throw runtime_error("Please inform a valid city code.");
-    
+
     vector<pair<string, double>> previousDeficit;
     previousDeficit = multiWaterNeeds();
     double previousCityDeficit;
 
     for (size_t i = 0; i < previousDeficit.size(); i++)
+    {
+        if (previousDeficit[i].first == city_code)
         {
-            if(previousDeficit[i].first == city_code){
-                previousCityDeficit = previousDeficit[i].second;
-            }
+            previousCityDeficit = previousDeficit[i].second;
         }
-    for(Vertex<Node>* node : network->getVertexSet()){
-        for(Edge<Node>* pipe : node->getAdj()){
+    }
+    for (Vertex<Node> *node : network->getVertexSet())
+    {
+        for (Edge<Node> *pipe : node->getAdj())
+        {
             double pipeWeight = pipe->getWeight();
             pipe->setWeight(0);
             vector<pair<string, double>> currentDeficit = multiWaterNeeds();
             double currentCityDeficit;
-    
+
             for (size_t i = 0; i < currentDeficit.size(); i++)
             {
-                if(currentDeficit[i].first == city_code){
+                if (currentDeficit[i].first == city_code)
+                {
                     currentCityDeficit = currentDeficit[i].second;
-                    if(currentCityDeficit > previousCityDeficit){
+                    if (currentCityDeficit > previousCityDeficit)
+                    {
                         cout << "PIPE: " << pipe->getOrig()->getInfo().getCode() << " -> " << pipe->getDest()->getInfo().getCode() << "  ;  PREV DEFICIT: " << previousCityDeficit << "  ;  CURR DEFICIT: " << currentCityDeficit << '\n';
                     }
                 }
             }
             pipe->setWeight(pipeWeight);
         }
-
     }
 }
