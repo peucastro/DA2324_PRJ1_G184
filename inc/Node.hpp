@@ -20,14 +20,10 @@ public:
     std::string getReservoir() const;
     std::string getMunicipality() const;
     int getMaxDelivery() const;
-    int getUsedDelivery() const;
-    void setUsedDelivery(const int &new_delivery);
 
     // Methods for city exclusive attributes
     int getDemand() const;
     int getPopulation() const;
-    int getCurrentFlow() const;
-    void setCurrentFlow(const int &new_flow);
 
     //  Operators overload
     bool operator==(const Node &other);
@@ -41,11 +37,9 @@ private:
     std::string reservoir;
     std::string municipality;
     int maxDelivery;
-    int usedDelivery;
 
     // City exclusive attributes
     int demand;
-    int currentFlow;
     int population;
 };
 

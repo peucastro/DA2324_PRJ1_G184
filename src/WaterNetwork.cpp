@@ -176,16 +176,16 @@ double findMinResidualAlongPath(Vertex<Node> *s, Vertex<Node> *t)
         if (e->getDest() == v)
         {
             f = min(f, e->getWeight() - e->getFlow());
-            // If the destination vertex is a city, consider its demand
-            if (e->getDest()->getInfo().getType() == 2)
+            // If the destination vertex is a city (and not superSink), consider its demand
+            if (e->getDest()->getInfo().getType() == 2 && e->getDest()->getInfo().getCode() != "superSink")
                 f = min(f, (double)(e->getDest()->getInfo().getDemand() - e->getDest()->getCurrentFlow()));
             v = e->getOrig();
         }
         else
         {
             f = min(f, e->getFlow());
-            // If the origin vertex is a reservoir, consider it's the residual capacity
-            if (e->getOrig()->getInfo().getType() == 0)
+            // If the origin vertex is a reservoir (and not superSource), consider it's the residual capacity
+            if (e->getOrig()->getInfo().getType() == 0 && e->getOrig()->getInfo().getCode() != "superSource")
                 f = min(f, (double)(e->getOrig()->getInfo().getMaxDelivery() - e->getOrig()->getUsedDelivery()));
             v = e->getDest();
         }
@@ -257,7 +257,7 @@ Node createSuperSource(Graph<Node> *g)
 
     for (Vertex<Node> *v : g->getVertexSet())
         if (v->getInfo().getType() == 0 && v->getInfo().getCode() != "superSource")
-            superSource->addEdge(v, INF);
+            superSource->addEdge(v, v->getInfo().getMaxDelivery());
 
     return superNode;
 }
@@ -270,7 +270,7 @@ Node createSuperSink(Graph<Node> *g)
 
     for (Vertex<Node> *v : g->getVertexSet())
         if (v->getInfo().getType() == 2 && v->getInfo().getCode() != "superSink")
-            v->addEdge(superSink, INF);
+            v->addEdge(superSink, v->getInfo().getDemand());
 
     return superNode;
 }
