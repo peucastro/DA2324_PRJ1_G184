@@ -129,7 +129,7 @@ public:
 
     std::vector<T> dfs() const;
     std::vector<T> dfs(const T &source) const;
-    void dfsVisit(Vertex<T> *v, std::vector<T> &res) const;
+    void dfsVisit(Vertex<T> *v, std::vector<Vertex<T>*> &res) const;
     std::vector<T> bfs(const T &source) const;
 
     bool isDAG() const;
@@ -562,10 +562,10 @@ std::vector<T> Graph<T>::dfs(const T &source) const
  * Updates a parameter with the list of visited node contents.
  */
 template <class T>
-void Graph<T>::dfsVisit(Vertex<T> *v, std::vector<T> &res) const
+void Graph<T>::dfsVisit(Vertex<T> *v, std::vector<Vertex<T>*> &res) const
 {
     v->setVisited(true);
-    res.push_back(v->getInfo());
+    res.push_back(v);
     for (auto &e : v->getAdj())
     {
         auto w = e->getDest();

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <filesystem>
+#include <stack>
 
 class WaterNetwork
 {
@@ -23,7 +24,6 @@ public:
 private:
     Graph<Node> *network;
 };
-
 void testAndVisit(std::queue<Vertex<Node> *> &q, Edge<Node> *e, Vertex<Node> *w, double residual);
 bool findAugmentingPath(Graph<Node> *g, Vertex<Node> *s, Vertex<Node> *t);
 double findMinResidualAlongPath(Vertex<Node> *s, Vertex<Node> *t);
@@ -33,5 +33,6 @@ void edmondsKarp(Graph<Node> *g, Node source, Node target);
 void resetGraph(Graph<Node> *g, const Node &s, const Node &t);
 Node createSuperSource(Graph<Node> *g);
 Node createSuperSink(Graph<Node> *g);
+Graph<Node> *findConnectedComponent(Graph<Node> *g, const std::string &node_code);
 
 #endif

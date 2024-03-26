@@ -367,6 +367,30 @@ vector<pair<string, double>> WaterNetwork::multiWaterNeeds() const
     return res;
 }
 
+Graph<Node> *findConnectedComponent(Graph<Node> *g, const string &node_code)
+{
+
+    std::vector<Vertex<Node>*> res;
+    Graph<Node> *subgraph = new Graph<Node>();
+
+    Node node(node_code);
+    Vertex<Node> *node_vertex = g->findVertex(node);
+    if (node_vertex == nullptr)
+        throw runtime_error("Please inform a valid code.");
+    
+    for(Vertex<Node>* v : g->getVertexSet()) v->setVisited(false);
+
+    g->dfsVisit(node_vertex, res);
+    for(Vertex<Node>* v : res){
+        subgraph->addVertex(v->getInfo());
+        for(Edge<Node>* e : v->getAdj()){
+            subgraph->addEdge(v->getInfo(), e->getDest()->getInfo(), e->getWeight());
+        }
+    }
+
+    return subgraph;
+}
+
 vector<pair<string, double>> WaterNetwork::evaluateReservoirImpact(const string &reservoir_code) const
 {
     vector<pair<string, double>> res;
