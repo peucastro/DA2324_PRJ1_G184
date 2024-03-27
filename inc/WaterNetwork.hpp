@@ -3,6 +3,7 @@
 
 #include "../inc/Graph.hpp"
 #include "../inc/Node.hpp"
+#include <algorithm>
 #include <fstream>
 #include <sstream>
 #include <filesystem>
@@ -17,9 +18,10 @@ public:
     Graph<Node> *getNetworkGraph() const;
     double singleSinkMaxFlow(const std::string &city_code) const;                                                 // T2.1
     std::vector<std::pair<std::string, double>> multiSinkMaxFlow() const;                                         // T2.1
-    std::vector<std::pair<std::string, double>> multiWaterNeeds() const;                                          // T2.2
+    std::vector<std::pair<std::string, double>> multiWaterNeeds(Graph<Node> *g, const bool &flag) const;          // T2.2
     std::vector<std::pair<std::string, double>> evaluateReservoirImpact(const std::string &reservoir_code) const; // T3.1
-    void evaluatePipelineImpact(const std::string &city_code) const; // T3.3
+    void evaluateAllReservoirImpact() const;                                                                      // T3.1
+    void evaluatePipelineImpact(const std::string &city_code) const;                                              // T3.3
 
 private:
     Graph<Node> *network;
@@ -33,6 +35,7 @@ void edmondsKarp(Graph<Node> *g, Node source, Node target);
 void resetGraph(Graph<Node> *g, const Node &s, const Node &t);
 Node createSuperSource(Graph<Node> *g);
 Node createSuperSink(Graph<Node> *g);
+
 Graph<Node> *findConnectedComponent(Graph<Node> *g, const std::string &node_code);
 
 #endif

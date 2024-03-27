@@ -171,7 +171,7 @@ void App::maxFlowMenu()
         try
         {
             pairs = waternetwork.multiSinkMaxFlow();
-        }  
+        }
         catch (const std::exception &e)
         {
             clearScreen();
@@ -264,7 +264,7 @@ void App::waterNeedsMenu()
 
         try
         {
-            pairs = waternetwork.multiWaterNeeds();
+            pairs = waternetwork.multiWaterNeeds(waternetwork.getNetworkGraph(), true);
         }
         catch (const std::exception &e)
         {
@@ -368,46 +368,58 @@ void App::reservoirImpactMenu()
     string reservoir_code;
     vector<pair<string, double>> pairs;
     double totalImpact;
-    cout << "Please inform the selected reservoir code:" << endl
+    cout << "Please inform the selected reservoir code (or type 0 if you want to check the impact of each reservoir):" << endl
          << "-> ";
     cin >> reservoir_code;
 
     reservoir_code = upperCase(reservoir_code);
 
-    try
+    if (reservoir_code[0] != '0')
     {
-        pairs = waternetwork.evaluateReservoirImpact(reservoir_code);
+        try
+        {
+            pairs = waternetwork.evaluateReservoirImpact(reservoir_code);
+        }
+        catch (const std::exception &e)
+        {
+            clearScreen();
+            std::cerr << e.what() << '\n';
+            mainMenu();
+        }
+
+        cout << "=================================================================================================" << endl
+             << setw(10) << left << "Cities" << setw(15) << left << "| Impacted?" << setw(15) << left << "| Impact" << endl
+             << "-------------------------------------------------------------------------------" << endl;
+
+        for (const pair<string, double> &p : pairs)
+        {
+            cout << setw(15) << left << p.first;
+
+            if (p.second == 0)
+                cout << setw(15) << "no" << setw(15) << "--" << '\n';
+            else
+                cout << setw(15) << "yes" << setw(15) << p.second << '\n';
+
+            totalImpact += p.second;
+        }
+
+        cout << endl
+             << "Total impact amount: " << totalImpact << endl
+             << endl
+             << "=================================================================================================" << endl;
     }
-    catch (const std::exception &e)
+    else
     {
-        clearScreen();
-        std::cerr << e.what() << '\n';
-        mainMenu();
+        cout << endl
+             << "=================================================================================================" << endl;
+        waternetwork.evaluateAllReservoirImpact();
+        cout << endl
+             << "=================================================================================================" << endl;
     }
-
-    cout << "=================================================================================================" << endl
-         << setw(10) << left << "Cities" << setw(15) << left << "| Impacted?" << setw(15) << left << "| Impact" << endl
-         << "-------------------------------------------------------------------------------" << endl;
-
-    for (const pair<string, double> &p : pairs)
-    {
-        cout << setw(15) << left << p.first;
-
-        if (p.second == 0)
-            cout << setw(15) << "no" << setw(15) << "--" << '\n';
-        else
-            cout << setw(15) << "yes" << setw(15) << p.second << '\n';
-
-        totalImpact += p.second;
-    }
-
-    cout << endl
-         << "Total impact amount: " << totalImpact << endl
-         << endl
-         << "=================================================================================================" << endl;
 
     goBackMainMenu();
 }
+
 void App::pipeImpactMenu()
 {
     string city_code;
@@ -432,9 +444,11 @@ void App::pipeImpactMenu()
     goBackMainMenu();
 }
 
-std::string App::upperCase(const std::string &str) {
+std::string App::upperCase(const std::string &str)
+{
     string s;
-    for (char c : str) {
+    for (char c : str)
+    {
         s += toupper(c);
     }
     return s;
