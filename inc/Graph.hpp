@@ -129,7 +129,7 @@ public:
 
     std::vector<T> dfs() const;
     std::vector<T> dfs(const T &source) const;
-    void dfsVisit(Vertex<T> *v, std::vector<Vertex<T>*> &res) const;
+    void dfsVisit(Vertex<T> *v, std::vector<Vertex<T> *> &res) const;
     std::vector<T> bfs(const T &source) const;
 
     bool isDAG() const;
@@ -523,7 +523,7 @@ bool Graph<T>::addBidirectionalEdge(const T &sourc, const T &dest, double w)
 template <class T>
 std::vector<T> Graph<T>::dfs() const
 {
-    std::vector<T> res;
+    std::vector<Vertex<T> *> res;
     for (auto v : vertexSet)
         v->setVisited(false);
     for (auto v : vertexSet)
@@ -539,7 +539,7 @@ std::vector<T> Graph<T>::dfs() const
 template <class T>
 std::vector<T> Graph<T>::dfs(const T &source) const
 {
-    std::vector<T> res;
+    std::vector<Vertex<T> *> res;
     // Get the source vertex
     auto s = findVertex(source);
     if (s == nullptr)
@@ -562,7 +562,7 @@ std::vector<T> Graph<T>::dfs(const T &source) const
  * Updates a parameter with the list of visited node contents.
  */
 template <class T>
-void Graph<T>::dfsVisit(Vertex<T> *v, std::vector<Vertex<T>*> &res) const
+void Graph<T>::dfsVisit(Vertex<T> *v, std::vector<Vertex<T> *> &res) const
 {
     v->setVisited(true);
     res.push_back(v);
