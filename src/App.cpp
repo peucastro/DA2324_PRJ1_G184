@@ -28,7 +28,8 @@ void App::mainMenu()
          << "[2] See the maximum amount of water that can reach each or a specific city." << endl
          << "[3] Verify if the network configuration meets the water needs of its customer" << endl
          << "[4] Evaluate the network resiliency if a reservoir gets out of commission." << endl
-         << "[5] Evaluate the city resiliency if a pipeline gets ruptured" << endl
+         << "[5] Evaluate the network resiliency if a pumping station is in periodic maintenance." << endl
+         << "[6] Evaluate the city resiliency if a pipeline gets ruptured" << endl
          << "[0] Exit" << endl
          << "=================================================================================================" << endl
          << "-> ";
@@ -62,6 +63,12 @@ void App::mainMenu()
         break;
     }
     case 5:
+    {
+        clearScreen();
+        stationImpactMenu();
+        break;
+    }
+    case 6:
     {
         clearScreen();
         pipeImpactMenu();
@@ -439,6 +446,30 @@ void App::pipeImpactMenu()
         clearScreen();
         std::cerr << e.what() << '\n';
         mainMenu();
+    }
+
+    goBackMainMenu();
+}
+
+void App::stationImpactMenu(){
+
+    string answer;
+    cout << "Can any pumping station be temporarily taken out of service without affecting the delivery capacity to all the cities?" << endl
+         << "The answer is yes (or no)! XX could be temporarily removed.\n"
+         << "================================================================================================= \n" <<
+            "Do you want to check the impact of temporarily removing each pumping station? [Y/N] \n"
+            << "-> ";
+    cin >> answer;
+    answer = upperCase(answer);
+
+    if (answer == "Y"){
+
+        cout << endl
+             << "================================================================================================= \n" <<
+             "Let's check the impact of temporarily removing each pumping station:" << endl;
+        waternetwork.evaluateAllPumpingStationImpact();
+        cout << endl
+             << "=================================================================================================" << endl;
     }
 
     goBackMainMenu();
