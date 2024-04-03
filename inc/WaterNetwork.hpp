@@ -21,7 +21,7 @@ public:
     /**
      * @brief Default constructor for the WaterNetwork class.
      */
-    WaterNetwork::WaterNetwork() {}
+    WaterNetwork();
 
     /**
      * @brief Constructor for the WaterNetwork class.\n
@@ -32,18 +32,18 @@ public:
      * @param cities_filename The filename of the CSV file containing city data.
      * @param pipes_filename The filename of the CSV file containing pipe data.
      */
-    WaterNetwork::WaterNetwork(const std::string reservoirs_filename, const std::string stations_filename, const std::string cities_filename, const std::string pipes_filename) {}
+    WaterNetwork(const std::string reservoirs_filename, const std::string stations_filename, const std::string cities_filename, const std::string pipes_filename);
 
     /**
      * @brief Destructor for the WaterNetwork class.
      */
-    WaterNetwork::~WaterNetwork() {}
+    ~WaterNetwork();
 
     /**
      * @brief Getter for the network graph.
      * @return A pointer to the network graph.
      */
-    Graph<Node> *WaterNetwork::getNetworkGraph() const {}
+    Graph<Node> *getNetworkGraph() const;
 
     double singleSinkMaxFlow(const std::string &city_code) const;                                                 // T2.1
     std::vector<std::pair<std::string, double>> multiSinkMaxFlow() const;                                         // T2.1
