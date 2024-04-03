@@ -1,4 +1,5 @@
 #include "../inc/WaterNetwork.hpp"
+#include <cmath>
 using namespace std;
 
 WaterNetwork::WaterNetwork() {}
@@ -370,7 +371,46 @@ vector<pair<string, double>> WaterNetwork::multiWaterNeeds(Graph<Node> *g, const
     resetGraph(g, s, t);
     return res;
 }
+vector<pair<string, double>> WaterNetwork::calculateMetrics(Graph<Node> *g) const {
+    vector<pair<string, double>> res;
 
+    Node s = createSuperSource(g);
+    Node t = createSuperSink(g);
+    edmondsKarp(g, s, t);
+
+    double dif;
+    double maxDif = 0;
+    double sumDif = 0;
+    double var = 0;
+    double count = 0;
+    double variance=0;
+
+    for (Vertex<Node> *v : g->getVertexSet()) {
+        for (Edge<Node> *e : v->getAdj()) {
+            dif = e->getWeight() - e->getFlow();
+            if(dif > maxDif) maxDif = dif;
+            sumDif += dif;
+            count++;
+        }
+    }
+
+    double avg = sumDif/count;
+
+    for (Vertex<Node> *v : g->getVertexSet()) {
+        for (Edge<Node> *e : v->getAdj()) {
+            dif = e->getWeight() - e->getFlow();
+            var += pow(dif - avg, 2);
+        }
+    }
+    
+    variance = (var/count);
+
+    res.push_back(make_pair("Maximum Difference: ", maxDif));
+    res.push_back(make_pair("Average Difference: ", avg));
+    res.push_back(make_pair("Variance of Difference: ", variance));
+
+    return res;
+}
 Graph<Node> *findConnectedComponent(Graph<Node> *g, const string &node_code)
 {
 

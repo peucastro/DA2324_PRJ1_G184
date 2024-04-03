@@ -30,6 +30,7 @@ void App::mainMenu()
          << "[4] Evaluate the network resiliency if a reservoir gets out of commission." << endl
          << "[5] Evaluate the network resiliency if a pumping station is in periodic maintenance." << endl
          << "[6] Evaluate the city resiliency if a pipeline gets ruptured" << endl
+         << "[7] See some statistics about the pipes balance" << endl
          << "[0] Exit" << endl
          << "=================================================================================================" << endl
          << "-> ";
@@ -72,6 +73,12 @@ void App::mainMenu()
     {
         clearScreen();
         pipeImpactMenu();
+        break;
+    }
+    case 7:
+    {
+        clearScreen();
+        balanceMenu();
         break;
     }
     case 0:
@@ -472,6 +479,17 @@ void App::stationImpactMenu(){
              << "=================================================================================================" << endl;
     }
 
+    goBackMainMenu();
+}
+void App::balanceMenu(){
+    cout << "Let's see some statistics about the difference between the capacity of pipes and flow that passes trough them:" << endl;
+    cout << "===============================================================================================================" << endl;
+    vector<pair<string, double>> pairs = waternetwork.calculateMetrics(waternetwork.getNetworkGraph());
+    for(auto pair : pairs){
+        cout << pair.first << pair.second << endl;
+    }
+
+    cout << "===============================================================================================================" << endl;
     goBackMainMenu();
 }
 

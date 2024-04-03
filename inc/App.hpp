@@ -16,6 +16,7 @@ public:
     void reservoirImpactMenu();
     void stationImpactMenu();
     void pipeImpactMenu();
+    void balanceMenu();
 
 private:
     WaterNetwork waternetwork;

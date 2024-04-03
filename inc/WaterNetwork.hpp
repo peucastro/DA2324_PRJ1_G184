@@ -48,6 +48,7 @@ public:
     double singleSinkMaxFlow(const std::string &city_code) const;                                                 // T2.1
     std::vector<std::pair<std::string, double>> multiSinkMaxFlow() const;                                         // T2.1
     std::vector<std::pair<std::string, double>> multiWaterNeeds(Graph<Node> *g, const bool &flag) const;          // T2.2
+    std::vector<std::pair<std::string, double>> calculateMetrics(Graph<Node> *g) const;                           // T2.3
     std::vector<std::pair<std::string, double>> evaluateReservoirImpact(const std::string &reservoir_code) const; // T3.1
     void evaluateAllReservoirImpact() const;                                                                      // T3.1
     void evaluateAllPumpingStationImpact() const;                                                                 // T3.2
