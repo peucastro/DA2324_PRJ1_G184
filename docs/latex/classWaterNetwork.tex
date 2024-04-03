@@ -1,0 +1,177 @@
+\hypertarget{classWaterNetwork}{}\doxysection{Water\+Network Class Reference}
+\label{classWaterNetwork}\index{WaterNetwork@{WaterNetwork}}
+
+
+Class representing a water supply network.~\newline
+.  
+
+
+
+
+{\ttfamily \#include $<$Water\+Network.\+hpp$>$}
+
+
+
+Collaboration diagram for Water\+Network\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=164pt]{classWaterNetwork__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classWaterNetwork_a9f941febe6bc41184bae679e01a70e1a}{Water\+Network}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for the \mbox{\hyperlink{classWaterNetwork}{Water\+Network}} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classWaterNetwork_a4758db7a8a9cc9e36a9004cd926c4cc8}{Water\+Network}} (const std\+::string reservoirs\+\_\+filename, const std\+::string stations\+\_\+filename, const std\+::string cities\+\_\+filename, const std\+::string pipes\+\_\+filename)
+\begin{DoxyCompactList}\small\item\em Constructor for the \mbox{\hyperlink{classWaterNetwork}{Water\+Network}} class.~\newline
+This constructor initializes a water network graph by parsing data from provided files. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classWaterNetwork_a921944601ccc9292214e538f39931680}{$\sim$\+Water\+Network}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \mbox{\hyperlink{classWaterNetwork}{Water\+Network}} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$ \mbox{\hyperlink{classWaterNetwork_a38e1c5ef4662c5dcd9e141c5d36492de}{get\+Network\+Graph}} () const
+\begin{DoxyCompactList}\small\item\em Getter for the network graph. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classWaterNetwork_a3700b085c7a34c30cccaac8b793e456b}{single\+Sink\+Max\+Flow}} (const std\+::string \&city\+\_\+code) const
+\item 
+std\+::vector$<$ std\+::pair$<$ std\+::string, double $>$ $>$ \mbox{\hyperlink{classWaterNetwork_ab6b8709b49157f4435262921670179f0}{multi\+Sink\+Max\+Flow}} () const
+\item 
+std\+::vector$<$ std\+::pair$<$ std\+::string, double $>$ $>$ \mbox{\hyperlink{classWaterNetwork_ada06e389634a0eeee253377135332331}{multi\+Water\+Needs}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g, const bool \&flag) const
+\item 
+std\+::vector$<$ std\+::pair$<$ std\+::string, double $>$ $>$ \mbox{\hyperlink{classWaterNetwork_aafeed73bb4b3ddd100c6b793309b8afb}{evaluate\+Reservoir\+Impact}} (const std\+::string \&reservoir\+\_\+code) const
+\item 
+void \mbox{\hyperlink{classWaterNetwork_a5cb954a0e70e1cd5a2ae2fdc01c44c92}{evaluate\+All\+Reservoir\+Impact}} () const
+\item 
+void \mbox{\hyperlink{classWaterNetwork_aa25c94515e6bb619842459f23d799874}{evaluate\+All\+Pumping\+Station\+Impact}} () const
+\item 
+void \mbox{\hyperlink{classWaterNetwork_a8aab0f81ac70d565ad1b5246d5e5b8f6}{evaluate\+Pipeline\+Impact}} (const std\+::string \&city\+\_\+code) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$ \mbox{\hyperlink{classWaterNetwork_a7451bc1765bc5e3dc0ee42e6b5780103}{network}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class representing a water supply network.~\newline
+. 
+
+This class provides functionality to model and analyze a water supply network, including methods for calculating maximum flow, evaluating network metrics, and managing network components. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classWaterNetwork_a9f941febe6bc41184bae679e01a70e1a}\label{classWaterNetwork_a9f941febe6bc41184bae679e01a70e1a}} 
+\index{WaterNetwork@{WaterNetwork}!WaterNetwork@{WaterNetwork}}
+\index{WaterNetwork@{WaterNetwork}!WaterNetwork@{WaterNetwork}}
+\doxysubsubsection{\texorpdfstring{WaterNetwork()}{WaterNetwork()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Water\+Network\+::\+Water\+Network (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor for the \mbox{\hyperlink{classWaterNetwork}{Water\+Network}} class. 
+
+\mbox{\Hypertarget{classWaterNetwork_a4758db7a8a9cc9e36a9004cd926c4cc8}\label{classWaterNetwork_a4758db7a8a9cc9e36a9004cd926c4cc8}} 
+\index{WaterNetwork@{WaterNetwork}!WaterNetwork@{WaterNetwork}}
+\index{WaterNetwork@{WaterNetwork}!WaterNetwork@{WaterNetwork}}
+\doxysubsubsection{\texorpdfstring{WaterNetwork()}{WaterNetwork()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Water\+Network\+::\+Water\+Network (\begin{DoxyParamCaption}\item[{const std\+::string}]{reservoirs\+\_\+filename,  }\item[{const std\+::string}]{stations\+\_\+filename,  }\item[{const std\+::string}]{cities\+\_\+filename,  }\item[{const std\+::string}]{pipes\+\_\+filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for the \mbox{\hyperlink{classWaterNetwork}{Water\+Network}} class.~\newline
+This constructor initializes a water network graph by parsing data from provided files. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reservoirs\+\_\+filename} & The filename of the CSV file containing reservoir data. \\
+\hline
+{\em stations\+\_\+filename} & The filename of the CSV file containing station data. \\
+\hline
+{\em cities\+\_\+filename} & The filename of the CSV file containing city data. \\
+\hline
+{\em pipes\+\_\+filename} & The filename of the CSV file containing pipe data. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classWaterNetwork_a921944601ccc9292214e538f39931680}\label{classWaterNetwork_a921944601ccc9292214e538f39931680}} 
+\index{WaterNetwork@{WaterNetwork}!````~WaterNetwork@{$\sim$WaterNetwork}}
+\index{````~WaterNetwork@{$\sim$WaterNetwork}!WaterNetwork@{WaterNetwork}}
+\doxysubsubsection{\texorpdfstring{$\sim$WaterNetwork()}{~WaterNetwork()}}
+{\footnotesize\ttfamily Water\+Network\+::$\sim$\+Water\+Network (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor for the \mbox{\hyperlink{classWaterNetwork}{Water\+Network}} class. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classWaterNetwork_aa25c94515e6bb619842459f23d799874}\label{classWaterNetwork_aa25c94515e6bb619842459f23d799874}} 
+\index{WaterNetwork@{WaterNetwork}!evaluateAllPumpingStationImpact@{evaluateAllPumpingStationImpact}}
+\index{evaluateAllPumpingStationImpact@{evaluateAllPumpingStationImpact}!WaterNetwork@{WaterNetwork}}
+\doxysubsubsection{\texorpdfstring{evaluateAllPumpingStationImpact()}{evaluateAllPumpingStationImpact()}}
+{\footnotesize\ttfamily void Water\+Network\+::evaluate\+All\+Pumping\+Station\+Impact (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classWaterNetwork_a5cb954a0e70e1cd5a2ae2fdc01c44c92}\label{classWaterNetwork_a5cb954a0e70e1cd5a2ae2fdc01c44c92}} 
+\index{WaterNetwork@{WaterNetwork}!evaluateAllReservoirImpact@{evaluateAllReservoirImpact}}
+\index{evaluateAllReservoirImpact@{evaluateAllReservoirImpact}!WaterNetwork@{WaterNetwork}}
+\doxysubsubsection{\texorpdfstring{evaluateAllReservoirImpact()}{evaluateAllReservoirImpact()}}
+{\footnotesize\ttfamily void Water\+Network\+::evaluate\+All\+Reservoir\+Impact (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classWaterNetwork_a8aab0f81ac70d565ad1b5246d5e5b8f6}\label{classWaterNetwork_a8aab0f81ac70d565ad1b5246d5e5b8f6}} 
+\index{WaterNetwork@{WaterNetwork}!evaluatePipelineImpact@{evaluatePipelineImpact}}
+\index{evaluatePipelineImpact@{evaluatePipelineImpact}!WaterNetwork@{WaterNetwork}}
+\doxysubsubsection{\texorpdfstring{evaluatePipelineImpact()}{evaluatePipelineImpact()}}
+{\footnotesize\ttfamily void Water\+Network\+::evaluate\+Pipeline\+Impact (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{city\+\_\+code }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classWaterNetwork_aafeed73bb4b3ddd100c6b793309b8afb}\label{classWaterNetwork_aafeed73bb4b3ddd100c6b793309b8afb}} 
+\index{WaterNetwork@{WaterNetwork}!evaluateReservoirImpact@{evaluateReservoirImpact}}
+\index{evaluateReservoirImpact@{evaluateReservoirImpact}!WaterNetwork@{WaterNetwork}}
+\doxysubsubsection{\texorpdfstring{evaluateReservoirImpact()}{evaluateReservoirImpact()}}
+{\footnotesize\ttfamily vector$<$ pair$<$ string, double $>$ $>$ Water\+Network\+::evaluate\+Reservoir\+Impact (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{reservoir\+\_\+code }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classWaterNetwork_a38e1c5ef4662c5dcd9e141c5d36492de}\label{classWaterNetwork_a38e1c5ef4662c5dcd9e141c5d36492de}} 
+\index{WaterNetwork@{WaterNetwork}!getNetworkGraph@{getNetworkGraph}}
+\index{getNetworkGraph@{getNetworkGraph}!WaterNetwork@{WaterNetwork}}
+\doxysubsubsection{\texorpdfstring{getNetworkGraph()}{getNetworkGraph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$ Water\+Network\+::get\+Network\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Getter for the network graph. 
+
+\begin{DoxyReturn}{Returns}
+A pointer to the network graph. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classWaterNetwork_ab6b8709b49157f4435262921670179f0}\label{classWaterNetwork_ab6b8709b49157f4435262921670179f0}} 
+\index{WaterNetwork@{WaterNetwork}!multiSinkMaxFlow@{multiSinkMaxFlow}}
+\index{multiSinkMaxFlow@{multiSinkMaxFlow}!WaterNetwork@{WaterNetwork}}
+\doxysubsubsection{\texorpdfstring{multiSinkMaxFlow()}{multiSinkMaxFlow()}}
+{\footnotesize\ttfamily vector$<$ pair$<$ string, double $>$ $>$ Water\+Network\+::multi\+Sink\+Max\+Flow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classWaterNetwork_ada06e389634a0eeee253377135332331}\label{classWaterNetwork_ada06e389634a0eeee253377135332331}} 
+\index{WaterNetwork@{WaterNetwork}!multiWaterNeeds@{multiWaterNeeds}}
+\index{multiWaterNeeds@{multiWaterNeeds}!WaterNetwork@{WaterNetwork}}
+\doxysubsubsection{\texorpdfstring{multiWaterNeeds()}{multiWaterNeeds()}}
+{\footnotesize\ttfamily vector$<$ pair$<$ string, double $>$ $>$ Water\+Network\+::multi\+Water\+Needs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$}]{g,  }\item[{const bool \&}]{flag }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classWaterNetwork_a3700b085c7a34c30cccaac8b793e456b}\label{classWaterNetwork_a3700b085c7a34c30cccaac8b793e456b}} 
+\index{WaterNetwork@{WaterNetwork}!singleSinkMaxFlow@{singleSinkMaxFlow}}
+\index{singleSinkMaxFlow@{singleSinkMaxFlow}!WaterNetwork@{WaterNetwork}}
+\doxysubsubsection{\texorpdfstring{singleSinkMaxFlow()}{singleSinkMaxFlow()}}
+{\footnotesize\ttfamily double Water\+Network\+::single\+Sink\+Max\+Flow (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{city\+\_\+code }\end{DoxyParamCaption}) const}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classWaterNetwork_a7451bc1765bc5e3dc0ee42e6b5780103}\label{classWaterNetwork_a7451bc1765bc5e3dc0ee42e6b5780103}} 
+\index{WaterNetwork@{WaterNetwork}!network@{network}}
+\index{network@{network}!WaterNetwork@{WaterNetwork}}
+\doxysubsubsection{\texorpdfstring{network}{network}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classGraph}{Graph}}$<$\mbox{\hyperlink{classNode}{Node}}$>$$\ast$ Water\+Network\+::network\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+inc/\mbox{\hyperlink{WaterNetwork_8hpp}{Water\+Network.\+hpp}}\item 
+src/\mbox{\hyperlink{WaterNetwork_8cpp}{Water\+Network.\+cpp}}\end{DoxyCompactItemize}
