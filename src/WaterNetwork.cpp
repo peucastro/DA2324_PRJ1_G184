@@ -408,46 +408,77 @@ void WaterNetwork::evaluateAllPumpingStationImpact() const
 
 void WaterNetwork::evaluatePipelineImpact(const std::string &city_code) const
 {
-
-    Node city(city_code);
-    Vertex<Node> *city_vertex = network->findVertex(city);
-
-    if (city_vertex == nullptr || city_vertex->getInfo().getType() != 2)
-        throw runtime_error("Please inform a valid city code.");
-
-    vector<pair<string, double>> previousDeficit;
-    previousDeficit = multiWaterNeeds(network, true);
     double previousCityDeficit;
+    vector<pair<string, double>> previousDeficit;
+    Node city(city_code);
+    Vertex<Node>* city_vertex = network->findVertex(city);
 
-    for (size_t i = 0; i < previousDeficit.size(); i++)
+    if (filesystem::exists("../out/WaterNeeds.csv"))
     {
-        if (previousDeficit[i].first == city_code)
+        ifstream waterneeds_file("../out/WaterNeeds.csv");
+        if (!waterneeds_file.is_open())
+            throw runtime_error("WaterNeeds.csv file could not be opened!");
+
+        string line;
+        waterneeds_file >> line;
+        while (waterneeds_file >> line)
         {
-            previousCityDeficit = previousDeficit[i].second;
+            istringstream iss(line);
+            string cityCode, waterDeficit_str;
+            getline(getline(iss, cityCode, ','), waterDeficit_str, '\r');
+            double waterDeficit = stod(waterDeficit_str);
+            if(cityCode == city_code) previousCityDeficit = waterDeficit;
+            previousDeficit.push_back(make_pair(cityCode, waterDeficit));
         }
+        waterneeds_file.close();
     }
+    else
+        previousDeficit = multiWaterNeeds(network, true);
+    
 
-    for (Vertex<Node> *node : network->getVertexSet())
+    vector<pair<string, double>> currentDeficit;
+    cout << "Pipelines that, if removed, will impact the city " << city_code << ':' << endl
+                 << setw(10) << left << "Pipes" << setw(15) << left << "| Impact" << endl
+                 << "-------------------------------------------------------------------------------" << endl;
+
+    for (Vertex<Node> *v : network->getVertexSet())
     {
-        for (Edge<Node> *pipe : node->getAdj())
-        {
-            double pipeWeight = pipe->getWeight();
-            pipe->setWeight(0);
-            vector<pair<string, double>> currentDeficit = multiWaterNeeds(network, false);
-            double currentCityDeficit;
+        for(Edge<Node> *pipe : v->getAdj()){
 
-            for (size_t i = 0; i < currentDeficit.size(); i++)
+            double originalPipe = pipe->getWeight();
+            pipe->setWeight(0);
+
+            Graph<Node> *subgraph = findConnectedComponent(network, pipe->getOrig()->getInfo().getCode());
+            /*for (Vertex<Node> *v : subgraph->getVertexSet())
             {
-                if (currentDeficit[i].first == city_code)
+                cout << v->getInfo().getCode() << endl;
+            }*/
+            currentDeficit = multiWaterNeeds(subgraph, false);
+            /*for (const pair<string, double> &p : currentDeficit)
+            {
+                cout << setw(18) << left << p.first;
+                cout << p.second << endl;
+            }*/
+
+            for (pair<string, double> &p : previousDeficit)
+            {
+                string currCity = p.first;
+                if(currCity != city_code) continue;
+                vector<pair<string, double>>::iterator it = find_if(currentDeficit.begin(), currentDeficit.end(),
+                                                                    [currCity](const pair<string, double> &pairInCurrentDeficit)
+                                                                    { return pairInCurrentDeficit.first == currCity; });
+
+                if (it == currentDeficit.end() || p.second - it->second == 0)
                 {
-                    currentCityDeficit = currentDeficit[i].second;
-                    if (currentCityDeficit > previousCityDeficit)
-                    {
-                        cout << "PIPE: " << pipe->getOrig()->getInfo().getCode() << " -> " << pipe->getDest()->getInfo().getCode() << "  ;  PREV DEFICIT: " << previousCityDeficit << "  ;  CURR DEFICIT: " << currentCityDeficit << '\n';
-                    }
+                    continue;
+                    cout << setw(15) << currCity << setw(15) << "no" << setw(15) << "--" << '\n';
+                }
+                else
+                {
+                    cout << pipe->getOrig()->getInfo().getCode() << " -> "  << setw(15) << pipe->getDest()->getInfo().getCode() << setw(15) << "yes" << setw(15) << p.second - it->second << '\n';
                 }
             }
-            pipe->setWeight(pipeWeight);
+            v->setVisited(false);
         }
     }
 }

@@ -443,7 +443,7 @@ void App::pipeImpactMenu()
          << "-> ";
     cin >> city_code;
     city_code = upperCase(city_code);
-
+    cout << endl;
     try
     {
         waternetwork.evaluatePipelineImpact(city_code);
@@ -454,7 +454,8 @@ void App::pipeImpactMenu()
         std::cerr << e.what() << '\n';
         mainMenu();
     }
-
+    cout << endl
+             << "=================================================================================================" << endl;
     goBackMainMenu();
 }
 
