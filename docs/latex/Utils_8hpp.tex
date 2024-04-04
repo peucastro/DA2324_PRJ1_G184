@@ -2,16 +2,14 @@
 \label{Utils_8hpp}\index{inc/Utils.hpp@{inc/Utils.hpp}}
 {\ttfamily \#include \char`\"{}Graph.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}Node.\+hpp\char`\"{}}\newline
-Include dependency graph for Utils.\+hpp\+:
-\nopagebreak
+Include dependency graph for Utils.\+hpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{Utils_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -22,33 +20,25 @@ This graph shows which files directly or indirectly include this file\+:
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{Utils_8hpp_ad3ebaabf329fa415b26933019ea38e51}{test\+And\+Visit}} (std\+::queue$<$ \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$ $>$ \&q, \mbox{\hyperlink{classEdge}{Edge}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$e, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$w, double residual)
-\begin{DoxyCompactList}\small\item\em Helper function to test and visit vertices during BFS traversal.~\newline
-. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Helper function to test and visit vertices during BFS traversal. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{Utils_8hpp_a1e4fb5cad71ea5d3f8f0d8aba4b9e0a7}{find\+Augmenting\+Path}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$s, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$t)
-\begin{DoxyCompactList}\small\item\em Function to find an augmenting path in the graph using BFS.~\newline
-. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to find an augmenting path in the graph using BFS. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{Utils_8hpp_a9aa0c2183131e4afa257b9c2449635a3}{find\+Min\+Residual\+Along\+Path}} (\mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$s, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$t)
-\begin{DoxyCompactList}\small\item\em Function to find the minimum residual capacity along an augmenting path.~\newline
-. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to find the minimum residual capacity along an augmenting path. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{Utils_8hpp_a8d63ca3896fcd9c47efcebde70691cf4}{augment\+Flow\+Along\+Path}} (\mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$s, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$t, double f)
-\begin{DoxyCompactList}\small\item\em Function to augment flow along an augmenting path.~\newline
-. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to augment flow along an augmenting path. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{Utils_8hpp_a322d367f5bea603c92bc6f16210c0705}{edmonds\+Karp}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g, \mbox{\hyperlink{classNode}{Node}} source, \mbox{\hyperlink{classNode}{Node}} target)
-\begin{DoxyCompactList}\small\item\em Function implementing the Edmonds-\/\+Karp algorithm for maximum flow.~\newline
-. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function implementing the Edmonds-\/\+Karp algorithm for maximum flow. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{Utils_8hpp_a0cf11d9d9e3226fa160682b451a7c029}{reset\+Graph}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g, const \mbox{\hyperlink{classNode}{Node}} \&s, const \mbox{\hyperlink{classNode}{Node}} \&t)
-\begin{DoxyCompactList}\small\item\em Function to reset the state of the graph.~\newline
-. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to reset the state of the graph. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classNode}{Node}} \mbox{\hyperlink{Utils_8hpp_a28e78b3b8c1575ca00ceafc53c2b3b6e}{create\+Super\+Source}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g)
-\begin{DoxyCompactList}\small\item\em Function to create a super source node in the graph.~\newline
-. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to create a super source node in the graph. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classNode}{Node}} \mbox{\hyperlink{Utils_8hpp_a62c474099c594006cc3104d5a2a0a313}{create\+Super\+Sink}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g)
-\begin{DoxyCompactList}\small\item\em Function to create a super sink node in the graph.~\newline
-. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to create a super sink node in the graph. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{Utils_8hpp_a5ccb2875cbf9060c3713025624732760}{dfs\+Visit\+Find\+CC}} (\mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$v, std\+::vector$<$ \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$ $>$ \&res)
-\item 
+\begin{DoxyCompactList}\small\item\em Depth-\/first search visit function to find connected components. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$ \mbox{\hyperlink{Utils_8hpp_a51983c36be7537268ed5c7769a03aa44}{find\+Connected\+Component}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g, const std\+::string \&node\+\_\+code)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Find connected component containing a specific node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
@@ -60,8 +50,7 @@ void \mbox{\hyperlink{Utils_8hpp_a5ccb2875cbf9060c3713025624732760}{dfs\+Visit\+
 
 
 
-Function to augment flow along an augmenting path.~\newline
-. 
+Function to augment flow along an augmenting path. 
 
 This function traverses the augmenting path from the target vertex to the source vertex and updates the flow values of edges and current flow values of vertices accordingly.
 
@@ -82,11 +71,9 @@ This function traverses the augmenting path from the target vertex to the source
 
 
 
-Function to create a super sink node in the graph.~\newline
-. 
+Function to create a super sink node in the graph. 
 
-This function creates a super sink node in the graph with maximum demand capacity.~\newline
-It adds edges from all city nodes in the graph except itself to the super sink.
+This function creates a super sink node in the graph with maximum demand capacity. It adds edges from all city nodes in the graph except itself to the super sink.
 
 
 \begin{DoxyParams}{Parameters}
@@ -104,11 +91,9 @@ The super sink node created.
 
 
 
-Function to create a super source node in the graph.~\newline
-. 
+Function to create a super source node in the graph. 
 
-This function creates a super source node in the graph with maximum delivery capacity.~\newline
-It adds edges from the super source to all reservoir nodes in the graph except itself.
+This function creates a super source node in the graph with maximum delivery capacity. It adds edges from the super source to all reservoir nodes in the graph except itself.
 
 
 \begin{DoxyParams}{Parameters}
@@ -124,7 +109,22 @@ The super source node created.
 \doxysubsubsection{\texorpdfstring{dfsVisitFindCC()}{dfsVisitFindCC()}}
 {\footnotesize\ttfamily void dfs\+Visit\+Find\+CC (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$}]{v,  }\item[{std\+::vector$<$ \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$ $>$ \&}]{res }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{Utils_8hpp_a322d367f5bea603c92bc6f16210c0705}\label{Utils_8hpp_a322d367f5bea603c92bc6f16210c0705}} 
+
+
+Depth-\/first search visit function to find connected components. 
+
+This function performs a depth-\/first search (DFS) traversal starting from a given vertex to find all connected components in the graph. It marks visited vertices and adds them to the result vector.
+
+During the traversal, if the adjacent vertex \textquotesingle{}w\textquotesingle{} is either a Pumping Station (type 1) or a city (type 2), the DFS traversal continues recursively from \textquotesingle{}w\textquotesingle{} to explore further connected vertices. Otherwise, if \textquotesingle{}w\textquotesingle{} is a Reservoir (type 0), it is marked as visited and added to the result vector.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & The vertex to start the DFS traversal from. \\
+\hline
+{\em res} & The vector to store the visited vertices representing the connected component.\\
+\hline
+\end{DoxyParams}
+@complexity O(V + E), where V is the number of vertices and E is the number of edges in the graph. \mbox{\Hypertarget{Utils_8hpp_a322d367f5bea603c92bc6f16210c0705}\label{Utils_8hpp_a322d367f5bea603c92bc6f16210c0705}} 
 \index{Utils.hpp@{Utils.hpp}!edmondsKarp@{edmondsKarp}}
 \index{edmondsKarp@{edmondsKarp}!Utils.hpp@{Utils.hpp}}
 \doxysubsubsection{\texorpdfstring{edmondsKarp()}{edmondsKarp()}}
@@ -132,11 +132,9 @@ The super source node created.
 
 
 
-Function implementing the Edmonds-\/\+Karp algorithm for maximum flow.~\newline
-. 
+Function implementing the Edmonds-\/\+Karp algorithm for maximum flow. 
 
-This function finds the maximum flow in the graph from a source vertex to a target vertex using the Edmonds-\/\+Karp algorithm.~\newline
-It repeatedly finds augmenting paths using BFS and augments flow along the paths until no more augmenting paths exist.
+This function finds the maximum flow in the graph from a source vertex to a target vertex using the Edmonds-\/\+Karp algorithm. It repeatedly finds augmenting paths using BFS and augments flow along the paths until no more augmenting paths exist.
 
 
 \begin{DoxyParams}{Parameters}
@@ -155,11 +153,9 @@ It repeatedly finds augmenting paths using BFS and augments flow along the paths
 
 
 
-Function to find an augmenting path in the graph using BFS.~\newline
-. 
+Function to find an augmenting path in the graph using BFS. 
 
-This function marks all vertices as not visited, marks the source vertex as visited, and performs BFS traversal to find an augmenting path from the source to the target vertex.~\newline
-It returns true if a path to the target vertex is found, and false otherwise.
+This function marks all vertices as not visited, marks the source vertex as visited, and performs BFS traversal to find an augmenting path from the source to the target vertex. It returns true if a path to the target vertex is found, and false otherwise.
 
 
 \begin{DoxyParams}{Parameters}
@@ -179,7 +175,30 @@ True if an augmenting path is found, false otherwise.
 \doxysubsubsection{\texorpdfstring{findConnectedComponent()}{findConnectedComponent()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classGraph}{Graph}}$<$\mbox{\hyperlink{classNode}{Node}}$>$$\ast$ find\+Connected\+Component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$}]{g,  }\item[{const std\+::string \&}]{node\+\_\+code }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{Utils_8hpp_a9aa0c2183131e4afa257b9c2449635a3}\label{Utils_8hpp_a9aa0c2183131e4afa257b9c2449635a3}} 
+
+
+Find connected component containing a specific node. 
+
+This function finds the connected component in the graph that contains the specified node. It performs a depth-\/first search (DFS) traversal from the specified node to identify the connected component.
+
+The function constructs a subgraph representing the connected component by adding edges from the original graph based on the connections of vertices within the connected component.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph to search for the connected component. \\
+\hline
+{\em node\+\_\+code} & The code of the node indicating the connected component to find. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the subgraph representing the connected component containing the specified node.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if the specified node code is not found in the graph.\\
+\hline
+\end{DoxyExceptions}
+@complexity O(V + E), where V is the number of vertices and E is the number of edges in the graph. \mbox{\Hypertarget{Utils_8hpp_a9aa0c2183131e4afa257b9c2449635a3}\label{Utils_8hpp_a9aa0c2183131e4afa257b9c2449635a3}} 
 \index{Utils.hpp@{Utils.hpp}!findMinResidualAlongPath@{findMinResidualAlongPath}}
 \index{findMinResidualAlongPath@{findMinResidualAlongPath}!Utils.hpp@{Utils.hpp}}
 \doxysubsubsection{\texorpdfstring{findMinResidualAlongPath()}{findMinResidualAlongPath()}}
@@ -187,11 +206,9 @@ True if an augmenting path is found, false otherwise.
 
 
 
-Function to find the minimum residual capacity along an augmenting path.~\newline
-. 
+Function to find the minimum residual capacity along an augmenting path. 
 
-This function traverses the augmenting path from the target vertex to the source vertex to find the minimum residual capacity.~\newline
-It considers the capacity of edges and the demand of cities.
+This function traverses the augmenting path from the target vertex to the source vertex to find the minimum residual capacity. It considers the capacity of edges and the demand of cities.
 
 
 \begin{DoxyParams}{Parameters}
@@ -211,11 +228,9 @@ The minimum residual capacity along the augmenting path.
 
 
 
-Function to reset the state of the graph.~\newline
-. 
+Function to reset the state of the graph. 
 
-This function resets the state of the graph by marking all vertices as not visited, clearing paths, current flow, and used delivery.~\newline
-It also resets the flow of all edges to zero. Additionally, it removes the super source and super sink nodes from the graph.
+This function resets the state of the graph by marking all vertices as not visited, clearing paths, current flow, and used delivery. It also resets the flow of all edges to zero. Additionally, it removes the super source and super sink nodes from the graph.
 
 
 \begin{DoxyParams}{Parameters}
@@ -234,11 +249,9 @@ It also resets the flow of all edges to zero. Additionally, it removes the super
 
 
 
-Helper function to test and visit vertices during BFS traversal.~\newline
-. 
+Helper function to test and visit vertices during BFS traversal. 
 
-This function checks if the vertex \textquotesingle{}w\textquotesingle{} is not visited and there is residual capacity.~\newline
-If so, it marks \textquotesingle{}w\textquotesingle{} as visited, sets the path through which it was reached, and enqueues it.
+This function checks if the vertex \textquotesingle{}w\textquotesingle{} is not visited and there is residual capacity. If so, it marks \textquotesingle{}w\textquotesingle{} as visited, sets the path through which it was reached, and enqueues it.
 
 
 \begin{DoxyParams}{Parameters}

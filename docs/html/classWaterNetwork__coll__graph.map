@@ -1,4 +1,4 @@
 <map id="WaterNetwork" name="WaterNetwork">
-<area shape="rect" id="node1" title="Class representing a water supply network. ." alt="" coords="9,95,114,121"/>
+<area shape="rect" id="node1" title="Class representing a water supply network." alt="" coords="9,95,114,121"/>
 <area shape="rect" id="node2" href="$classGraph.html" title=" " alt="" coords="5,5,117,32"/>
 </map>

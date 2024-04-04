@@ -1,8 +1,7 @@
 \hypertarget{Utils_8cpp}{}\doxysection{src/\+Utils.cpp File Reference}
 \label{Utils_8cpp}\index{src/Utils.cpp@{src/Utils.cpp}}
 {\ttfamily \#include \char`\"{}../inc/\+Utils.\+hpp\char`\"{}}\newline
-Include dependency graph for Utils.\+cpp\+:
-\nopagebreak
+Include dependency graph for Utils.\+cpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -15,26 +14,19 @@ Include dependency graph for Utils.\+cpp\+:
 void \mbox{\hyperlink{Utils_8cpp_ae12d9a6e276a1ddfa67ebf7a4885ae91}{test\+And\+Visit}} (queue$<$ \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$ $>$ \&q, \mbox{\hyperlink{classEdge}{Edge}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$e, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$w, double residual)
 \item 
 bool \mbox{\hyperlink{Utils_8cpp_a1e4fb5cad71ea5d3f8f0d8aba4b9e0a7}{find\+Augmenting\+Path}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$s, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$t)
-\begin{DoxyCompactList}\small\item\em Function to find an augmenting path in the graph using BFS.~\newline
-. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to find an augmenting path in the graph using BFS. \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{Utils_8cpp_a9aa0c2183131e4afa257b9c2449635a3}{find\+Min\+Residual\+Along\+Path}} (\mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$s, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$t)
-\begin{DoxyCompactList}\small\item\em Function to find the minimum residual capacity along an augmenting path.~\newline
-. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to find the minimum residual capacity along an augmenting path. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{Utils_8cpp_a8d63ca3896fcd9c47efcebde70691cf4}{augment\+Flow\+Along\+Path}} (\mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$s, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$t, double f)
-\begin{DoxyCompactList}\small\item\em Function to augment flow along an augmenting path.~\newline
-. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to augment flow along an augmenting path. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{Utils_8cpp_a322d367f5bea603c92bc6f16210c0705}{edmonds\+Karp}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g, \mbox{\hyperlink{classNode}{Node}} source, \mbox{\hyperlink{classNode}{Node}} target)
-\begin{DoxyCompactList}\small\item\em Function implementing the Edmonds-\/\+Karp algorithm for maximum flow.~\newline
-. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function implementing the Edmonds-\/\+Karp algorithm for maximum flow. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{Utils_8cpp_a0cf11d9d9e3226fa160682b451a7c029}{reset\+Graph}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g, const \mbox{\hyperlink{classNode}{Node}} \&s, const \mbox{\hyperlink{classNode}{Node}} \&t)
-\begin{DoxyCompactList}\small\item\em Function to reset the state of the graph.~\newline
-. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to reset the state of the graph. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classNode}{Node}} \mbox{\hyperlink{Utils_8cpp_a28e78b3b8c1575ca00ceafc53c2b3b6e}{create\+Super\+Source}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g)
-\begin{DoxyCompactList}\small\item\em Function to create a super source node in the graph.~\newline
-. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to create a super source node in the graph. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classNode}{Node}} \mbox{\hyperlink{Utils_8cpp_a62c474099c594006cc3104d5a2a0a313}{create\+Super\+Sink}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g)
-\begin{DoxyCompactList}\small\item\em Function to create a super sink node in the graph.~\newline
-. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Function to create a super sink node in the graph. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{Utils_8cpp_a90d49177de08a1fdb2d558850be95477}{dfs\+Visit\+Find\+CC}} (\mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$v, vector$<$ \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$ $>$ \&res)
 \item 
 \mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$ \mbox{\hyperlink{Utils_8cpp_a9224a420fa7da85650c4dc7010161947}{find\+Connected\+Component}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g, const string \&node\+\_\+code)
@@ -50,8 +42,7 @@ void \mbox{\hyperlink{Utils_8cpp_a90d49177de08a1fdb2d558850be95477}{dfs\+Visit\+
 
 
 
-Function to augment flow along an augmenting path.~\newline
-. 
+Function to augment flow along an augmenting path. 
 
 This function traverses the augmenting path from the target vertex to the source vertex and updates the flow values of edges and current flow values of vertices accordingly.
 
@@ -72,11 +63,9 @@ This function traverses the augmenting path from the target vertex to the source
 
 
 
-Function to create a super sink node in the graph.~\newline
-. 
+Function to create a super sink node in the graph. 
 
-This function creates a super sink node in the graph with maximum demand capacity.~\newline
-It adds edges from all city nodes in the graph except itself to the super sink.
+This function creates a super sink node in the graph with maximum demand capacity. It adds edges from all city nodes in the graph except itself to the super sink.
 
 
 \begin{DoxyParams}{Parameters}
@@ -94,11 +83,9 @@ The super sink node created.
 
 
 
-Function to create a super source node in the graph.~\newline
-. 
+Function to create a super source node in the graph. 
 
-This function creates a super source node in the graph with maximum delivery capacity.~\newline
-It adds edges from the super source to all reservoir nodes in the graph except itself.
+This function creates a super source node in the graph with maximum delivery capacity. It adds edges from the super source to all reservoir nodes in the graph except itself.
 
 
 \begin{DoxyParams}{Parameters}
@@ -122,11 +109,9 @@ The super source node created.
 
 
 
-Function implementing the Edmonds-\/\+Karp algorithm for maximum flow.~\newline
-. 
+Function implementing the Edmonds-\/\+Karp algorithm for maximum flow. 
 
-This function finds the maximum flow in the graph from a source vertex to a target vertex using the Edmonds-\/\+Karp algorithm.~\newline
-It repeatedly finds augmenting paths using BFS and augments flow along the paths until no more augmenting paths exist.
+This function finds the maximum flow in the graph from a source vertex to a target vertex using the Edmonds-\/\+Karp algorithm. It repeatedly finds augmenting paths using BFS and augments flow along the paths until no more augmenting paths exist.
 
 
 \begin{DoxyParams}{Parameters}
@@ -145,11 +130,9 @@ It repeatedly finds augmenting paths using BFS and augments flow along the paths
 
 
 
-Function to find an augmenting path in the graph using BFS.~\newline
-. 
+Function to find an augmenting path in the graph using BFS. 
 
-This function marks all vertices as not visited, marks the source vertex as visited, and performs BFS traversal to find an augmenting path from the source to the target vertex.~\newline
-It returns true if a path to the target vertex is found, and false otherwise.
+This function marks all vertices as not visited, marks the source vertex as visited, and performs BFS traversal to find an augmenting path from the source to the target vertex. It returns true if a path to the target vertex is found, and false otherwise.
 
 
 \begin{DoxyParams}{Parameters}
@@ -177,11 +160,9 @@ True if an augmenting path is found, false otherwise.
 
 
 
-Function to find the minimum residual capacity along an augmenting path.~\newline
-. 
+Function to find the minimum residual capacity along an augmenting path. 
 
-This function traverses the augmenting path from the target vertex to the source vertex to find the minimum residual capacity.~\newline
-It considers the capacity of edges and the demand of cities.
+This function traverses the augmenting path from the target vertex to the source vertex to find the minimum residual capacity. It considers the capacity of edges and the demand of cities.
 
 
 \begin{DoxyParams}{Parameters}
@@ -201,11 +182,9 @@ The minimum residual capacity along the augmenting path.
 
 
 
-Function to reset the state of the graph.~\newline
-. 
+Function to reset the state of the graph. 
 
-This function resets the state of the graph by marking all vertices as not visited, clearing paths, current flow, and used delivery.~\newline
-It also resets the flow of all edges to zero. Additionally, it removes the super source and super sink nodes from the graph.
+This function resets the state of the graph by marking all vertices as not visited, clearing paths, current flow, and used delivery. It also resets the flow of all edges to zero. Additionally, it removes the super source and super sink nodes from the graph.
 
 
 \begin{DoxyParams}{Parameters}
