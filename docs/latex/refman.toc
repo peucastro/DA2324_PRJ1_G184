@@ -9,18 +9,19 @@
 \contentsline {subsection}{\numberline {4.1.1}Constructor \& Destructor Documentation}{8}{subsection.4.1.1}%
 \contentsline {subsubsection}{\numberline {4.1.1.1}App()}{8}{subsubsection.4.1.1.1}%
 \contentsline {subsection}{\numberline {4.1.2}Member Function Documentation}{8}{subsection.4.1.2}%
-\contentsline {subsubsection}{\numberline {4.1.2.1}goBackMainMenu()}{8}{subsubsection.4.1.2.1}%
-\contentsline {subsubsection}{\numberline {4.1.2.2}mainMenu()}{8}{subsubsection.4.1.2.2}%
-\contentsline {subsubsection}{\numberline {4.1.2.3}maxFlowMenu()}{8}{subsubsection.4.1.2.3}%
-\contentsline {subsubsection}{\numberline {4.1.2.4}pipeImpactMenu()}{8}{subsubsection.4.1.2.4}%
-\contentsline {subsubsection}{\numberline {4.1.2.5}reservoirImpactMenu()}{9}{subsubsection.4.1.2.5}%
-\contentsline {subsubsection}{\numberline {4.1.2.6}stationImpactMenu()}{9}{subsubsection.4.1.2.6}%
-\contentsline {subsubsection}{\numberline {4.1.2.7}statisticsMenu()}{9}{subsubsection.4.1.2.7}%
-\contentsline {subsubsection}{\numberline {4.1.2.8}upperCase()}{9}{subsubsection.4.1.2.8}%
-\contentsline {subsubsection}{\numberline {4.1.2.9}waterNeedsMenu()}{9}{subsubsection.4.1.2.9}%
+\contentsline {subsubsection}{\numberline {4.1.2.1}balanceMenu()}{8}{subsubsection.4.1.2.1}%
+\contentsline {subsubsection}{\numberline {4.1.2.2}goBackMainMenu()}{8}{subsubsection.4.1.2.2}%
+\contentsline {subsubsection}{\numberline {4.1.2.3}mainMenu()}{8}{subsubsection.4.1.2.3}%
+\contentsline {subsubsection}{\numberline {4.1.2.4}maxFlowMenu()}{8}{subsubsection.4.1.2.4}%
+\contentsline {subsubsection}{\numberline {4.1.2.5}pipeImpactMenu()}{9}{subsubsection.4.1.2.5}%
+\contentsline {subsubsection}{\numberline {4.1.2.6}reservoirImpactMenu()}{9}{subsubsection.4.1.2.6}%
+\contentsline {subsubsection}{\numberline {4.1.2.7}stationImpactMenu()}{9}{subsubsection.4.1.2.7}%
+\contentsline {subsubsection}{\numberline {4.1.2.8}statisticsMenu()}{9}{subsubsection.4.1.2.8}%
+\contentsline {subsubsection}{\numberline {4.1.2.9}upperCase()}{9}{subsubsection.4.1.2.9}%
+\contentsline {subsubsection}{\numberline {4.1.2.10}waterNeedsMenu()}{9}{subsubsection.4.1.2.10}%
 \contentsline {subsection}{\numberline {4.1.3}Member Data Documentation}{9}{subsection.4.1.3}%
 \contentsline {subsubsection}{\numberline {4.1.3.1}waternetwork}{9}{subsubsection.4.1.3.1}%
-\contentsline {section}{\numberline {4.2}Edge$<$ T $>$ Class Template Reference}{9}{section.4.2}%
+\contentsline {section}{\numberline {4.2}Edge$<$ T $>$ Class Template Reference}{10}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Constructor \& Destructor Documentation}{10}{subsection.4.2.1}%
 \contentsline {subsubsection}{\numberline {4.2.1.1}Edge()}{10}{subsubsection.4.2.1.1}%
 \contentsline {subsection}{\numberline {4.2.2}Member Function Documentation}{10}{subsection.4.2.2}%
@@ -130,14 +131,15 @@
 \contentsline {subsubsection}{\numberline {4.6.2.2}WaterNetwork()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{30}{subsubsection.4.6.2.2}%
 \contentsline {subsubsection}{\numberline {4.6.2.3}$\sim $WaterNetwork()}{30}{subsubsection.4.6.2.3}%
 \contentsline {subsection}{\numberline {4.6.3}Member Function Documentation}{31}{subsection.4.6.3}%
-\contentsline {subsubsection}{\numberline {4.6.3.1}evaluateAllPumpingStationImpact()}{31}{subsubsection.4.6.3.1}%
-\contentsline {subsubsection}{\numberline {4.6.3.2}evaluateAllReservoirImpact()}{31}{subsubsection.4.6.3.2}%
-\contentsline {subsubsection}{\numberline {4.6.3.3}evaluatePipelineImpact()}{31}{subsubsection.4.6.3.3}%
-\contentsline {subsubsection}{\numberline {4.6.3.4}evaluateReservoirImpact()}{31}{subsubsection.4.6.3.4}%
-\contentsline {subsubsection}{\numberline {4.6.3.5}getNetworkGraph()}{31}{subsubsection.4.6.3.5}%
-\contentsline {subsubsection}{\numberline {4.6.3.6}multiSinkMaxFlow()}{31}{subsubsection.4.6.3.6}%
-\contentsline {subsubsection}{\numberline {4.6.3.7}multiWaterNeeds()}{32}{subsubsection.4.6.3.7}%
-\contentsline {subsubsection}{\numberline {4.6.3.8}singleSinkMaxFlow()}{32}{subsubsection.4.6.3.8}%
+\contentsline {subsubsection}{\numberline {4.6.3.1}calculateMetrics()}{31}{subsubsection.4.6.3.1}%
+\contentsline {subsubsection}{\numberline {4.6.3.2}evaluateAllPumpingStationImpact()}{31}{subsubsection.4.6.3.2}%
+\contentsline {subsubsection}{\numberline {4.6.3.3}evaluateAllReservoirImpact()}{31}{subsubsection.4.6.3.3}%
+\contentsline {subsubsection}{\numberline {4.6.3.4}evaluatePipelineImpact()}{31}{subsubsection.4.6.3.4}%
+\contentsline {subsubsection}{\numberline {4.6.3.5}evaluateReservoirImpact()}{31}{subsubsection.4.6.3.5}%
+\contentsline {subsubsection}{\numberline {4.6.3.6}getNetworkGraph()}{31}{subsubsection.4.6.3.6}%
+\contentsline {subsubsection}{\numberline {4.6.3.7}multiSinkMaxFlow()}{32}{subsubsection.4.6.3.7}%
+\contentsline {subsubsection}{\numberline {4.6.3.8}multiWaterNeeds()}{32}{subsubsection.4.6.3.8}%
+\contentsline {subsubsection}{\numberline {4.6.3.9}singleSinkMaxFlow()}{32}{subsubsection.4.6.3.9}%
 \contentsline {subsection}{\numberline {4.6.4}Member Data Documentation}{32}{subsection.4.6.4}%
 \contentsline {subsubsection}{\numberline {4.6.4.1}network}{32}{subsubsection.4.6.4.1}%
 \contentsline {chapter}{\numberline {5}File Documentation}{33}{chapter.5}%
@@ -146,34 +148,38 @@
 \contentsline {subsection}{\numberline {5.2.1}Macro Definition Documentation}{35}{subsection.5.2.1}%
 \contentsline {subsubsection}{\numberline {5.2.1.1}INF}{35}{subsubsection.5.2.1.1}%
 \contentsline {section}{\numberline {5.3}inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.hpp File Reference}{35}{section.5.3}%
-\contentsline {section}{\numberline {5.4}inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Water\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Network.hpp File Reference}{36}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Function Documentation}{37}{subsection.5.4.1}%
-\contentsline {subsubsection}{\numberline {5.4.1.1}augmentFlowAlongPath()}{37}{subsubsection.5.4.1.1}%
+\contentsline {section}{\numberline {5.4}inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Utils.hpp File Reference}{36}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Function Documentation}{38}{subsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.1.1}augmentFlowAlongPath()}{38}{subsubsection.5.4.1.1}%
 \contentsline {subsubsection}{\numberline {5.4.1.2}createSuperSink()}{38}{subsubsection.5.4.1.2}%
 \contentsline {subsubsection}{\numberline {5.4.1.3}createSuperSource()}{38}{subsubsection.5.4.1.3}%
-\contentsline {subsubsection}{\numberline {5.4.1.4}edmondsKarp()}{38}{subsubsection.5.4.1.4}%
-\contentsline {subsubsection}{\numberline {5.4.1.5}findAugmentingPath()}{39}{subsubsection.5.4.1.5}%
-\contentsline {subsubsection}{\numberline {5.4.1.6}findConnectedComponent()}{39}{subsubsection.5.4.1.6}%
-\contentsline {subsubsection}{\numberline {5.4.1.7}findMinResidualAlongPath()}{40}{subsubsection.5.4.1.7}%
-\contentsline {subsubsection}{\numberline {5.4.1.8}resetGraph()}{40}{subsubsection.5.4.1.8}%
-\contentsline {subsubsection}{\numberline {5.4.1.9}testAndVisit()}{40}{subsubsection.5.4.1.9}%
-\contentsline {section}{\numberline {5.5}README.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}md File Reference}{41}{section.5.5}%
-\contentsline {section}{\numberline {5.6}src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}App.cpp File Reference}{41}{section.5.6}%
-\contentsline {subsection}{\numberline {5.6.1}Function Documentation}{41}{subsection.5.6.1}%
-\contentsline {subsubsection}{\numberline {5.6.1.1}clearScreen()}{42}{subsubsection.5.6.1.1}%
-\contentsline {section}{\numberline {5.7}src/main.cpp File Reference}{42}{section.5.7}%
-\contentsline {subsection}{\numberline {5.7.1}Function Documentation}{42}{subsection.5.7.1}%
-\contentsline {subsubsection}{\numberline {5.7.1.1}main()}{42}{subsubsection.5.7.1.1}%
-\contentsline {section}{\numberline {5.8}src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.cpp File Reference}{43}{section.5.8}%
-\contentsline {section}{\numberline {5.9}src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Water\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Network.cpp File Reference}{43}{section.5.9}%
-\contentsline {subsection}{\numberline {5.9.1}Function Documentation}{44}{subsection.5.9.1}%
-\contentsline {subsubsection}{\numberline {5.9.1.1}augmentFlowAlongPath()}{44}{subsubsection.5.9.1.1}%
-\contentsline {subsubsection}{\numberline {5.9.1.2}createSuperSink()}{44}{subsubsection.5.9.1.2}%
-\contentsline {subsubsection}{\numberline {5.9.1.3}createSuperSource()}{45}{subsubsection.5.9.1.3}%
-\contentsline {subsubsection}{\numberline {5.9.1.4}edmondsKarp()}{45}{subsubsection.5.9.1.4}%
-\contentsline {subsubsection}{\numberline {5.9.1.5}findAugmentingPath()}{46}{subsubsection.5.9.1.5}%
-\contentsline {subsubsection}{\numberline {5.9.1.6}findConnectedComponent()}{46}{subsubsection.5.9.1.6}%
-\contentsline {subsubsection}{\numberline {5.9.1.7}findMinResidualAlongPath()}{46}{subsubsection.5.9.1.7}%
-\contentsline {subsubsection}{\numberline {5.9.1.8}resetGraph()}{47}{subsubsection.5.9.1.8}%
-\contentsline {subsubsection}{\numberline {5.9.1.9}testAndVisit()}{47}{subsubsection.5.9.1.9}%
-\contentsline {chapter}{Index}{49}{section*.38}%
+\contentsline {subsubsection}{\numberline {5.4.1.4}dfsVisitFindCC()}{39}{subsubsection.5.4.1.4}%
+\contentsline {subsubsection}{\numberline {5.4.1.5}edmondsKarp()}{39}{subsubsection.5.4.1.5}%
+\contentsline {subsubsection}{\numberline {5.4.1.6}findAugmentingPath()}{39}{subsubsection.5.4.1.6}%
+\contentsline {subsubsection}{\numberline {5.4.1.7}findConnectedComponent()}{40}{subsubsection.5.4.1.7}%
+\contentsline {subsubsection}{\numberline {5.4.1.8}findMinResidualAlongPath()}{40}{subsubsection.5.4.1.8}%
+\contentsline {subsubsection}{\numberline {5.4.1.9}resetGraph()}{41}{subsubsection.5.4.1.9}%
+\contentsline {subsubsection}{\numberline {5.4.1.10}testAndVisit()}{41}{subsubsection.5.4.1.10}%
+\contentsline {section}{\numberline {5.5}inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Water\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Network.hpp File Reference}{42}{section.5.5}%
+\contentsline {section}{\numberline {5.6}README.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}md File Reference}{43}{section.5.6}%
+\contentsline {section}{\numberline {5.7}src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}App.cpp File Reference}{43}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Function Documentation}{43}{subsection.5.7.1}%
+\contentsline {subsubsection}{\numberline {5.7.1.1}clearScreen()}{43}{subsubsection.5.7.1.1}%
+\contentsline {section}{\numberline {5.8}src/main.cpp File Reference}{43}{section.5.8}%
+\contentsline {subsection}{\numberline {5.8.1}Function Documentation}{44}{subsection.5.8.1}%
+\contentsline {subsubsection}{\numberline {5.8.1.1}main()}{44}{subsubsection.5.8.1.1}%
+\contentsline {section}{\numberline {5.9}src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.cpp File Reference}{45}{section.5.9}%
+\contentsline {section}{\numberline {5.10}src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Utils.cpp File Reference}{45}{section.5.10}%
+\contentsline {subsection}{\numberline {5.10.1}Function Documentation}{46}{subsection.5.10.1}%
+\contentsline {subsubsection}{\numberline {5.10.1.1}augmentFlowAlongPath()}{46}{subsubsection.5.10.1.1}%
+\contentsline {subsubsection}{\numberline {5.10.1.2}createSuperSink()}{47}{subsubsection.5.10.1.2}%
+\contentsline {subsubsection}{\numberline {5.10.1.3}createSuperSource()}{47}{subsubsection.5.10.1.3}%
+\contentsline {subsubsection}{\numberline {5.10.1.4}dfsVisitFindCC()}{47}{subsubsection.5.10.1.4}%
+\contentsline {subsubsection}{\numberline {5.10.1.5}edmondsKarp()}{48}{subsubsection.5.10.1.5}%
+\contentsline {subsubsection}{\numberline {5.10.1.6}findAugmentingPath()}{48}{subsubsection.5.10.1.6}%
+\contentsline {subsubsection}{\numberline {5.10.1.7}findConnectedComponent()}{49}{subsubsection.5.10.1.7}%
+\contentsline {subsubsection}{\numberline {5.10.1.8}findMinResidualAlongPath()}{49}{subsubsection.5.10.1.8}%
+\contentsline {subsubsection}{\numberline {5.10.1.9}resetGraph()}{49}{subsubsection.5.10.1.9}%
+\contentsline {subsubsection}{\numberline {5.10.1.10}testAndVisit()}{50}{subsubsection.5.10.1.10}%
+\contentsline {section}{\numberline {5.11}src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Water\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Network.cpp File Reference}{50}{section.5.11}%
+\contentsline {chapter}{Index}{51}{section*.41}%

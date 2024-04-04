@@ -7,5 +7,5 @@ var searchData=
   ['app_4',['App',['../classApp.html',1,'App'],['../classApp.html#aa9f847e0a38b65c52306ab8e51d42a35',1,'App::App()']]],
   ['app_2ecpp_5',['App.cpp',['../App_8cpp.html',1,'']]],
   ['app_2ehpp_6',['App.hpp',['../App_8hpp.html',1,'']]],
-  ['augmentflowalongpath_7',['augmentFlowAlongPath',['../WaterNetwork_8hpp.html#a8d63ca3896fcd9c47efcebde70691cf4',1,'augmentFlowAlongPath(Vertex&lt; Node &gt; *s, Vertex&lt; Node &gt; *t, double f):&#160;WaterNetwork.cpp'],['../WaterNetwork_8cpp.html#a8d63ca3896fcd9c47efcebde70691cf4',1,'augmentFlowAlongPath(Vertex&lt; Node &gt; *s, Vertex&lt; Node &gt; *t, double f):&#160;WaterNetwork.cpp']]]
+  ['augmentflowalongpath_7',['augmentFlowAlongPath',['../Utils_8hpp.html#a8d63ca3896fcd9c47efcebde70691cf4',1,'augmentFlowAlongPath(Vertex&lt; Node &gt; *s, Vertex&lt; Node &gt; *t, double f):&#160;Utils.cpp'],['../Utils_8cpp.html#a8d63ca3896fcd9c47efcebde70691cf4',1,'augmentFlowAlongPath(Vertex&lt; Node &gt; *s, Vertex&lt; Node &gt; *t, double f):&#160;Utils.cpp']]]
 ];

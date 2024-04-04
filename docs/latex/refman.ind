@@ -16,39 +16,44 @@
     \subitem {Vertex$<$ T $>$}, \hyperpage{27}
   \item {App}, \hyperpage{7}
     \subitem {App}, \hyperpage{8}
+    \subitem {balanceMenu}, \hyperpage{8}
     \subitem {goBackMainMenu}, \hyperpage{8}
     \subitem {mainMenu}, \hyperpage{8}
     \subitem {maxFlowMenu}, \hyperpage{8}
     \subitem {pipeImpactMenu}, \hyperpage{8}
-    \subitem {reservoirImpactMenu}, \hyperpage{8}
+    \subitem {reservoirImpactMenu}, \hyperpage{9}
     \subitem {stationImpactMenu}, \hyperpage{9}
     \subitem {statisticsMenu}, \hyperpage{9}
     \subitem {upperCase}, \hyperpage{9}
     \subitem {waterNeedsMenu}, \hyperpage{9}
     \subitem {waternetwork}, \hyperpage{9}
   \item {App.cpp}
-    \subitem {clearScreen}, \hyperpage{41}
+    \subitem {clearScreen}, \hyperpage{43}
   \item {augmentFlowAlongPath}
-    \subitem {WaterNetwork.cpp}, \hyperpage{44}
-    \subitem {WaterNetwork.hpp}, \hyperpage{37}
+    \subitem {Utils.cpp}, \hyperpage{46}
+    \subitem {Utils.hpp}, \hyperpage{38}
 
   \indexspace
 
+  \item {balanceMenu}
+    \subitem {App}, \hyperpage{8}
   \item {bfs}
     \subitem {Graph$<$ T $>$}, \hyperpage{14}
 
   \indexspace
 
+  \item {calculateMetrics}
+    \subitem {WaterNetwork}, \hyperpage{31}
   \item {clearScreen}
-    \subitem {App.cpp}, \hyperpage{41}
+    \subitem {App.cpp}, \hyperpage{43}
   \item {code}
     \subitem {Node}, \hyperpage{21}
   \item {createSuperSink}
-    \subitem {WaterNetwork.cpp}, \hyperpage{44}
-    \subitem {WaterNetwork.hpp}, \hyperpage{38}
+    \subitem {Utils.cpp}, \hyperpage{46}
+    \subitem {Utils.hpp}, \hyperpage{38}
   \item {createSuperSource}
-    \subitem {WaterNetwork.cpp}, \hyperpage{45}
-    \subitem {WaterNetwork.hpp}, \hyperpage{38}
+    \subitem {Utils.cpp}, \hyperpage{47}
+    \subitem {Utils.hpp}, \hyperpage{38}
   \item {currentFlow}
     \subitem {Vertex$<$ T $>$}, \hyperpage{27}
 
@@ -66,6 +71,9 @@
     \subitem {Graph$<$ T $>$}, \hyperpage{15}
   \item {dfsVisit}
     \subitem {Graph$<$ T $>$}, \hyperpage{15}
+  \item {dfsVisitFindCC}
+    \subitem {Utils.cpp}, \hyperpage{47}
+    \subitem {Utils.hpp}, \hyperpage{39}
   \item {dist}
     \subitem {Vertex$<$ T $>$}, \hyperpage{27}
 
@@ -73,7 +81,7 @@
 
   \item {Edge}
     \subitem {Edge$<$ T $>$}, \hyperpage{10}
-  \item {Edge$<$ T $>$}, \hyperpage{9}
+  \item {Edge$<$ T $>$}, \hyperpage{10}
     \subitem {dest}, \hyperpage{12}
     \subitem {Edge}, \hyperpage{10}
     \subitem {flow}, \hyperpage{12}
@@ -92,8 +100,8 @@
     \subitem {setWeight}, \hyperpage{12}
     \subitem {weight}, \hyperpage{13}
   \item {edmondsKarp}
-    \subitem {WaterNetwork.cpp}, \hyperpage{45}
-    \subitem {WaterNetwork.hpp}, \hyperpage{38}
+    \subitem {Utils.cpp}, \hyperpage{47}
+    \subitem {Utils.hpp}, \hyperpage{39}
   \item {evaluateAllPumpingStationImpact}
     \subitem {WaterNetwork}, \hyperpage{31}
   \item {evaluateAllReservoirImpact}
@@ -106,14 +114,14 @@
   \indexspace
 
   \item {findAugmentingPath}
-    \subitem {WaterNetwork.cpp}, \hyperpage{46}
-    \subitem {WaterNetwork.hpp}, \hyperpage{39}
+    \subitem {Utils.cpp}, \hyperpage{48}
+    \subitem {Utils.hpp}, \hyperpage{39}
   \item {findConnectedComponent}
-    \subitem {WaterNetwork.cpp}, \hyperpage{46}
-    \subitem {WaterNetwork.hpp}, \hyperpage{39}
+    \subitem {Utils.cpp}, \hyperpage{48}
+    \subitem {Utils.hpp}, \hyperpage{40}
   \item {findMinResidualAlongPath}
-    \subitem {WaterNetwork.cpp}, \hyperpage{46}
-    \subitem {WaterNetwork.hpp}, \hyperpage{39}
+    \subitem {Utils.cpp}, \hyperpage{49}
+    \subitem {Utils.hpp}, \hyperpage{40}
   \item {findVertex}
     \subitem {Graph$<$ T $>$}, \hyperpage{15}
   \item {findVertexIdx}
@@ -196,7 +204,8 @@
   \item {inc/App.hpp}, \hyperpage{33}
   \item {inc/Graph.hpp}, \hyperpage{34}
   \item {inc/Node.hpp}, \hyperpage{35}
-  \item {inc/WaterNetwork.hpp}, \hyperpage{36}
+  \item {inc/Utils.hpp}, \hyperpage{36}
+  \item {inc/WaterNetwork.hpp}, \hyperpage{42}
   \item {incoming}
     \subitem {Vertex$<$ T $>$}, \hyperpage{27}
   \item {indegree}
@@ -217,9 +226,9 @@
   \indexspace
 
   \item {main}
-    \subitem {main.cpp}, \hyperpage{42}
+    \subitem {main.cpp}, \hyperpage{44}
   \item {main.cpp}
-    \subitem {main}, \hyperpage{42}
+    \subitem {main}, \hyperpage{44}
   \item {mainMenu}
     \subitem {App}, \hyperpage{8}
   \item {maxDelivery}
@@ -229,7 +238,7 @@
   \item {multiSinkMaxFlow}
     \subitem {WaterNetwork}, \hyperpage{31}
   \item {multiWaterNeeds}
-    \subitem {WaterNetwork}, \hyperpage{31}
+    \subitem {WaterNetwork}, \hyperpage{32}
   \item {municipality}
     \subitem {Node}, \hyperpage{22}
 
@@ -275,7 +284,7 @@
 
   \indexspace
 
-  \item {README.md}, \hyperpage{41}
+  \item {README.md}, \hyperpage{43}
   \item {removeEdge}
     \subitem {Graph$<$ T $>$}, \hyperpage{16}
     \subitem {Vertex$<$ T $>$}, \hyperpage{25}
@@ -286,10 +295,10 @@
   \item {reservoir}
     \subitem {Node}, \hyperpage{22}
   \item {reservoirImpactMenu}
-    \subitem {App}, \hyperpage{8}
+    \subitem {App}, \hyperpage{9}
   \item {resetGraph}
-    \subitem {WaterNetwork.cpp}, \hyperpage{47}
-    \subitem {WaterNetwork.hpp}, \hyperpage{40}
+    \subitem {Utils.cpp}, \hyperpage{49}
+    \subitem {Utils.hpp}, \hyperpage{41}
   \item {reverse}
     \subitem {Edge$<$ T $>$}, \hyperpage{12}
 
@@ -323,10 +332,11 @@
     \subitem {Edge$<$ T $>$}, \hyperpage{12}
   \item {singleSinkMaxFlow}
     \subitem {WaterNetwork}, \hyperpage{32}
-  \item {src/App.cpp}, \hyperpage{41}
-  \item {src/main.cpp}, \hyperpage{42}
-  \item {src/Node.cpp}, \hyperpage{43}
-  \item {src/WaterNetwork.cpp}, \hyperpage{43}
+  \item {src/App.cpp}, \hyperpage{43}
+  \item {src/main.cpp}, \hyperpage{43}
+  \item {src/Node.cpp}, \hyperpage{45}
+  \item {src/Utils.cpp}, \hyperpage{45}
+  \item {src/WaterNetwork.cpp}, \hyperpage{50}
   \item {stationImpactMenu}
     \subitem {App}, \hyperpage{9}
   \item {statisticsMenu}
@@ -335,8 +345,8 @@
   \indexspace
 
   \item {testAndVisit}
-    \subitem {WaterNetwork.cpp}, \hyperpage{47}
-    \subitem {WaterNetwork.hpp}, \hyperpage{40}
+    \subitem {Utils.cpp}, \hyperpage{50}
+    \subitem {Utils.hpp}, \hyperpage{41}
   \item {topsort}
     \subitem {Graph$<$ T $>$}, \hyperpage{16}
   \item {type}
@@ -348,6 +358,28 @@
     \subitem {App}, \hyperpage{9}
   \item {usedDelivery}
     \subitem {Vertex$<$ T $>$}, \hyperpage{28}
+  \item {Utils.cpp}
+    \subitem {augmentFlowAlongPath}, \hyperpage{46}
+    \subitem {createSuperSink}, \hyperpage{46}
+    \subitem {createSuperSource}, \hyperpage{47}
+    \subitem {dfsVisitFindCC}, \hyperpage{47}
+    \subitem {edmondsKarp}, \hyperpage{47}
+    \subitem {findAugmentingPath}, \hyperpage{48}
+    \subitem {findConnectedComponent}, \hyperpage{48}
+    \subitem {findMinResidualAlongPath}, \hyperpage{49}
+    \subitem {resetGraph}, \hyperpage{49}
+    \subitem {testAndVisit}, \hyperpage{50}
+  \item {Utils.hpp}
+    \subitem {augmentFlowAlongPath}, \hyperpage{38}
+    \subitem {createSuperSink}, \hyperpage{38}
+    \subitem {createSuperSource}, \hyperpage{38}
+    \subitem {dfsVisitFindCC}, \hyperpage{39}
+    \subitem {edmondsKarp}, \hyperpage{39}
+    \subitem {findAugmentingPath}, \hyperpage{39}
+    \subitem {findConnectedComponent}, \hyperpage{40}
+    \subitem {findMinResidualAlongPath}, \hyperpage{40}
+    \subitem {resetGraph}, \hyperpage{41}
+    \subitem {testAndVisit}, \hyperpage{41}
 
   \indexspace
 
@@ -398,38 +430,19 @@
     \subitem {App}, \hyperpage{9}
   \item {WaterNetwork}, \hyperpage{29}
     \subitem {$\sim$WaterNetwork}, \hyperpage{30}
+    \subitem {calculateMetrics}, \hyperpage{31}
     \subitem {evaluateAllPumpingStationImpact}, \hyperpage{31}
     \subitem {evaluateAllReservoirImpact}, \hyperpage{31}
     \subitem {evaluatePipelineImpact}, \hyperpage{31}
     \subitem {evaluateReservoirImpact}, \hyperpage{31}
     \subitem {getNetworkGraph}, \hyperpage{31}
     \subitem {multiSinkMaxFlow}, \hyperpage{31}
-    \subitem {multiWaterNeeds}, \hyperpage{31}
+    \subitem {multiWaterNeeds}, \hyperpage{32}
     \subitem {network}, \hyperpage{32}
     \subitem {singleSinkMaxFlow}, \hyperpage{32}
     \subitem {WaterNetwork}, \hyperpage{30}
   \item {waternetwork}
     \subitem {App}, \hyperpage{9}
-  \item {WaterNetwork.cpp}
-    \subitem {augmentFlowAlongPath}, \hyperpage{44}
-    \subitem {createSuperSink}, \hyperpage{44}
-    \subitem {createSuperSource}, \hyperpage{45}
-    \subitem {edmondsKarp}, \hyperpage{45}
-    \subitem {findAugmentingPath}, \hyperpage{46}
-    \subitem {findConnectedComponent}, \hyperpage{46}
-    \subitem {findMinResidualAlongPath}, \hyperpage{46}
-    \subitem {resetGraph}, \hyperpage{47}
-    \subitem {testAndVisit}, \hyperpage{47}
-  \item {WaterNetwork.hpp}
-    \subitem {augmentFlowAlongPath}, \hyperpage{37}
-    \subitem {createSuperSink}, \hyperpage{38}
-    \subitem {createSuperSource}, \hyperpage{38}
-    \subitem {edmondsKarp}, \hyperpage{38}
-    \subitem {findAugmentingPath}, \hyperpage{39}
-    \subitem {findConnectedComponent}, \hyperpage{39}
-    \subitem {findMinResidualAlongPath}, \hyperpage{39}
-    \subitem {resetGraph}, \hyperpage{40}
-    \subitem {testAndVisit}, \hyperpage{40}
   \item {weight}
     \subitem {Edge$<$ T $>$}, \hyperpage{13}
 

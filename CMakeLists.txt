@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(SOURCE_FILES
     src/Node.cpp
     src/WaterNetwork.cpp
+    src/Utils.cpp
     src/App.cpp
     src/main.cpp
 )
