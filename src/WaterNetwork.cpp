@@ -195,8 +195,8 @@ bool comparePipes(const pair<Edge<Node> *, double> &a, const pair<Edge<Node> *, 
 vector<pair<string, double>> WaterNetwork::calculateMetrics(Graph<Node> *g) const
 {
     vector<pair<string, double>> res;
-    vector<pair<Edge<Node> *, double>> pipes;
-
+    vector<pair<Edge<Node>*, double>> pipes;
+    
     Node s = createSuperSource(g);
     Node t = createSuperSink(g);
     edmondsKarp(g, s, t);
@@ -231,32 +231,61 @@ vector<pair<string, double>> WaterNetwork::calculateMetrics(Graph<Node> *g) cons
             var += pow(dif - avgbef, 2);
         }
     }
+    variancebef = (var / count);
+    
     sort(pipes.begin(), pipes.end(), comparePipes);
     double max = 0;
-    double min = pipes.size() - 1;
+    double min = pipes.size()-1;
+    Edge<Node>* badPipe = pipes[max].first;
+    Edge<Node>* goodPipe = pipes[min].first;
 
-    variancebef = (var / count);
-    while (max != min)
-    {
-        Edge<Node> *badPipe = pipes[max].first;
-        Edge<Node> *goodPipe = pipes[min].first;
-        double badPercent = badPipe->getFlow() / badPipe->getWeight();
-        double goodPercent = goodPipe->getFlow() / goodPipe->getWeight();
-        double newBadPercent = goodPercent * (badPipe->getWeight() / goodPipe->getWeight());
-        double newFlow = newBadPercent * badPipe->getWeight();
-        badPipe->setFlow(newFlow);
-        goodPipe->setFlow(goodPipe->getFlow() - newFlow);
+    while((max != min) && (max < pipes.size()) && (min >= 0)){
+        Edge<Node>* badPipe = pipes[max].first;
+        Edge<Node>* goodPipe = pipes[min].first;
+        double badCap = badPipe->getWeight() - pipes[max].second;
+        double goodFlow = goodPipe->getWeight();
+        while((pipes[max].second >= 0) && (pipes[max].second <= badPipe->getWeight()) && (pipes[min].second >= 0) && (pipes[min].second <= goodPipe->getWeight())){
+            pipes[max].second -= 1;
+            pipes[min].second += 1;
+        }
         max++;
         min--;
-        if (max == min)
-            break;
+        if(max==min) break;
     }
+
+    double maxDifAft=0;
+    double varianceaft = 0;
+    var = 0;
+    count = 0;
+    sumDif = 0;
+
+    for (auto p : pipes)
+    {
+        Edge<Node> *e = p.first;
+        dif = e->getWeight() - p.second;
+        if (dif > maxDifAft) maxDifAft = dif;
+        sumDif += dif;
+        count++;
+
+    }
+    double avgaft = sumDif/count;
+    for (auto p : pipes)
+    {
+        Edge<Node> *e = p.first;
+        dif = e->getWeight() - p.second;
+        var += pow(dif - avgbef, 2);
+    
+    }
+    varianceaft = (var / count);
 
     res.push_back(make_pair("Maximum difference before balance: ", maxDifBef));
     res.push_back(make_pair("Average difference before balance: ", avgbef));
     res.push_back(make_pair("Variance of difference before balance: ", variancebef));
+    res.push_back(make_pair("Maximum difference after balance: ", maxDifAft));
+    res.push_back(make_pair("Average difference after balance: ", avgaft));
+    res.push_back(make_pair("Variance of difference after balance: ", varianceaft));
 
-    resetGraph(g, s, t);
+    resetGraph(g,s,t);
     return res;
 }
 
