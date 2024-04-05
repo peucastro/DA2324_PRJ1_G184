@@ -184,7 +184,7 @@ vector<pair<string, double>> WaterNetwork::multiWaterNeeds(Graph<Node> *g, const
         return res;
 }
 bool comparePipes(const pair<Edge<Node>*, double> &a, const pair<Edge<Node>*, double> &b) {
-    return a.second < b.second;
+    return a.second > b.second;
 }
 vector<pair<string, double>> WaterNetwork::calculateMetrics(Graph<Node> *g) const
 {
@@ -197,30 +197,26 @@ vector<pair<string, double>> WaterNetwork::calculateMetrics(Graph<Node> *g) cons
 
 
     double dif;
-    double maxDif = 0;
+    double maxDifBef = 0;
     double sumDif = 0;
     double var = 0;
     double count = 0;
-    double variance = 0;
+    double variancebef = 0;
 
     for (Vertex<Node> *v : g->getVertexSet())
     {
         for (Edge<Node> *e : v->getAdj())
         {
             dif = e->getWeight() - e->getFlow();
-            if (dif > maxDif)
-                maxDif = dif;
+            if (dif > maxDifBef)
+                maxDifBef = dif;
             sumDif += dif;
             count++;
             pipes.push_back(make_pair(e, dif));
         }
     }
 
-    
-
     double avgbef = sumDif / count;
-
-    sort(pipes.begin(), pipes.end(), comparePipes);
 
     for (Vertex<Node> *v : g->getVertexSet())
     {
@@ -230,12 +226,29 @@ vector<pair<string, double>> WaterNetwork::calculateMetrics(Graph<Node> *g) cons
             var += pow(dif - avgbef, 2);
         }
     }
+    sort(pipes.begin(), pipes.end(), comparePipes);
+    double max = 0;
+    double min = pipes.size()-1;
+    
+    variancebef = (var / count);
+    while(max != min){
+        Edge<Node>* badPipe = pipes[max].first;
+        Edge<Node>* goodPipe = pipes[min].first;
+        double badPercent = badPipe->getFlow()/badPipe->getWeight();
+        double goodPercent = goodPipe->getFlow()/goodPipe->getWeight();
+        double newBadPercent = goodPercent * (badPipe->getWeight() / goodPipe->getWeight());
+        double newFlow = newBadPercent * badPipe->getWeight();
+        badPipe->setFlow(newFlow);
+        goodPipe->setFlow(goodPipe->getFlow() - newFlow);
+        max++;
+        min--;
+        if(max==min) break;
+    }
 
-    variance = (var / count);
 
-    res.push_back(make_pair("Maximum difference before balance: ", maxDif));
+    res.push_back(make_pair("Maximum difference before balance: ", maxDifBef));
     res.push_back(make_pair("Average difference before balance: ", avgbef));
-    res.push_back(make_pair("Variance of difference before balance: ", variance));
+    res.push_back(make_pair("Variance of difference before balance: ", variancebef));
 
     resetGraph(g, s, t);
     return res;
