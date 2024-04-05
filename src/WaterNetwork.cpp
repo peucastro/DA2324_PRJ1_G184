@@ -183,6 +183,9 @@ vector<pair<string, double>> WaterNetwork::multiWaterNeeds(Graph<Node> *g, const
     resetGraph(g, s, t);
         return res;
 }
+bool comparePipes(const pair<Edge<Node>*, double> &a, const pair<Edge<Node>*, double> &b) {
+    return a.second < b.second;
+}
 vector<pair<string, double>> WaterNetwork::calculateMetrics(Graph<Node> *g) const
 {
     vector<pair<string, double>> res;
@@ -209,29 +212,35 @@ vector<pair<string, double>> WaterNetwork::calculateMetrics(Graph<Node> *g) cons
                 maxDif = dif;
             sumDif += dif;
             count++;
+            pipes.push_back(make_pair(e, dif));
         }
     }
 
-    double avg = sumDif / count;
+    
+
+    double avgbef = sumDif / count;
+
+    sort(pipes.begin(), pipes.end(), comparePipes);
 
     for (Vertex<Node> *v : g->getVertexSet())
     {
         for (Edge<Node> *e : v->getAdj())
         {
             dif = e->getWeight() - e->getFlow();
-            var += pow(dif - avg, 2);
+            var += pow(dif - avgbef, 2);
         }
     }
 
     variance = (var / count);
 
     res.push_back(make_pair("Maximum difference before balance: ", maxDif));
-    res.push_back(make_pair("Average difference before balance: ", avg));
+    res.push_back(make_pair("Average difference before balance: ", avgbef));
     res.push_back(make_pair("Variance of difference before balance: ", variance));
 
     resetGraph(g, s, t);
     return res;
 }
+
 
 vector<pair<string, double>> WaterNetwork::evaluateReservoirImpact(const string &reservoir_code) const
 {
