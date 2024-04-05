@@ -223,7 +223,6 @@ void dfsVisitFindCC(Vertex<Node> *v, vector<Vertex<Node> *> &res)
 
 Graph<Node> *findConnectedComponent(Graph<Node> *g, const string &node_code)
 {
-
     vector<Vertex<Node> *> res;
     Graph<Node> *subgraph = new Graph<Node>();
 
@@ -238,17 +237,14 @@ Graph<Node> *findConnectedComponent(Graph<Node> *g, const string &node_code)
     dfsVisitFindCC(node_vertex, res);
     for (Vertex<Node> *v : res)
     {
-        if (v->getInfo().getCode() != node_code)
+        subgraph->addVertex(v->getInfo());
+        for (Edge<Node> *e : v->getAdj())
         {
-            subgraph->addVertex(v->getInfo());
-            for (Edge<Node> *e : v->getAdj())
-            {
-                subgraph->addEdge(v->getInfo(), e->getDest()->getInfo(), e->getWeight());
-            }
-            for (Edge<Node> *e : v->getIncoming())
-            {
-                subgraph->addEdge(e->getOrig()->getInfo(), v->getInfo(), e->getWeight());
-            }
+            subgraph->addEdge(v->getInfo(), e->getDest()->getInfo(), e->getWeight());
+        }
+        for (Edge<Node> *e : v->getIncoming())
+        {
+            subgraph->addEdge(e->getOrig()->getInfo(), v->getInfo(), e->getWeight());
         }
     }
 

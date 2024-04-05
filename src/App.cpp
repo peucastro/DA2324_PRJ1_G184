@@ -17,6 +17,16 @@ App::App(WaterNetwork &waternetwork)
     mainMenu();
 }
 
+std::string App::upperCase(const std::string &str)
+{
+    string s;
+    for (char c : str)
+    {
+        s += toupper(c);
+    }
+    return s;
+}
+
 void App::mainMenu()
 {
     unsigned int option;
@@ -184,7 +194,7 @@ void App::maxFlowMenu()
 
         try
         {
-            pairs = waternetwork.multiSinkMaxFlow();
+            pairs = waternetwork.multiSinkMaxFlow(waternetwork.getNetworkGraph(), true);
         }
         catch (const std::exception &e)
         {
@@ -380,7 +390,6 @@ void App::waterNeedsMenu()
 void App::reservoirImpactMenu()
 {
     string reservoir_code;
-    vector<pair<string, double>> pairs;
     double totalImpact;
     cout << "Please inform the selected reservoir code (or type 0 if you want to check the impact of each reservoir):" << endl
          << "-> ";
@@ -392,7 +401,7 @@ void App::reservoirImpactMenu()
     {
         try
         {
-            pairs = waternetwork.evaluateReservoirImpact(reservoir_code);
+            waternetwork.evaluateReservoirImpact(reservoir_code);
         }
         catch (const std::exception &e)
         {
@@ -401,34 +410,22 @@ void App::reservoirImpactMenu()
             mainMenu();
         }
 
-        cout << "=================================================================================================" << endl
-             << setw(10) << left << "Cities" << setw(15) << left << "| Impacted?" << setw(15) << left << "| Impact" << endl
-             << "-------------------------------------------------------------------------------" << endl;
-
-        for (const pair<string, double> &p : pairs)
-        {
-            cout << setw(15) << left << p.first;
-
-            if (p.second == 0)
-                cout << setw(15) << "no" << setw(15) << "--" << '\n';
-            else
-                cout << setw(15) << "yes" << setw(15) << p.second << '\n';
-
-            totalImpact += p.second;
-        }
-
-        cout << endl
-             << "Total impact amount: " << totalImpact << endl
-             << endl
-             << "=================================================================================================" << endl;
+        cout << "=================================================================================================" << endl;
     }
-    else
+    else if (reservoir_code[0] == '0')
     {
         cout << endl
              << "=================================================================================================" << endl;
         waternetwork.evaluateAllReservoirImpact();
         cout << endl
              << "=================================================================================================" << endl;
+    }
+    else
+    {
+        clearScreen();
+        cout << "Invalid option! Please try again:" << endl
+             << endl;
+        waterNeedsMenu();
     }
 
     goBackMainMenu();
@@ -455,26 +452,28 @@ void App::pipeImpactMenu()
         mainMenu();
     }
     cout << endl
-             << "=================================================================================================" << endl;
+         << "=================================================================================================" << endl;
     goBackMainMenu();
 }
 
-void App::stationImpactMenu(){
+void App::stationImpactMenu()
+{
 
     string answer;
     cout << "Can any pumping station be temporarily taken out of service without affecting the delivery capacity to all the cities?" << endl
          << "The answer is yes (or no)! XX could be temporarily removed.\n"
-         << "================================================================================================= \n" <<
-            "Do you want to check the impact of temporarily removing each pumping station? [Y/N] \n"
-            << "-> ";
+         << "================================================================================================= \n"
+         << "Do you want to check the impact of temporarily removing each pumping station? [Y/N] \n"
+         << "-> ";
     cin >> answer;
     answer = upperCase(answer);
 
-    if (answer == "Y"){
+    if (answer == "Y")
+    {
 
         cout << endl
-             << "================================================================================================= \n" <<
-             "Let's check the impact of temporarily removing each pumping station:" << endl;
+             << "================================================================================================= \n"
+             << "Let's check the impact of temporarily removing each pumping station:" << endl;
         waternetwork.evaluateAllPumpingStationImpact();
         cout << endl
              << "=================================================================================================" << endl;
@@ -482,24 +481,16 @@ void App::stationImpactMenu(){
 
     goBackMainMenu();
 }
-void App::balanceMenu(){
+void App::balanceMenu()
+{
     cout << "Let's see some statistics about the difference between the capacity of pipes and flow that passes trough them:" << endl;
     cout << "===============================================================================================================" << endl;
     vector<pair<string, double>> pairs = waternetwork.calculateMetrics(waternetwork.getNetworkGraph());
-    for(auto pair : pairs){
+    for (auto pair : pairs)
+    {
         cout << pair.first << pair.second << endl;
     }
 
     cout << "===============================================================================================================" << endl;
     goBackMainMenu();
-}
-
-std::string App::upperCase(const std::string &str)
-{
-    string s;
-    for (char c : str)
-    {
-        s += toupper(c);
-    }
-    return s;
 }

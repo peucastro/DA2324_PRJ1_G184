@@ -122,23 +122,26 @@ double WaterNetwork::singleSinkMaxFlow(const string &city_code) const
     return flow;
 }
 
-vector<pair<string, double>> WaterNetwork::multiSinkMaxFlow() const
+vector<pair<string, double>> WaterNetwork::multiSinkMaxFlow(Graph<Node> *g, const bool &flag) const
 {
     vector<pair<string, double>> res;
     double flow;
 
-    Node s = createSuperSource(network);
-    Node t = createSuperSink(network);
-    edmondsKarp(network, s, t);
+    Node s = createSuperSource(g);
+    Node t = createSuperSink(g);
+    edmondsKarp(g, s, t);
 
-    filesystem::path outputPath("../out");
-    if (!filesystem::exists(outputPath))
-        filesystem::create_directories(outputPath);
-    ofstream out("../out/MaxFlow.csv");
-    out.clear();
-    out << "CityCode,Flow\r";
+    ofstream out;
+    if (flag)
+    {
+        filesystem::path outputPath("../out");
+        if (!filesystem::exists(outputPath))
+            filesystem::create_directories(outputPath);
+        out.open("../out/MaxFlow.csv");
+        out << "CityCode,Flow\r";
+    }
 
-    for (Vertex<Node> *v : network->getVertexSet())
+    for (Vertex<Node> *v : g->getVertexSet())
     {
         if (v->getInfo().getType() == 2 && v->getInfo().getCode() != "superSink")
         {
@@ -147,7 +150,7 @@ vector<pair<string, double>> WaterNetwork::multiSinkMaxFlow() const
         }
     }
 
-    resetGraph(network, s, t);
+    resetGraph(g, s, t);
     out.close();
     return res;
 }
@@ -181,20 +184,22 @@ vector<pair<string, double>> WaterNetwork::multiWaterNeeds(Graph<Node> *g, const
 
     out.close();
     resetGraph(g, s, t);
-        return res;
+    return res;
 }
-bool comparePipes(const pair<Edge<Node>*, double> &a, const pair<Edge<Node>*, double> &b) {
+
+bool comparePipes(const pair<Edge<Node> *, double> &a, const pair<Edge<Node> *, double> &b)
+{
     return a.second > b.second;
 }
+
 vector<pair<string, double>> WaterNetwork::calculateMetrics(Graph<Node> *g) const
 {
     vector<pair<string, double>> res;
-    vector<pair<Edge<Node>*, double>> pipes;
-    
+    vector<pair<Edge<Node> *, double>> pipes;
+
     Node s = createSuperSource(g);
     Node t = createSuperSink(g);
     edmondsKarp(g, s, t);
-
 
     double dif;
     double maxDifBef = 0;
@@ -228,23 +233,24 @@ vector<pair<string, double>> WaterNetwork::calculateMetrics(Graph<Node> *g) cons
     }
     sort(pipes.begin(), pipes.end(), comparePipes);
     double max = 0;
-    double min = pipes.size()-1;
-    
+    double min = pipes.size() - 1;
+
     variancebef = (var / count);
-    while(max != min){
-        Edge<Node>* badPipe = pipes[max].first;
-        Edge<Node>* goodPipe = pipes[min].first;
-        double badPercent = badPipe->getFlow()/badPipe->getWeight();
-        double goodPercent = goodPipe->getFlow()/goodPipe->getWeight();
+    while (max != min)
+    {
+        Edge<Node> *badPipe = pipes[max].first;
+        Edge<Node> *goodPipe = pipes[min].first;
+        double badPercent = badPipe->getFlow() / badPipe->getWeight();
+        double goodPercent = goodPipe->getFlow() / goodPipe->getWeight();
         double newBadPercent = goodPercent * (badPipe->getWeight() / goodPipe->getWeight());
         double newFlow = newBadPercent * badPipe->getWeight();
         badPipe->setFlow(newFlow);
         goodPipe->setFlow(goodPipe->getFlow() - newFlow);
         max++;
         min--;
-        if(max==min) break;
+        if (max == min)
+            break;
     }
-
 
     res.push_back(make_pair("Maximum difference before balance: ", maxDifBef));
     res.push_back(make_pair("Average difference before balance: ", avgbef));
@@ -254,10 +260,8 @@ vector<pair<string, double>> WaterNetwork::calculateMetrics(Graph<Node> *g) cons
     return res;
 }
 
-
-vector<pair<string, double>> WaterNetwork::evaluateReservoirImpact(const string &reservoir_code) const
+void WaterNetwork::evaluateReservoirImpact(const string &reservoir_code) const
 {
-    vector<pair<string, double>> res;
     Node reservoir(reservoir_code);
     Vertex<Node> *reservoir_vertex = network->findVertex(reservoir);
 
@@ -265,168 +269,159 @@ vector<pair<string, double>> WaterNetwork::evaluateReservoirImpact(const string 
         throw runtime_error("Please inform a valid reservoir code.");
     reservoir = reservoir_vertex->getInfo();
 
-    vector<pair<string, double>> previousDeficit;
-    if (filesystem::exists("../out/WaterNeeds.csv"))
+    vector<pair<string, double>> previousFlow;
+    if (filesystem::exists("../out/MaxFlow.csv"))
     {
-        ifstream waterneeds_file("../out/WaterNeeds.csv");
+        ifstream waterneeds_file("../out/MaxFlow.csv");
         if (!waterneeds_file.is_open())
-            throw runtime_error("WaterNeeds.csv file could not be opened!");
+            throw runtime_error("MaxFlow.csv file could not be opened!");
 
         string line;
         waterneeds_file >> line;
         while (waterneeds_file >> line)
         {
             istringstream iss(line);
-            string cityCode, waterDeficit_str;
-            getline(getline(iss, cityCode, ','), waterDeficit_str, '\r');
-            double waterDeficit = stod(waterDeficit_str);
+            string cityCode, flow_str;
+            getline(getline(iss, cityCode, ','), flow_str, '\r');
+            double flow = stod(flow_str);
 
-            previousDeficit.push_back(make_pair(cityCode, waterDeficit));
+            previousFlow.push_back(make_pair(cityCode, flow));
         }
         waterneeds_file.close();
     }
     else
-        previousDeficit = multiWaterNeeds(network, true);
+        previousFlow = multiSinkMaxFlow(network, true);
 
-    reservoir_vertex->setUsedDelivery(reservoir_vertex->getInfo().getMaxDelivery());
-    vector<pair<string, double>> currentDeficit = multiWaterNeeds(network, false);
+    Graph<Node> *subgraph = findConnectedComponent(network, reservoir_code);
+    Vertex<Node> *subgraph_vertex = subgraph->findVertex(reservoir);
+    subgraph_vertex->setUsedDelivery(subgraph_vertex->getInfo().getMaxDelivery());
+    vector<pair<string, double>> currentFlow = multiSinkMaxFlow(subgraph, false);
 
-    for (size_t i = 0; i < previousDeficit.size(); i++)
+    cout << "IMPACT OF REMOVING THE RESERVOIR " << reservoir_code << ":\n";
+    for (size_t i = 0; i < currentFlow.size(); i++)
     {
-        double diff = previousDeficit[i].second - currentDeficit[i].second;
-        res.push_back(make_pair(previousDeficit[i].first, diff));
-        cout << "CITY: " << previousDeficit[i].first << "  ;  PREV DEFICIT: " << previousDeficit[i].second << "  ;  CURR DEFICIT: " << currentDeficit[i].second << '\n';
+        string currCity = currentFlow[i].first;
+        vector<pair<string, double>>::iterator it = find_if(previousFlow.begin(), previousFlow.end(),
+                                                            [currCity](const pair<string, double> &p)
+                                                            { return p.first == currCity; });
+        if (it != previousFlow.end())
+        {
+            double diff = it->second - currentFlow[i].second;
+            if (diff != 0)
+                cout << "CITY: " << it->first << "  -->  OLD FLOW: " << it->second << "  ;  NEW FLOW: " << currentFlow[i].second << "  ;  DIFFERENCE: " << diff << endl;
+        }
     }
 
     reservoir_vertex->setUsedDelivery(0);
-    return res;
 }
 
 void WaterNetwork::evaluateAllReservoirImpact() const
 {
-    vector<pair<string, double>> previousDeficit;
-    if (filesystem::exists("../out/WaterNeeds.csv"))
+    vector<pair<string, double>> previousFlow;
+    if (filesystem::exists("../out/MaxFlow.csv"))
     {
-        ifstream waterneeds_file("../out/WaterNeeds.csv");
-        if (!waterneeds_file.is_open())
-            throw runtime_error("WaterNeeds.csv file could not be opened!");
+        ifstream maxflow_file("../out/MaxFlow.csv");
+        if (!maxflow_file.is_open())
+            throw runtime_error("MaxFlow.csv file could not be opened!");
 
         string line;
-        waterneeds_file >> line;
-        while (waterneeds_file >> line)
+        maxflow_file >> line;
+        while (maxflow_file >> line)
         {
             istringstream iss(line);
-            string cityCode, waterDeficit_str;
-            getline(getline(iss, cityCode, ','), waterDeficit_str, '\r');
-            double waterDeficit = stod(waterDeficit_str);
+            string cityCode, flow_str;
+            getline(getline(iss, cityCode, ','), flow_str, '\r');
+            double flow = stod(flow_str);
 
-            previousDeficit.push_back(make_pair(cityCode, waterDeficit));
+            previousFlow.push_back(make_pair(cityCode, flow));
         }
-        waterneeds_file.close();
+        maxflow_file.close();
     }
     else
-        previousDeficit = multiWaterNeeds(network, true);
+        previousFlow = multiWaterNeeds(network, true);
 
-    vector<pair<string, double>> currentDeficit;
+    vector<pair<string, double>> currentFlow;
     for (Vertex<Node> *v : network->getVertexSet())
     {
         if (v->getInfo().getType() == 0)
         {
-            v->setUsedDelivery(v->getInfo().getMaxDelivery());
             Graph<Node> *subgraph = findConnectedComponent(network, v->getInfo().getCode());
-            currentDeficit = multiWaterNeeds(subgraph, false);
+            Vertex<Node> *subgraph_vertex = subgraph->findVertex(v->getInfo());
+            subgraph_vertex->setUsedDelivery(subgraph_vertex->getInfo().getMaxDelivery());
+            currentFlow = multiSinkMaxFlow(subgraph, false);
 
-            cout << "Impact of removing the reservoir " << v->getInfo().getCode() << ':' << endl
-                 << setw(10) << left << "Cities" << setw(15) << left << "| Impacted?" << setw(15) << left << "| Impact" << endl
-                 << "-------------------------------------------------------------------------------" << endl;
-            for (pair<string, double> &p : previousDeficit)
+            cout << "IMPACT OF REMOVING THE RESERVOIR " << v->getInfo().getCode() << ":\n";
+            for (size_t i = 0; i < currentFlow.size(); i++)
             {
-                string currCity = p.first;
-                vector<pair<string, double>>::iterator it = find_if(currentDeficit.begin(), currentDeficit.end(),
-                                                                    [currCity](const pair<string, double> &pairInCurrentDeficit)
-                                                                    { return pairInCurrentDeficit.first == currCity; });
-
-                if (it == currentDeficit.end() || p.second - it->second == 0)
+                string currCity = currentFlow[i].first;
+                vector<pair<string, double>>::iterator it = find_if(previousFlow.begin(), previousFlow.end(),
+                                                                    [currCity](const pair<string, double> &p)
+                                                                    { return p.first == currCity; });
+                if (it != previousFlow.end())
                 {
-                    cout << setw(15) << currCity << setw(15) << "no" << setw(15) << "--" << '\n';
-                }
-                else
-                {
-                    cout << setw(15) << currCity << setw(15) << "yes" << setw(15) << p.second - it->second << '\n';
+                    double diff = it->second - currentFlow[i].second;
+                    if (diff != 0)
+                        cout << "CITY: " << it->first << "  -->  OLD FLOW: " << it->second << "  ;  NEW FLOW: " << currentFlow[i].second << "  ;  DIFFERENCE: " << diff << endl;
                 }
             }
 
             cout << endl;
-            v->setUsedDelivery(0);
+            subgraph_vertex->setUsedDelivery(0);
         }
     }
 }
 
 void WaterNetwork::evaluateAllPumpingStationImpact() const
 {
-    vector<pair<string, double>> previousDeficit;
-    if (filesystem::exists("../out/WaterNeeds.csv"))
+    vector<pair<string, double>> previousFlow;
+    if (filesystem::exists("../out/MaxFlow.csv"))
     {
-        ifstream waterneeds_file("../out/WaterNeeds.csv");
-        if (!waterneeds_file.is_open())
-            throw runtime_error("WaterNeeds.csv file could not be opened!");
+        ifstream maxflow_file("../out/MaxFlow.csv");
+        if (!maxflow_file.is_open())
+            throw runtime_error("MaxFlow.csv file could not be opened!");
 
         string line;
-        waterneeds_file >> line;
-        while (waterneeds_file >> line)
+        maxflow_file >> line;
+        while (maxflow_file >> line)
         {
             istringstream iss(line);
-            string cityCode, waterDeficit_str;
-            getline(getline(iss, cityCode, ','), waterDeficit_str, '\r');
-            double waterDeficit = stod(waterDeficit_str);
+            string cityCode, flow_str;
+            getline(getline(iss, cityCode, ','), flow_str, '\r');
+            double flow = stod(flow_str);
 
-            previousDeficit.push_back(make_pair(cityCode, waterDeficit));
+            previousFlow.push_back(make_pair(cityCode, flow));
         }
-        waterneeds_file.close();
+        maxflow_file.close();
     }
     else
-        previousDeficit = multiWaterNeeds(network, true);
+        previousFlow = multiSinkMaxFlow(network, true);
 
-    vector<pair<string, double>> currentDeficit;
+    vector<pair<string, double>> currentFlow;
     for (Vertex<Node> *v : network->getVertexSet())
     {
         if (v->getInfo().getType() == 1)
         {
-            v->setUsedDelivery(v->getInfo().getMaxDelivery());
             Graph<Node> *subgraph = findConnectedComponent(network, v->getInfo().getCode());
-            /*for (Vertex<Node> *v : subgraph->getVertexSet())
-            {
-                cout << v->getInfo().getCode() << endl;
-            }*/
-            currentDeficit = multiWaterNeeds(subgraph, false);
-            /*for (const pair<string, double> &p : currentDeficit)
-            {
-                cout << setw(18) << left << p.first;
-                cout << p.second << endl;
-            }*/
+            Node ps(v->getInfo().getCode());
+            subgraph->removeVertex(ps);
+            currentFlow = multiSinkMaxFlow(subgraph, false);
 
-            cout << "Impact of removing the pumping station " << v->getInfo().getCode() << ':' << endl
-                 << setw(10) << left << "Cities" << setw(15) << left << "| Impacted?" << setw(15) << left << "| Impact" << endl
-                 << "-------------------------------------------------------------------------------" << endl;
-            for (pair<string, double> &p : previousDeficit)
+            cout << "IMPACT OF REMOVING THE PUMPING STATION " << ps.getCode() << ":\n";
+            for (size_t i = 0; i < currentFlow.size(); i++)
             {
-                string currCity = p.first;
-                vector<pair<string, double>>::iterator it = find_if(currentDeficit.begin(), currentDeficit.end(),
-                                                                    [currCity](const pair<string, double> &pairInCurrentDeficit)
-                                                                    { return pairInCurrentDeficit.first == currCity; });
-
-                if (it == currentDeficit.end() || p.second - it->second == 0)
+                string currCity = currentFlow[i].first;
+                vector<pair<string, double>>::iterator it = find_if(previousFlow.begin(), previousFlow.end(),
+                                                                    [currCity](const pair<string, double> &p)
+                                                                    { return p.first == currCity; });
+                if (it != previousFlow.end())
                 {
-                    cout << setw(15) << currCity << setw(15) << "no" << setw(15) << "--" << '\n';
-                }
-                else
-                {
-                    cout << setw(15) << currCity << setw(15) << "yes" << setw(15) << p.second - it->second << '\n';
+                    double diff = it->second - currentFlow[i].second;
+                    if (diff != 0)
+                        cout << "CITY: " << it->first << "  -->  OLD FLOW: " << it->second << "  ;  NEW FLOW: " << currentFlow[i].second << "  ;  DIFFERENCE: " << diff << endl;
                 }
             }
 
             cout << endl;
-            v->setVisited(false);
         }
     }
 }
@@ -436,7 +431,7 @@ void WaterNetwork::evaluatePipelineImpact(const std::string &city_code) const
     double previousCityDeficit;
     vector<pair<string, double>> previousDeficit;
     Node city(city_code);
-    Vertex<Node>* city_vertex = network->findVertex(city);
+    Vertex<Node> *city_vertex = network->findVertex(city);
 
     if (filesystem::exists("../out/WaterNeeds.csv"))
     {
@@ -452,23 +447,24 @@ void WaterNetwork::evaluatePipelineImpact(const std::string &city_code) const
             string cityCode, waterDeficit_str;
             getline(getline(iss, cityCode, ','), waterDeficit_str, '\r');
             double waterDeficit = stod(waterDeficit_str);
-            if(cityCode == city_code) previousCityDeficit = waterDeficit;
+            if (cityCode == city_code)
+                previousCityDeficit = waterDeficit;
             previousDeficit.push_back(make_pair(cityCode, waterDeficit));
         }
         waterneeds_file.close();
     }
     else
         previousDeficit = multiWaterNeeds(network, true);
-    
 
     vector<pair<string, double>> currentDeficit;
     cout << "Pipelines that, if removed, will impact the city " << city_code << ':' << endl
-                 << setw(10) << left << "Pipes" << setw(15) << left << "| Impact" << endl
-                 << "-------------------------------------------------------------------------------" << endl;
+         << setw(10) << left << "Pipes" << setw(15) << left << "| Impact" << endl
+         << "-------------------------------------------------------------------------------" << endl;
 
     for (Vertex<Node> *v : network->getVertexSet())
     {
-        for(Edge<Node> *pipe : v->getAdj()){
+        for (Edge<Node> *pipe : v->getAdj())
+        {
 
             double originalPipe = pipe->getWeight();
             pipe->setWeight(0);
@@ -488,7 +484,8 @@ void WaterNetwork::evaluatePipelineImpact(const std::string &city_code) const
             for (pair<string, double> &p : previousDeficit)
             {
                 string currCity = p.first;
-                if(currCity != city_code) continue;
+                if (currCity != city_code)
+                    continue;
                 vector<pair<string, double>>::iterator it = find_if(currentDeficit.begin(), currentDeficit.end(),
                                                                     [currCity](const pair<string, double> &pairInCurrentDeficit)
                                                                     { return pairInCurrentDeficit.first == currCity; });
@@ -500,7 +497,7 @@ void WaterNetwork::evaluatePipelineImpact(const std::string &city_code) const
                 }
                 else
                 {
-                    cout << pipe->getOrig()->getInfo().getCode() << " -> "  << setw(15) << pipe->getDest()->getInfo().getCode() << setw(15) << "yes" << setw(15) << p.second - it->second << '\n';
+                    cout << pipe->getOrig()->getInfo().getCode() << " -> " << setw(15) << pipe->getDest()->getInfo().getCode() << setw(15) << "yes" << setw(15) << p.second - it->second << '\n';
                 }
             }
             v->setVisited(false);

@@ -102,19 +102,22 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3700b085c7a34c30cccaac8b793e456b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWaterNetwork.html#a3700b085c7a34c30cccaac8b793e456b">singleSinkMaxFlow</a> (const std::string &amp;city_code) const</td></tr>
 <tr class="memdesc:a3700b085c7a34c30cccaac8b793e456b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine the maximum amount of water that can reach a specific city. (T2.1)  <a href="classWaterNetwork.html#a3700b085c7a34c30cccaac8b793e456b">More...</a><br /></td></tr>
 <tr class="separator:a3700b085c7a34c30cccaac8b793e456b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6b8709b49157f4435262921670179f0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; std::string, double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWaterNetwork.html#ab6b8709b49157f4435262921670179f0">multiSinkMaxFlow</a> () const</td></tr>
-<tr class="memdesc:ab6b8709b49157f4435262921670179f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine the maximum amount of water that can reach each city in the water supply network. (T2.1)  <a href="classWaterNetwork.html#ab6b8709b49157f4435262921670179f0">More...</a><br /></td></tr>
-<tr class="separator:ab6b8709b49157f4435262921670179f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b878477ff607290c80db9b880d8e92a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; std::string, double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWaterNetwork.html#a2b878477ff607290c80db9b880d8e92a">multiSinkMaxFlow</a> (<a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classNode.html">Node</a> &gt; *g, const bool &amp;flag) const</td></tr>
+<tr class="memdesc:a2b878477ff607290c80db9b880d8e92a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine the maximum amount of water that can reach each city in the water supply network. (T2.1)  <a href="classWaterNetwork.html#a2b878477ff607290c80db9b880d8e92a">More...</a><br /></td></tr>
+<tr class="separator:a2b878477ff607290c80db9b880d8e92a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada06e389634a0eeee253377135332331"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; std::string, double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWaterNetwork.html#ada06e389634a0eeee253377135332331">multiWaterNeeds</a> (<a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classNode.html">Node</a> &gt; *g, const bool &amp;flag) const</td></tr>
 <tr class="memdesc:ada06e389634a0eeee253377135332331"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine the water deficit or excess for each city in the water supply network. (T2.2)  <a href="classWaterNetwork.html#ada06e389634a0eeee253377135332331">More...</a><br /></td></tr>
 <tr class="separator:ada06e389634a0eeee253377135332331"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3afde9082c7b35b375bcf2fa150fa355"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; std::string, double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWaterNetwork.html#a3afde9082c7b35b375bcf2fa150fa355">calculateMetrics</a> (<a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classNode.html">Node</a> &gt; *g) const</td></tr>
 <tr class="separator:a3afde9082c7b35b375bcf2fa150fa355"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafeed73bb4b3ddd100c6b793309b8afb"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; std::string, double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWaterNetwork.html#aafeed73bb4b3ddd100c6b793309b8afb">evaluateReservoirImpact</a> (const std::string &amp;reservoir_code) const</td></tr>
-<tr class="separator:aafeed73bb4b3ddd100c6b793309b8afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a395fa06cc629fbe1fab1c7e4397b0960"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWaterNetwork.html#a395fa06cc629fbe1fab1c7e4397b0960">evaluateReservoirImpact</a> (const std::string &amp;reservoir_code) const</td></tr>
+<tr class="memdesc:a395fa06cc629fbe1fab1c7e4397b0960"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the impact of removing a reservoir from the water supply network. (T3.1)  <a href="classWaterNetwork.html#a395fa06cc629fbe1fab1c7e4397b0960">More...</a><br /></td></tr>
+<tr class="separator:a395fa06cc629fbe1fab1c7e4397b0960"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cb954a0e70e1cd5a2ae2fdc01c44c92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWaterNetwork.html#a5cb954a0e70e1cd5a2ae2fdc01c44c92">evaluateAllReservoirImpact</a> () const</td></tr>
+<tr class="memdesc:a5cb954a0e70e1cd5a2ae2fdc01c44c92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the impact of removing all reservoirs from the water supply network, one ate a time. (T3.1)  <a href="classWaterNetwork.html#a5cb954a0e70e1cd5a2ae2fdc01c44c92">More...</a><br /></td></tr>
 <tr class="separator:a5cb954a0e70e1cd5a2ae2fdc01c44c92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa25c94515e6bb619842459f23d799874"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWaterNetwork.html#aa25c94515e6bb619842459f23d799874">evaluateAllPumpingStationImpact</a> () const</td></tr>
+<tr class="memdesc:aa25c94515e6bb619842459f23d799874"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the impact of removing all pumping stations from the water supply network, one at a time. (T3.1)  <a href="classWaterNetwork.html#aa25c94515e6bb619842459f23d799874">More...</a><br /></td></tr>
 <tr class="separator:aa25c94515e6bb619842459f23d799874"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8aab0f81ac70d565ad1b5246d5e5b8f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWaterNetwork.html#a8aab0f81ac70d565ad1b5246d5e5b8f6">evaluatePipelineImpact</a> (const std::string &amp;city_code) const</td></tr>
 <tr class="separator:a8aab0f81ac70d565ad1b5246d5e5b8f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -251,6 +254,16 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Evaluate the impact of removing all pumping stations from the water supply network, one at a time. (T3.1) </p>
+<p>This function evaluates the impact of removing all pumping stations from the water supply network. It calculates the change in water flow to each city in the network before and after removing each pumping station. The function retrieves the previous maximum flow of water to each city from a CSV file named "MaxFlow.csv" if it exists, otherwise, it calculates the maximum flow using the multiSinkMaxFlow function. Then, for each pumping station node in the network, it constructs a subgraph containing only the connected component of the network that excludes the pumping station, calculates the current maximum flow of water to each city in this subgraph, and prints the impact of removing the pumping station by comparing the previous and current flows to each city and displaying the difference, if any, in water flow.</p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>if the "MaxFlow.csv" file could not be opened or if an error occurs during the evaluation process.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>@complexity O(V^3 + V^2E + VElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct subgraphs for each pumping station, calculate current flows, and print the impact for each pumping station. </p>
+
 </div>
 </div>
 <a id="a5cb954a0e70e1cd5a2ae2fdc01c44c92"></a>
@@ -267,6 +280,16 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Evaluate the impact of removing all reservoirs from the water supply network, one ate a time. (T3.1) </p>
+<p>This function evaluates the impact of removing all reservoirs from the water supply network. It calculates the change in water flow to each city in the network before and after removing each reservoir. The function retrieves the previous maximum flow of water to each city from a CSV file named "MaxFlow.csv" if it exists, otherwise, it calculates the maximum flow using the multiWaterNeeds function. Then, for each reservoir node in the network, it constructs a subgraph containing only the connected component of the network that includes the reservoir, calculates the current maximum flow of water to each city in this subgraph, and prints the impact of removing the reservoir by comparing the previous and current flows to each city and displaying the difference, if any, in water flow.</p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>if the "MaxFlow.csv" file could not be opened or if an error occurs during the evaluation process.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>@complexity O(V^3 + V^2E + VElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct subgraphs for each reservoir, calculate current flows, and print the impact for each reservoir. </p>
 
 </div>
 </div>
@@ -288,14 +311,14 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aafeed73bb4b3ddd100c6b793309b8afb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafeed73bb4b3ddd100c6b793309b8afb">&#9670;&nbsp;</a></span>evaluateReservoirImpact()</h2>
+<a id="a395fa06cc629fbe1fab1c7e4397b0960"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a395fa06cc629fbe1fab1c7e4397b0960">&#9670;&nbsp;</a></span>evaluateReservoirImpact()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt; pair&lt; string, double &gt; &gt; WaterNetwork::evaluateReservoirImpact </td>
+          <td class="memname">void WaterNetwork::evaluateReservoirImpact </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>reservoir_code</em></td><td>)</td>
@@ -303,6 +326,22 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Evaluate the impact of removing a reservoir from the water supply network. (T3.1) </p>
+<p>This function evaluates the impact of removing a reservoir specified by its code from the water supply network. It calculates the change in water flow to each city in the network before and after removing the reservoir. The function first checks if the provided reservoir code is valid and corresponds to a reservoir node in the network. Then, it retrieves the previous maximum flow of water to each city from a CSV file named "MaxFlow.csv" if it exists, otherwise, it calculates the maximum flow using the multiSinkMaxFlow function. After that, it constructs a subgraph containing only the connected component of the network that includes the specified reservoir. Next, it calculates the current maximum flow of water to each city in this subgraph. Finally, it prints the impact of removing the reservoir by comparing the previous and current flows to each city and displaying the difference, if any, in water flow.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">reservoir_code</td><td>The code of the reservoir to be removed from the network.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>if the provided reservoir code is not valid or does not correspond to a reservoir node in the network.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>@complexity O(V^2 + VE + ElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct the subgraph, and calculate the current flow to each city. </p>
 
 </div>
 </div>
@@ -326,8 +365,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab6b8709b49157f4435262921670179f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6b8709b49157f4435262921670179f0">&#9670;&nbsp;</a></span>multiSinkMaxFlow()</h2>
+<a id="a2b878477ff607290c80db9b880d8e92a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b878477ff607290c80db9b880d8e92a">&#9670;&nbsp;</a></span>multiSinkMaxFlow()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -335,14 +374,32 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">vector&lt; pair&lt; string, double &gt; &gt; WaterNetwork::multiSinkMaxFlow </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype"><a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classNode.html">Node</a> &gt; *&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>flag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Determine the maximum amount of water that can reach each city in the water supply network. (T2.1) </p>
-<p>This function calculates the maximum flow of water that can reach each city in the water supply network. It uses the Edmonds-Karp algorithm to find the optimal flow through the network, with water reservoirs set as sources, delivery sites as sinks, and pumping stations as intermediate nodes. The function returns a vector of pairs containing each city's code and the corresponding maximum flow of water reaching it. Additionally, the function writes the results to a CSV file for further analysis.</p>
+<p>This function calculates the maximum flow of water that can reach each city in the water supply network. It uses the Edmonds-Karp algorithm to find the optimal flow through the network, with water reservoirs set as sources, delivery sites as sinks, and pumping stations as intermediate nodes. The function returns a vector of pairs containing each city's code and the corresponding maximum flow of water reaching it. Additionally, if the flag parameter is set to true, the function writes the results to a CSV file named "MaxFlow.csv" in the "out" directory.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">g</td><td>A pointer to the graph representing the water supply network. </td></tr>
+    <tr><td class="paramname">flag</td><td>A boolean flag indicating whether to write the results to a CSV file (true) or not (false). </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>A vector of pairs, where each pair consists of a city code and the maximum flow of water reaching that city.</dd></dl>
 <p>@complexity O(V * E^2), where V is the number of vertices and E is the number of edges in the graph. </p>
 
