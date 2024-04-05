@@ -181,15 +181,17 @@ vector<pair<string, double>> WaterNetwork::multiWaterNeeds(Graph<Node> *g, const
 
     out.close();
     resetGraph(g, s, t);
-    return res;
+        return res;
 }
 vector<pair<string, double>> WaterNetwork::calculateMetrics(Graph<Node> *g) const
 {
     vector<pair<string, double>> res;
-
+    vector<pair<Edge<Node>*, double>> pipes;
+    
     Node s = createSuperSource(g);
     Node t = createSuperSink(g);
     edmondsKarp(g, s, t);
+
 
     double dif;
     double maxDif = 0;
@@ -223,10 +225,11 @@ vector<pair<string, double>> WaterNetwork::calculateMetrics(Graph<Node> *g) cons
 
     variance = (var / count);
 
-    res.push_back(make_pair("Maximum Difference: ", maxDif));
-    res.push_back(make_pair("Average Difference: ", avg));
-    res.push_back(make_pair("Variance of Difference: ", variance));
+    res.push_back(make_pair("Maximum difference before balance: ", maxDif));
+    res.push_back(make_pair("Average difference before balance: ", avg));
+    res.push_back(make_pair("Variance of difference before balance: ", variance));
 
+    resetGraph(g, s, t);
     return res;
 }
 
@@ -479,6 +482,7 @@ void WaterNetwork::evaluatePipelineImpact(const std::string &city_code) const
                 }
             }
             v->setVisited(false);
+            pipe->setWeight(originalPipe);
         }
     }
 }
