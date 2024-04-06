@@ -109,17 +109,19 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ada06e389634a0eeee253377135332331"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine the water deficit or excess for each city in the water supply network. (T2.2)  <a href="classWaterNetwork.html#ada06e389634a0eeee253377135332331">More...</a><br /></td></tr>
 <tr class="separator:ada06e389634a0eeee253377135332331"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3afde9082c7b35b375bcf2fa150fa355"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; std::string, double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWaterNetwork.html#a3afde9082c7b35b375bcf2fa150fa355">calculateMetrics</a> (<a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classNode.html">Node</a> &gt; *g) const</td></tr>
+<tr class="memdesc:a3afde9082c7b35b375bcf2fa150fa355"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate metrics to assess the balance of water flow in a given graph. (T2.3)  <a href="classWaterNetwork.html#a3afde9082c7b35b375bcf2fa150fa355">More...</a><br /></td></tr>
 <tr class="separator:a3afde9082c7b35b375bcf2fa150fa355"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a395fa06cc629fbe1fab1c7e4397b0960"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWaterNetwork.html#a395fa06cc629fbe1fab1c7e4397b0960">evaluateReservoirImpact</a> (const std::string &amp;reservoir_code) const</td></tr>
 <tr class="memdesc:a395fa06cc629fbe1fab1c7e4397b0960"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the impact of removing a reservoir from the water supply network. (T3.1)  <a href="classWaterNetwork.html#a395fa06cc629fbe1fab1c7e4397b0960">More...</a><br /></td></tr>
 <tr class="separator:a395fa06cc629fbe1fab1c7e4397b0960"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cb954a0e70e1cd5a2ae2fdc01c44c92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWaterNetwork.html#a5cb954a0e70e1cd5a2ae2fdc01c44c92">evaluateAllReservoirImpact</a> () const</td></tr>
-<tr class="memdesc:a5cb954a0e70e1cd5a2ae2fdc01c44c92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the impact of removing all reservoirs from the water supply network, one ate a time. (T3.1)  <a href="classWaterNetwork.html#a5cb954a0e70e1cd5a2ae2fdc01c44c92">More...</a><br /></td></tr>
+<tr class="memdesc:a5cb954a0e70e1cd5a2ae2fdc01c44c92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the impact of removing all reservoirs from the water supply network, one at a time. (T3.1)  <a href="classWaterNetwork.html#a5cb954a0e70e1cd5a2ae2fdc01c44c92">More...</a><br /></td></tr>
 <tr class="separator:a5cb954a0e70e1cd5a2ae2fdc01c44c92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa25c94515e6bb619842459f23d799874"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWaterNetwork.html#aa25c94515e6bb619842459f23d799874">evaluateAllPumpingStationImpact</a> () const</td></tr>
 <tr class="memdesc:aa25c94515e6bb619842459f23d799874"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the impact of removing all pumping stations from the water supply network, one at a time. (T3.1)  <a href="classWaterNetwork.html#aa25c94515e6bb619842459f23d799874">More...</a><br /></td></tr>
 <tr class="separator:aa25c94515e6bb619842459f23d799874"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8aab0f81ac70d565ad1b5246d5e5b8f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWaterNetwork.html#a8aab0f81ac70d565ad1b5246d5e5b8f6">evaluatePipelineImpact</a> (const std::string &amp;city_code) const</td></tr>
+<tr class="memdesc:a8aab0f81ac70d565ad1b5246d5e5b8f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the impact of removing pipelines on the water supply to a specific city. (T3.3)  <a href="classWaterNetwork.html#a8aab0f81ac70d565ad1b5246d5e5b8f6">More...</a><br /></td></tr>
 <tr class="separator:a8aab0f81ac70d565ad1b5246d5e5b8f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -237,6 +239,20 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Calculate metrics to assess the balance of water flow in a given graph. (T2.3) </p>
+<p>This function calculates various metrics to evaluate the balance of water flow in a provided graph. It assesses the difference between the weight of each edge (representing pipeline capacity) and its flow, both before and after attempting to balance the flow across the network.</p>
+<p>The function first creates a super source and a super sink node in the graph and uses the Edmonds-Karp algorithm to find the maximum flow in the network. Then, it iterates over all edges in the graph to compute the differences between the edge weights and their corresponding flow values. These differences are used to calculate the maximum, average, and variance of the differences before attempting to balance the flow.</p>
+<p>Next, the function attempts to balance the flow across the network by adjusting the flow in each pipeline. It identifies the pipeline with the maximum difference and the pipeline with the minimum difference and iteratively transfers flow from the maximum to the minimum until the differences are minimized.</p>
+<p>After balancing the flow, the function recalculates the maximum, average, and variance of the differences.</p>
+<p>Finally, the function stores the calculated metrics, including the maximum difference, average difference, and variance of differences before and after balancing, in a vector of pairs and returns it.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">g</td><td>Pointer to the graph for which metrics are to be calculated. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A vector of pairs containing the calculated metrics. </dd></dl>
+
 </div>
 </div>
 <a id="aa25c94515e6bb619842459f23d799874"></a>
@@ -255,14 +271,9 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Evaluate the impact of removing all pumping stations from the water supply network, one at a time. (T3.1) </p>
-<p>This function evaluates the impact of removing all pumping stations from the water supply network. It calculates the change in water flow to each city in the network before and after removing each pumping station. The function retrieves the previous maximum flow of water to each city from a CSV file named "MaxFlow.csv" if it exists, otherwise, it calculates the maximum flow using the multiSinkMaxFlow function. Then, for each pumping station node in the network, it constructs a subgraph containing only the connected component of the network that excludes the pumping station, calculates the current maximum flow of water to each city in this subgraph, and prints the impact of removing the pumping station by comparing the previous and current flows to each city and displaying the difference, if any, in water flow.</p>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::runtime_error</td><td>if the "MaxFlow.csv" file could not be opened or if an error occurs during the evaluation process.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>@complexity O(V^3 + V^2E + VElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct subgraphs for each pumping station, calculate current flows, and print the impact for each pumping station. </p>
+<p>This function assesses the consequences of removing each pumping station from the water supply network individually. It calculates the change in water flow to each city in the network before and after removing each pumping station.</p>
+<p>To begin, the function computes the initial water flow to each city using the multiSinkMaxFlow function. Then, for each pumping station node in the network, it constructs a subgraph that contains only the connected component of the network excluding the pumping station. Subsequently, it determines the current maximum flow of water to each city within this subgraph. Finally, the function prints the impact of removing the pumping station by comparing the previous and current flows to each city and displaying any differences in water flow.</p>
+<p>@complexity The time complexity of this function is O(V^3 + V^2E + VElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct subgraphs for each pumping station, calculate current flows, and print the impact for each pumping station. </p>
 
 </div>
 </div>
@@ -281,15 +292,10 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Evaluate the impact of removing all reservoirs from the water supply network, one ate a time. (T3.1) </p>
-<p>This function evaluates the impact of removing all reservoirs from the water supply network. It calculates the change in water flow to each city in the network before and after removing each reservoir. The function retrieves the previous maximum flow of water to each city from a CSV file named "MaxFlow.csv" if it exists, otherwise, it calculates the maximum flow using the multiWaterNeeds function. Then, for each reservoir node in the network, it constructs a subgraph containing only the connected component of the network that includes the reservoir, calculates the current maximum flow of water to each city in this subgraph, and prints the impact of removing the reservoir by comparing the previous and current flows to each city and displaying the difference, if any, in water flow.</p>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">std::runtime_error</td><td>if the "MaxFlow.csv" file could not be opened or if an error occurs during the evaluation process.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>@complexity O(V^3 + V^2E + VElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct subgraphs for each reservoir, calculate current flows, and print the impact for each reservoir. </p>
+<p>Evaluate the impact of removing all reservoirs from the water supply network, one at a time. (T3.1) </p>
+<p>This function assesses the consequences of removing each reservoir from the water supply network individually. It calculates the change in water flow to each city in the network before and after removing each reservoir.</p>
+<p>To begin, the function computes the initial water flow to each city using the multiWaterNeeds function. Then, for each reservoir node in the network, it constructs a subgraph that contains only the connected component of the network including the reservoir. Subsequently, it determines the current maximum flow of water to each city within this subgraph. Finally, the function prints the impact of removing the reservoir by comparing the previous and current flows to each city and displaying any differences in water flow.</p>
+<p>@complexity The time complexity of this function is O(V^3 + V^2E + VElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct subgraphs for each reservoir, calculate current flows, and print the impact for each reservoir. </p>
 
 </div>
 </div>
@@ -308,6 +314,18 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Evaluate the impact of removing pipelines on the water supply to a specific city. (T3.3) </p>
+<p>This function assesses the impact of removing pipelines on the water supply to a specific city within the network. It calculates the change in water deficit for the specified city before and after removing each pipeline connected to it.</p>
+<p>To begin, the function computes the initial water deficit for the city using the multiWaterNeeds function. Then, for each pipeline connected to the specified city, it temporarily removes the pipeline from the network, constructs a subgraph containing only the connected component of the network that includes the origin node of the pipeline, and calculates the current water deficit for the city in this subgraph.</p>
+<p>If there is a change in water deficit for the city after removing the pipeline, it indicates that removing the pipeline impacts the water supply to the city, and the function prints the pipeline's origin and destination codes along with the magnitude of the impact. If there is no change in water deficit, it means that removing the pipeline does not affect the water supply to the city, and the function indicates this as well.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">city_code</td><td>The code of the city for which the impact of removing pipelines is to be evaluated.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>@complexity The time complexity of this function depends on the size of the network and the number of pipelines connected to the specified city. For each pipeline, it constructs a subgraph, which has a complexity of O(V + E), where V is the number of vertices and E is the number of edges. Thus, the overall time complexity is O(P * (V + E)), where P is the number of pipelines connected to the specified city. </p>
 
 </div>
 </div>
@@ -328,7 +346,9 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Evaluate the impact of removing a reservoir from the water supply network. (T3.1) </p>
-<p>This function evaluates the impact of removing a reservoir specified by its code from the water supply network. It calculates the change in water flow to each city in the network before and after removing the reservoir. The function first checks if the provided reservoir code is valid and corresponds to a reservoir node in the network. Then, it retrieves the previous maximum flow of water to each city from a CSV file named "MaxFlow.csv" if it exists, otherwise, it calculates the maximum flow using the multiSinkMaxFlow function. After that, it constructs a subgraph containing only the connected component of the network that includes the specified reservoir. Next, it calculates the current maximum flow of water to each city in this subgraph. Finally, it prints the impact of removing the reservoir by comparing the previous and current flows to each city and displaying the difference, if any, in water flow.</p>
+<p>This function calculates the impact of removing a reservoir specified by its code from the water supply network. It first validates the provided reservoir code to ensure it corresponds to a reservoir node in the network. Then, it determines the change in water flow to each city in the network before and after removing the reservoir. The function achieves this by calculating the maximum flow of water to each city using the multiSinkMaxFlow function.</p>
+<p>After validating the reservoir code and calculating the initial flow, the function constructs a subgraph consisting only of the connected component of the network that includes the specified reservoir. It then recalculates the maximum flow of water to each city in this subgraph.</p>
+<p>Finally, the function prints the impact of removing the reservoir by comparing the previous and current flows to each city and displaying the difference, if any, in water flow.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">reservoir_code</td><td>The code of the reservoir to be removed from the network.</td></tr>
@@ -341,7 +361,7 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>@complexity O(V^2 + VE + ElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct the subgraph, and calculate the current flow to each city. </p>
+<p>@complexity The time complexity of this function is O(V^2 + VE + ElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct the subgraph, and calculate the current flow to each city. </p>
 
 </div>
 </div>

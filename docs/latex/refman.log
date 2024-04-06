@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.4.3)  5 APR 2024 15:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.4.3)  6 APR 2024 16:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1057,34 +1057,41 @@ File: classWaterNetwork__coll__graph.pdf Graphic file (type pdf)
 Package pdftex.def Info: classWaterNetwork__coll__graph.pdf  used on input line
  18.
 (pdftex.def)             Requested size: 164.0pt x 167.00427pt.
- [28] [29] [30] [31] [32]
-Underfull \hbox (badness 10000) detected at line 183
+ [28] [29] [30]
+Underfull \hbox (badness 10000) detected at line 130
 [][][]
  []
 
-
-Underfull \hbox (badness 10000) detected at line 205
+[31] [32]
+Underfull \hbox (badness 10000) detected at line 218
 [][][]
  []
 
 [33]
-Underfull \hbox (badness 10000) detected at line 227
+Underfull \hbox (badness 10000) detected at line 240
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 247
+Underfull \hbox (badness 10000) detected at line 262
 [][][]
  []
 
-) [34]
+[34]
+Underfull \hbox (badness 10000) detected at line 282
+[][][]
+ []
+
+) [35] [36
+
+]
 Chapter 5.
 (./App_8hpp.tex <./App_8hpp__incl.pdf
 
 pdfTeX warning: pdflatex (file ./App_8hpp__incl.pdf): PDF inclusion: multiple p
 dfs with page group included in a single page
 >
-<App_8hpp__incl.pdf, id=1663, 675.52374pt x 325.215pt>
+<App_8hpp__incl.pdf, id=1672, 675.52374pt x 325.215pt>
 File: App_8hpp__incl.pdf Graphic file (type pdf)
 <use App_8hpp__incl.pdf>
 Package pdftex.def Info: App_8hpp__incl.pdf  used on input line 8.
@@ -1094,7 +1101,7 @@ Package pdftex.def Info: App_8hpp__incl.pdf  used on input line 8.
 pdfTeX warning: pdflatex (file ./App_8hpp__dep__incl.pdf): PDF inclusion: multi
 ple pdfs with page group included in a single page
 >
-<App_8hpp__dep__incl.pdf, id=1671, 240.9pt x 156.585pt>
+<App_8hpp__dep__incl.pdf, id=1680, 240.9pt x 156.585pt>
 File: App_8hpp__dep__incl.pdf Graphic file (type pdf)
 <use App_8hpp__dep__incl.pdf>
 Package pdftex.def Info: App_8hpp__dep__incl.pdf  used on input line 15.
@@ -1104,21 +1111,19 @@ Package pdftex.def Info: App_8hpp__dep__incl.pdf  used on input line 15.
 pdfTeX warning: pdflatex (file ./Graph_8hpp__incl.pdf): PDF inclusion: multiple
  pdfs with page group included in a single page
 >
-<Graph_8hpp__incl.pdf, id=1680, 391.4625pt x 156.585pt>
+<Graph_8hpp__incl.pdf, id=1689, 391.4625pt x 156.585pt>
 File: Graph_8hpp__incl.pdf Graphic file (type pdf)
 <use Graph_8hpp__incl.pdf>
 Package pdftex.def Info: Graph_8hpp__incl.pdf  used on input line 12.
 (pdftex.def)             Requested size: 350.0pt x 140.00769pt.
- [35
-
-] <./Graph_8hpp__dep__incl.pdf>
-<Graph_8hpp__dep__incl.pdf, id=1696, 369.38pt x 325.215pt>
+ [37] <./Graph_8hpp__dep__incl.pdf>
+<Graph_8hpp__dep__incl.pdf, id=1704, 369.38pt x 325.215pt>
 File: Graph_8hpp__dep__incl.pdf Graphic file (type pdf)
 <use Graph_8hpp__dep__incl.pdf>
 Package pdftex.def Info: Graph_8hpp__dep__incl.pdf  used on input line 19.
 (pdftex.def)             Requested size: 350.0pt x 308.15355pt.
- [36]) (./Node_8hpp.tex <./Node_8hpp__incl.pdf>
-<Node_8hpp__incl.pdf, id=1716, 154.5775pt x 156.585pt>
+ [38]) (./Node_8hpp.tex <./Node_8hpp__incl.pdf>
+<Node_8hpp__incl.pdf, id=1724, 154.5775pt x 156.585pt>
 File: Node_8hpp__incl.pdf Graphic file (type pdf)
 <use Node_8hpp__incl.pdf>
 Package pdftex.def Info: Node_8hpp__incl.pdf  used on input line 8.
@@ -1128,13 +1133,13 @@ Package pdftex.def Info: Node_8hpp__incl.pdf  used on input line 8.
 pdfTeX warning: pdflatex (file ./Node_8hpp__dep__incl.pdf): PDF inclusion: mult
 iple pdfs with page group included in a single page
 >
-<Node_8hpp__dep__incl.pdf, id=1724, 466.74374pt x 325.215pt>
+<Node_8hpp__dep__incl.pdf, id=1732, 466.74374pt x 325.215pt>
 File: Node_8hpp__dep__incl.pdf Graphic file (type pdf)
 <use Node_8hpp__dep__incl.pdf>
 Package pdftex.def Info: Node_8hpp__dep__incl.pdf  used on input line 15.
 (pdftex.def)             Requested size: 350.0pt x 243.88087pt.
- [37]) (./Utils_8hpp.tex <./Utils_8hpp__incl.pdf>
-<Utils_8hpp__incl.pdf, id=1742, 451.6875pt x 212.795pt>
+ [39]) (./Utils_8hpp.tex <./Utils_8hpp__incl.pdf>
+<Utils_8hpp__incl.pdf, id=1751, 451.6875pt x 212.795pt>
 File: Utils_8hpp__incl.pdf Graphic file (type pdf)
 <use Utils_8hpp__incl.pdf>
 Package pdftex.def Info: Utils_8hpp__incl.pdf  used on input line 9.
@@ -1144,22 +1149,22 @@ Package pdftex.def Info: Utils_8hpp__incl.pdf  used on input line 9.
 pdfTeX warning: pdflatex (file ./Utils_8hpp__dep__incl.pdf): PDF inclusion: mul
 tiple pdfs with page group included in a single page
 >
-<Utils_8hpp__dep__incl.pdf, id=1751, 352.31625pt x 269.005pt>
+<Utils_8hpp__dep__incl.pdf, id=1759, 352.31625pt x 269.005pt>
 File: Utils_8hpp__dep__incl.pdf Graphic file (type pdf)
 <use Utils_8hpp__dep__incl.pdf>
 Package pdftex.def Info: Utils_8hpp__dep__incl.pdf  used on input line 16.
 (pdftex.def)             Requested size: 350.0pt x 267.23521pt.
- [38] [39]
+ [40] [41]
 Underfull \hbox (badness 10000) detected at line 83
 [][][]
  []
 
-[40]
+[42]
 Underfull \hbox (badness 10000) detected at line 103
 [][][]
  []
 
-[41]
+[43]
 Underfull \hbox (badness 10000) detected at line 169
 [][][]
  []
@@ -1169,17 +1174,17 @@ Underfull \hbox (badness 10000) detected at line 193
 [][][]
  []
 
-[42]
+[44]
 Underfull \hbox (badness 10000) detected at line 220
 [][][]
  []
 
-[43]) (./WaterNetwork_8hpp.tex <./WaterNetwork_8hpp__incl.pdf
+[45]) (./WaterNetwork_8hpp.tex <./WaterNetwork_8hpp__incl.pdf
 
 pdfTeX warning: pdflatex (file ./WaterNetwork_8hpp__incl.pdf): PDF inclusion: m
 ultiple pdfs with page group included in a single page
 >
-<WaterNetwork_8hpp__incl.pdf, id=1907, 675.52374pt x 269.005pt>
+<WaterNetwork_8hpp__incl.pdf, id=1915, 675.52374pt x 269.005pt>
 File: WaterNetwork_8hpp__incl.pdf Graphic file (type pdf)
 <use WaterNetwork_8hpp__incl.pdf>
 Package pdftex.def Info: WaterNetwork_8hpp__incl.pdf  used on input line 13.
@@ -1189,21 +1194,21 @@ Package pdftex.def Info: WaterNetwork_8hpp__incl.pdf  used on input line 13.
 pdfTeX warning: pdflatex (file ./WaterNetwork_8hpp__dep__incl.pdf): PDF inclusi
 on: multiple pdfs with page group included in a single page
 >
-<WaterNetwork_8hpp__dep__incl.pdf, id=1915, 347.2975pt x 212.795pt>
+<WaterNetwork_8hpp__dep__incl.pdf, id=1923, 347.2975pt x 212.795pt>
 File: WaterNetwork_8hpp__dep__incl.pdf Graphic file (type pdf)
 <use WaterNetwork_8hpp__dep__incl.pdf>
 Package pdftex.def Info: WaterNetwork_8hpp__dep__incl.pdf  used on input line 2
 0.
 (pdftex.def)             Requested size: 346.0pt x 212.00868pt.
- [44]) (./README_8md.tex) (./App_8cpp.tex <./App_8cpp__incl.pdf>
-<App_8cpp__incl.pdf, id=1931, 675.52374pt x 381.425pt>
+ [46]) (./README_8md.tex) (./App_8cpp.tex <./App_8cpp__incl.pdf>
+<App_8cpp__incl.pdf, id=1939, 675.52374pt x 381.425pt>
 File: App_8cpp__incl.pdf Graphic file (type pdf)
 <use App_8cpp__incl.pdf>
 Package pdftex.def Info: App_8cpp__incl.pdf  used on input line 8.
 (pdftex.def)             Requested size: 350.0pt x 197.62627pt.
- [45])
+ [47])
 (./main_8cpp.tex <./main_8cpp__incl.pdf>
-<main_8cpp__incl.pdf, id=1949, 664.4825pt x 381.425pt>
+<main_8cpp__incl.pdf, id=1958, 664.4825pt x 381.425pt>
 File: main_8cpp__incl.pdf Graphic file (type pdf)
 <use main_8cpp__incl.pdf>
 Package pdftex.def Info: main_8cpp__incl.pdf  used on input line 11.
@@ -1213,18 +1218,18 @@ Package pdftex.def Info: main_8cpp__incl.pdf  used on input line 11.
 pdfTeX warning: pdflatex (file ./Node_8cpp__incl.pdf): PDF inclusion: multiple 
 pdfs with page group included in a single page
 >
-<Node_8cpp__incl.pdf, id=1958, 163.61125pt x 212.795pt>
+<Node_8cpp__incl.pdf, id=1968, 163.61125pt x 212.795pt>
 File: Node_8cpp__incl.pdf Graphic file (type pdf)
 <use Node_8cpp__incl.pdf>
 Package pdftex.def Info: Node_8cpp__incl.pdf  used on input line 8.
 (pdftex.def)             Requested size: 163.0pt x 211.99895pt.
-) (./Utils_8cpp.tex [46] <./Utils_8cpp__incl.pdf>
-<Utils_8cpp__incl.pdf, id=1977, 451.6875pt x 269.005pt>
+) (./Utils_8cpp.tex [48] <./Utils_8cpp__incl.pdf>
+<Utils_8cpp__incl.pdf, id=1986, 451.6875pt x 269.005pt>
 File: Utils_8cpp__incl.pdf Graphic file (type pdf)
 <use Utils_8cpp__incl.pdf>
 Package pdftex.def Info: Utils_8cpp__incl.pdf  used on input line 8.
 (pdftex.def)             Requested size: 350.0pt x 208.45619pt.
- [47] [48]
+ [49] [50]
 Underfull \hbox (badness 10000) detected at line 75
 [][][]
  []
@@ -1234,12 +1239,12 @@ Underfull \hbox (badness 10000) detected at line 95
 [][][]
  []
 
-[49] [50]
+[51] [52]
 Underfull \hbox (badness 10000) detected at line 146
 [][][]
  []
 
-[51]
+[53]
 Underfull \hbox (badness 10000) detected at line 174
 [][][]
  []
@@ -1249,28 +1254,28 @@ Underfull \hbox (badness 10000) detected at line 174
 pdfTeX warning: pdflatex (file ./WaterNetwork_8cpp__incl.pdf): PDF inclusion: m
 ultiple pdfs with page group included in a single page
 >
-<WaterNetwork_8cpp__incl.pdf, id=2120, 675.52374pt x 325.215pt>
+<WaterNetwork_8cpp__incl.pdf, id=2129, 675.52374pt x 325.215pt>
 File: WaterNetwork_8cpp__incl.pdf Graphic file (type pdf)
 <use WaterNetwork_8cpp__incl.pdf>
 Package pdftex.def Info: WaterNetwork_8cpp__incl.pdf  used on input line 8.
 (pdftex.def)             Requested size: 350.0pt x 168.5024pt.
- [52]) [53] [54
+ [54]) [55] [56
 
-] (./refman.ind [55
+] (./refman.ind [57
 
 
-] [56] [57] [58]) (./refman.aux)
+] [58] [59] [60]) (./refman.aux)
 Package rerunfilecheck Info: File `refman.out' has not changed.
 (rerunfilecheck)             Checksum: B52990C55E83EE4B381C92269DCE16A8;37031.
  ) 
 Here is how much of TeX's memory you used:
- 18324 strings out of 478287
- 302794 string characters out of 5849290
- 630913 words of memory out of 5000000
+ 18326 strings out of 478287
+ 302808 string characters out of 5849290
+ 630912 words of memory out of 5000000
  35674 multiletter control sequences out of 15000+600000
  530889 words of font info for 107 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,16n,117p,1000b,633s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 99i,15n,117p,676b,633s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist
@@ -1285,10 +1290,10 @@ mf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/font
 s/type1/urw/helvetic/uhvb8ac.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
 /helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uh
 vro8a.pfb>
-Output written on refman.pdf (66 pages, 478521 bytes).
+Output written on refman.pdf (68 pages, 481546 bytes).
 PDF statistics:
- 2617 PDF objects out of 2984 (max. 8388607)
- 2439 compressed objects within 25 object streams
- 483 named destinations out of 1000 (max. 500000)
+ 2626 PDF objects out of 2984 (max. 8388607)
+ 2446 compressed objects within 25 object streams
+ 485 named destinations out of 1000 (max. 500000)
  1614 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -36,15 +36,15 @@ std\+::vector$<$ std\+::pair$<$ std\+::string, double $>$ $>$ \mbox{\hyperlink{c
 std\+::vector$<$ std\+::pair$<$ std\+::string, double $>$ $>$ \mbox{\hyperlink{classWaterNetwork_ada06e389634a0eeee253377135332331}{multi\+Water\+Needs}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g, const bool \&flag) const
 \begin{DoxyCompactList}\small\item\em Determine the water deficit or excess for each city in the water supply network. (T2.\+2) \end{DoxyCompactList}\item 
 std\+::vector$<$ std\+::pair$<$ std\+::string, double $>$ $>$ \mbox{\hyperlink{classWaterNetwork_a3afde9082c7b35b375bcf2fa150fa355}{calculate\+Metrics}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g) const
-\item 
+\begin{DoxyCompactList}\small\item\em Calculate metrics to assess the balance of water flow in a given graph. (T2.\+3) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classWaterNetwork_a395fa06cc629fbe1fab1c7e4397b0960}{evaluate\+Reservoir\+Impact}} (const std\+::string \&reservoir\+\_\+code) const
 \begin{DoxyCompactList}\small\item\em Evaluate the impact of removing a reservoir from the water supply network. (T3.\+1) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classWaterNetwork_a5cb954a0e70e1cd5a2ae2fdc01c44c92}{evaluate\+All\+Reservoir\+Impact}} () const
-\begin{DoxyCompactList}\small\item\em Evaluate the impact of removing all reservoirs from the water supply network, one ate a time. (T3.\+1) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Evaluate the impact of removing all reservoirs from the water supply network, one at a time. (T3.\+1) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classWaterNetwork_aa25c94515e6bb619842459f23d799874}{evaluate\+All\+Pumping\+Station\+Impact}} () const
 \begin{DoxyCompactList}\small\item\em Evaluate the impact of removing all pumping stations from the water supply network, one at a time. (T3.\+1) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classWaterNetwork_a8aab0f81ac70d565ad1b5246d5e5b8f6}{evaluate\+Pipeline\+Impact}} (const std\+::string \&city\+\_\+code) const
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Evaluate the impact of removing pipelines on the water supply to a specific city. (T3.\+3) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -108,6 +108,28 @@ Destructor for the \mbox{\hyperlink{classWaterNetwork}{Water\+Network}} class.
 \doxysubsubsection{\texorpdfstring{calculateMetrics()}{calculateMetrics()}}
 {\footnotesize\ttfamily vector$<$ pair$<$ string, double $>$ $>$ Water\+Network\+::calculate\+Metrics (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$}]{g }\end{DoxyParamCaption}) const}
 
+
+
+Calculate metrics to assess the balance of water flow in a given graph. (T2.\+3) 
+
+This function calculates various metrics to evaluate the balance of water flow in a provided graph. It assesses the difference between the weight of each edge (representing pipeline capacity) and its flow, both before and after attempting to balance the flow across the network.
+
+The function first creates a super source and a super sink node in the graph and uses the Edmonds-\/\+Karp algorithm to find the maximum flow in the network. Then, it iterates over all edges in the graph to compute the differences between the edge weights and their corresponding flow values. These differences are used to calculate the maximum, average, and variance of the differences before attempting to balance the flow.
+
+Next, the function attempts to balance the flow across the network by adjusting the flow in each pipeline. It identifies the pipeline with the maximum difference and the pipeline with the minimum difference and iteratively transfers flow from the maximum to the minimum until the differences are minimized.
+
+After balancing the flow, the function recalculates the maximum, average, and variance of the differences.
+
+Finally, the function stores the calculated metrics, including the maximum difference, average difference, and variance of differences before and after balancing, in a vector of pairs and returns it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & Pointer to the graph for which metrics are to be calculated. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of pairs containing the calculated metrics. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classWaterNetwork_aa25c94515e6bb619842459f23d799874}\label{classWaterNetwork_aa25c94515e6bb619842459f23d799874}} 
 \index{WaterNetwork@{WaterNetwork}!evaluateAllPumpingStationImpact@{evaluateAllPumpingStationImpact}}
 \index{evaluateAllPumpingStationImpact@{evaluateAllPumpingStationImpact}!WaterNetwork@{WaterNetwork}}
@@ -118,14 +140,11 @@ Destructor for the \mbox{\hyperlink{classWaterNetwork}{Water\+Network}} class.
 
 Evaluate the impact of removing all pumping stations from the water supply network, one at a time. (T3.\+1) 
 
-This function evaluates the impact of removing all pumping stations from the water supply network. It calculates the change in water flow to each city in the network before and after removing each pumping station. The function retrieves the previous maximum flow of water to each city from a CSV file named \char`\"{}\+Max\+Flow.\+csv\char`\"{} if it exists, otherwise, it calculates the maximum flow using the multi\+Sink\+Max\+Flow function. Then, for each pumping station node in the network, it constructs a subgraph containing only the connected component of the network that excludes the pumping station, calculates the current maximum flow of water to each city in this subgraph, and prints the impact of removing the pumping station by comparing the previous and current flows to each city and displaying the difference, if any, in water flow.
+This function assesses the consequences of removing each pumping station from the water supply network individually. It calculates the change in water flow to each city in the network before and after removing each pumping station.
 
+To begin, the function computes the initial water flow to each city using the multi\+Sink\+Max\+Flow function. Then, for each pumping station node in the network, it constructs a subgraph that contains only the connected component of the network excluding the pumping station. Subsequently, it determines the current maximum flow of water to each city within this subgraph. Finally, the function prints the impact of removing the pumping station by comparing the previous and current flows to each city and displaying any differences in water flow.
 
-\begin{DoxyExceptions}{Exceptions}
-{\em std\+::runtime\+\_\+error} & if the \char`\"{}\+Max\+Flow.\+csv\char`\"{} file could not be opened or if an error occurs during the evaluation process.\\
-\hline
-\end{DoxyExceptions}
-@complexity O(V$^\wedge$3 + V$^\wedge$2E + VElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct subgraphs for each pumping station, calculate current flows, and print the impact for each pumping station. \mbox{\Hypertarget{classWaterNetwork_a5cb954a0e70e1cd5a2ae2fdc01c44c92}\label{classWaterNetwork_a5cb954a0e70e1cd5a2ae2fdc01c44c92}} 
+@complexity The time complexity of this function is O(V$^\wedge$3 + V$^\wedge$2E + VElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct subgraphs for each pumping station, calculate current flows, and print the impact for each pumping station. \mbox{\Hypertarget{classWaterNetwork_a5cb954a0e70e1cd5a2ae2fdc01c44c92}\label{classWaterNetwork_a5cb954a0e70e1cd5a2ae2fdc01c44c92}} 
 \index{WaterNetwork@{WaterNetwork}!evaluateAllReservoirImpact@{evaluateAllReservoirImpact}}
 \index{evaluateAllReservoirImpact@{evaluateAllReservoirImpact}!WaterNetwork@{WaterNetwork}}
 \doxysubsubsection{\texorpdfstring{evaluateAllReservoirImpact()}{evaluateAllReservoirImpact()}}
@@ -133,22 +152,34 @@ This function evaluates the impact of removing all pumping stations from the wat
 
 
 
-Evaluate the impact of removing all reservoirs from the water supply network, one ate a time. (T3.\+1) 
+Evaluate the impact of removing all reservoirs from the water supply network, one at a time. (T3.\+1) 
 
-This function evaluates the impact of removing all reservoirs from the water supply network. It calculates the change in water flow to each city in the network before and after removing each reservoir. The function retrieves the previous maximum flow of water to each city from a CSV file named \char`\"{}\+Max\+Flow.\+csv\char`\"{} if it exists, otherwise, it calculates the maximum flow using the multi\+Water\+Needs function. Then, for each reservoir node in the network, it constructs a subgraph containing only the connected component of the network that includes the reservoir, calculates the current maximum flow of water to each city in this subgraph, and prints the impact of removing the reservoir by comparing the previous and current flows to each city and displaying the difference, if any, in water flow.
+This function assesses the consequences of removing each reservoir from the water supply network individually. It calculates the change in water flow to each city in the network before and after removing each reservoir.
 
+To begin, the function computes the initial water flow to each city using the multi\+Water\+Needs function. Then, for each reservoir node in the network, it constructs a subgraph that contains only the connected component of the network including the reservoir. Subsequently, it determines the current maximum flow of water to each city within this subgraph. Finally, the function prints the impact of removing the reservoir by comparing the previous and current flows to each city and displaying any differences in water flow.
 
-\begin{DoxyExceptions}{Exceptions}
-{\em std\+::runtime\+\_\+error} & if the \char`\"{}\+Max\+Flow.\+csv\char`\"{} file could not be opened or if an error occurs during the evaluation process.\\
-\hline
-\end{DoxyExceptions}
-@complexity O(V$^\wedge$3 + V$^\wedge$2E + VElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct subgraphs for each reservoir, calculate current flows, and print the impact for each reservoir. \mbox{\Hypertarget{classWaterNetwork_a8aab0f81ac70d565ad1b5246d5e5b8f6}\label{classWaterNetwork_a8aab0f81ac70d565ad1b5246d5e5b8f6}} 
+@complexity The time complexity of this function is O(V$^\wedge$3 + V$^\wedge$2E + VElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct subgraphs for each reservoir, calculate current flows, and print the impact for each reservoir. \mbox{\Hypertarget{classWaterNetwork_a8aab0f81ac70d565ad1b5246d5e5b8f6}\label{classWaterNetwork_a8aab0f81ac70d565ad1b5246d5e5b8f6}} 
 \index{WaterNetwork@{WaterNetwork}!evaluatePipelineImpact@{evaluatePipelineImpact}}
 \index{evaluatePipelineImpact@{evaluatePipelineImpact}!WaterNetwork@{WaterNetwork}}
 \doxysubsubsection{\texorpdfstring{evaluatePipelineImpact()}{evaluatePipelineImpact()}}
 {\footnotesize\ttfamily void Water\+Network\+::evaluate\+Pipeline\+Impact (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{city\+\_\+code }\end{DoxyParamCaption}) const}
 
-\mbox{\Hypertarget{classWaterNetwork_a395fa06cc629fbe1fab1c7e4397b0960}\label{classWaterNetwork_a395fa06cc629fbe1fab1c7e4397b0960}} 
+
+
+Evaluate the impact of removing pipelines on the water supply to a specific city. (T3.\+3) 
+
+This function assesses the impact of removing pipelines on the water supply to a specific city within the network. It calculates the change in water deficit for the specified city before and after removing each pipeline connected to it.
+
+To begin, the function computes the initial water deficit for the city using the multi\+Water\+Needs function. Then, for each pipeline connected to the specified city, it temporarily removes the pipeline from the network, constructs a subgraph containing only the connected component of the network that includes the origin node of the pipeline, and calculates the current water deficit for the city in this subgraph.
+
+If there is a change in water deficit for the city after removing the pipeline, it indicates that removing the pipeline impacts the water supply to the city, and the function prints the pipeline\textquotesingle{}s origin and destination codes along with the magnitude of the impact. If there is no change in water deficit, it means that removing the pipeline does not affect the water supply to the city, and the function indicates this as well.
+
+
+\begin{DoxyParams}{Parameters}
+{\em city\+\_\+code} & The code of the city for which the impact of removing pipelines is to be evaluated.\\
+\hline
+\end{DoxyParams}
+@complexity The time complexity of this function depends on the size of the network and the number of pipelines connected to the specified city. For each pipeline, it constructs a subgraph, which has a complexity of O(V + E), where V is the number of vertices and E is the number of edges. Thus, the overall time complexity is O(P $\ast$ (V + E)), where P is the number of pipelines connected to the specified city. \mbox{\Hypertarget{classWaterNetwork_a395fa06cc629fbe1fab1c7e4397b0960}\label{classWaterNetwork_a395fa06cc629fbe1fab1c7e4397b0960}} 
 \index{WaterNetwork@{WaterNetwork}!evaluateReservoirImpact@{evaluateReservoirImpact}}
 \index{evaluateReservoirImpact@{evaluateReservoirImpact}!WaterNetwork@{WaterNetwork}}
 \doxysubsubsection{\texorpdfstring{evaluateReservoirImpact()}{evaluateReservoirImpact()}}
@@ -158,7 +189,11 @@ This function evaluates the impact of removing all reservoirs from the water sup
 
 Evaluate the impact of removing a reservoir from the water supply network. (T3.\+1) 
 
-This function evaluates the impact of removing a reservoir specified by its code from the water supply network. It calculates the change in water flow to each city in the network before and after removing the reservoir. The function first checks if the provided reservoir code is valid and corresponds to a reservoir node in the network. Then, it retrieves the previous maximum flow of water to each city from a CSV file named \char`\"{}\+Max\+Flow.\+csv\char`\"{} if it exists, otherwise, it calculates the maximum flow using the multi\+Sink\+Max\+Flow function. After that, it constructs a subgraph containing only the connected component of the network that includes the specified reservoir. Next, it calculates the current maximum flow of water to each city in this subgraph. Finally, it prints the impact of removing the reservoir by comparing the previous and current flows to each city and displaying the difference, if any, in water flow.
+This function calculates the impact of removing a reservoir specified by its code from the water supply network. It first validates the provided reservoir code to ensure it corresponds to a reservoir node in the network. Then, it determines the change in water flow to each city in the network before and after removing the reservoir. The function achieves this by calculating the maximum flow of water to each city using the multi\+Sink\+Max\+Flow function.
+
+After validating the reservoir code and calculating the initial flow, the function constructs a subgraph consisting only of the connected component of the network that includes the specified reservoir. It then recalculates the maximum flow of water to each city in this subgraph.
+
+Finally, the function prints the impact of removing the reservoir by comparing the previous and current flows to each city and displaying the difference, if any, in water flow.
 
 
 \begin{DoxyParams}{Parameters}
@@ -170,7 +205,7 @@ This function evaluates the impact of removing a reservoir specified by its code
 {\em std\+::runtime\+\_\+error} & if the provided reservoir code is not valid or does not correspond to a reservoir node in the network.\\
 \hline
 \end{DoxyExceptions}
-@complexity O(V$^\wedge$2 + VE + ElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct the subgraph, and calculate the current flow to each city. \mbox{\Hypertarget{classWaterNetwork_a38e1c5ef4662c5dcd9e141c5d36492de}\label{classWaterNetwork_a38e1c5ef4662c5dcd9e141c5d36492de}} 
+@complexity The time complexity of this function is O(V$^\wedge$2 + VE + ElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct the subgraph, and calculate the current flow to each city. \mbox{\Hypertarget{classWaterNetwork_a38e1c5ef4662c5dcd9e141c5d36492de}\label{classWaterNetwork_a38e1c5ef4662c5dcd9e141c5d36492de}} 
 \index{WaterNetwork@{WaterNetwork}!getNetworkGraph@{getNetworkGraph}}
 \index{getNetworkGraph@{getNetworkGraph}!WaterNetwork@{WaterNetwork}}
 \doxysubsubsection{\texorpdfstring{getNetworkGraph()}{getNetworkGraph()}}
