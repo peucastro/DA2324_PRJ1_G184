@@ -51,7 +51,6 @@
   \item {comparePipes}
     \subitem {Utils.cpp}, \hyperpage{51}
     \subitem {Utils.hpp}, \hyperpage{42}
-    \subitem {WaterNetwork.cpp}, \hyperpage{55}
   \item {createSuperSink}
     \subitem {Utils.cpp}, \hyperpage{51}
     \subitem {Utils.hpp}, \hyperpage{42}
@@ -449,8 +448,6 @@
     \subitem {WaterNetwork}, \hyperpage{30}
   \item {waternetwork}
     \subitem {App}, \hyperpage{9}
-  \item {WaterNetwork.cpp}
-    \subitem {comparePipes}, \hyperpage{55}
   \item {weight}
     \subitem {Edge$<$ T $>$}, \hyperpage{13}
 
