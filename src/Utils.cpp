@@ -188,6 +188,11 @@ Node createSuperSink(Graph<Node> *g)
     return superNode;
 }
 
+bool comparePipes(const pair<Edge<Node> *, double> &a, const pair<Edge<Node> *, double> &b)
+{
+    return a.second > b.second;
+}
+
 void dfsVisitFindCC(Vertex<Node> *v, vector<Vertex<Node> *> &res)
 {
     v->setVisited(true);

@@ -154,39 +154,41 @@
 \contentsline {subsubsection}{\numberline {5.2.1.1}INF}{39}{subsubsection.5.2.1.1}%
 \contentsline {section}{\numberline {5.3}inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.hpp File Reference}{39}{section.5.3}%
 \contentsline {section}{\numberline {5.4}inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Utils.hpp File Reference}{40}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Function Documentation}{41}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.1}Function Documentation}{42}{subsection.5.4.1}%
 \contentsline {subsubsection}{\numberline {5.4.1.1}augmentFlowAlongPath()}{42}{subsubsection.5.4.1.1}%
-\contentsline {subsubsection}{\numberline {5.4.1.2}createSuperSink()}{42}{subsubsection.5.4.1.2}%
-\contentsline {subsubsection}{\numberline {5.4.1.3}createSuperSource()}{42}{subsubsection.5.4.1.3}%
-\contentsline {subsubsection}{\numberline {5.4.1.4}dfsVisitFindCC()}{43}{subsubsection.5.4.1.4}%
-\contentsline {subsubsection}{\numberline {5.4.1.5}edmondsKarp()}{43}{subsubsection.5.4.1.5}%
-\contentsline {subsubsection}{\numberline {5.4.1.6}findAugmentingPath()}{44}{subsubsection.5.4.1.6}%
-\contentsline {subsubsection}{\numberline {5.4.1.7}findConnectedComponent()}{44}{subsubsection.5.4.1.7}%
-\contentsline {subsubsection}{\numberline {5.4.1.8}findMinResidualAlongPath()}{45}{subsubsection.5.4.1.8}%
-\contentsline {subsubsection}{\numberline {5.4.1.9}resetGraph()}{45}{subsubsection.5.4.1.9}%
-\contentsline {subsubsection}{\numberline {5.4.1.10}testAndVisit()}{46}{subsubsection.5.4.1.10}%
-\contentsline {section}{\numberline {5.5}inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Water\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Network.hpp File Reference}{46}{section.5.5}%
-\contentsline {section}{\numberline {5.6}README.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}md File Reference}{47}{section.5.6}%
-\contentsline {section}{\numberline {5.7}src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}App.cpp File Reference}{47}{section.5.7}%
+\contentsline {subsubsection}{\numberline {5.4.1.2}comparePipes()}{42}{subsubsection.5.4.1.2}%
+\contentsline {subsubsection}{\numberline {5.4.1.3}createSuperSink()}{43}{subsubsection.5.4.1.3}%
+\contentsline {subsubsection}{\numberline {5.4.1.4}createSuperSource()}{43}{subsubsection.5.4.1.4}%
+\contentsline {subsubsection}{\numberline {5.4.1.5}dfsVisitFindCC()}{43}{subsubsection.5.4.1.5}%
+\contentsline {subsubsection}{\numberline {5.4.1.6}edmondsKarp()}{44}{subsubsection.5.4.1.6}%
+\contentsline {subsubsection}{\numberline {5.4.1.7}findAugmentingPath()}{44}{subsubsection.5.4.1.7}%
+\contentsline {subsubsection}{\numberline {5.4.1.8}findConnectedComponent()}{45}{subsubsection.5.4.1.8}%
+\contentsline {subsubsection}{\numberline {5.4.1.9}findMinResidualAlongPath()}{45}{subsubsection.5.4.1.9}%
+\contentsline {subsubsection}{\numberline {5.4.1.10}resetGraph()}{46}{subsubsection.5.4.1.10}%
+\contentsline {subsubsection}{\numberline {5.4.1.11}testAndVisit()}{46}{subsubsection.5.4.1.11}%
+\contentsline {section}{\numberline {5.5}inc/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Water\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Network.hpp File Reference}{47}{section.5.5}%
+\contentsline {section}{\numberline {5.6}README.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}md File Reference}{48}{section.5.6}%
+\contentsline {section}{\numberline {5.7}src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}App.cpp File Reference}{48}{section.5.7}%
 \contentsline {subsection}{\numberline {5.7.1}Function Documentation}{48}{subsection.5.7.1}%
 \contentsline {subsubsection}{\numberline {5.7.1.1}clearScreen()}{48}{subsubsection.5.7.1.1}%
 \contentsline {section}{\numberline {5.8}src/main.cpp File Reference}{48}{section.5.8}%
-\contentsline {subsection}{\numberline {5.8.1}Function Documentation}{48}{subsection.5.8.1}%
+\contentsline {subsection}{\numberline {5.8.1}Function Documentation}{49}{subsection.5.8.1}%
 \contentsline {subsubsection}{\numberline {5.8.1.1}main()}{49}{subsubsection.5.8.1.1}%
-\contentsline {section}{\numberline {5.9}src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.cpp File Reference}{49}{section.5.9}%
-\contentsline {section}{\numberline {5.10}src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Utils.cpp File Reference}{49}{section.5.10}%
-\contentsline {subsection}{\numberline {5.10.1}Function Documentation}{50}{subsection.5.10.1}%
-\contentsline {subsubsection}{\numberline {5.10.1.1}augmentFlowAlongPath()}{50}{subsubsection.5.10.1.1}%
-\contentsline {subsubsection}{\numberline {5.10.1.2}createSuperSink()}{50}{subsubsection.5.10.1.2}%
-\contentsline {subsubsection}{\numberline {5.10.1.3}createSuperSource()}{51}{subsubsection.5.10.1.3}%
-\contentsline {subsubsection}{\numberline {5.10.1.4}dfsVisitFindCC()}{51}{subsubsection.5.10.1.4}%
-\contentsline {subsubsection}{\numberline {5.10.1.5}edmondsKarp()}{51}{subsubsection.5.10.1.5}%
-\contentsline {subsubsection}{\numberline {5.10.1.6}findAugmentingPath()}{53}{subsubsection.5.10.1.6}%
-\contentsline {subsubsection}{\numberline {5.10.1.7}findConnectedComponent()}{53}{subsubsection.5.10.1.7}%
-\contentsline {subsubsection}{\numberline {5.10.1.8}findMinResidualAlongPath()}{53}{subsubsection.5.10.1.8}%
-\contentsline {subsubsection}{\numberline {5.10.1.9}resetGraph()}{54}{subsubsection.5.10.1.9}%
-\contentsline {subsubsection}{\numberline {5.10.1.10}testAndVisit()}{54}{subsubsection.5.10.1.10}%
-\contentsline {section}{\numberline {5.11}src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Water\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Network.cpp File Reference}{54}{section.5.11}%
+\contentsline {section}{\numberline {5.9}src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node.cpp File Reference}{50}{section.5.9}%
+\contentsline {section}{\numberline {5.10}src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Utils.cpp File Reference}{50}{section.5.10}%
+\contentsline {subsection}{\numberline {5.10.1}Function Documentation}{51}{subsection.5.10.1}%
+\contentsline {subsubsection}{\numberline {5.10.1.1}augmentFlowAlongPath()}{51}{subsubsection.5.10.1.1}%
+\contentsline {subsubsection}{\numberline {5.10.1.2}comparePipes()}{51}{subsubsection.5.10.1.2}%
+\contentsline {subsubsection}{\numberline {5.10.1.3}createSuperSink()}{52}{subsubsection.5.10.1.3}%
+\contentsline {subsubsection}{\numberline {5.10.1.4}createSuperSource()}{52}{subsubsection.5.10.1.4}%
+\contentsline {subsubsection}{\numberline {5.10.1.5}dfsVisitFindCC()}{52}{subsubsection.5.10.1.5}%
+\contentsline {subsubsection}{\numberline {5.10.1.6}edmondsKarp()}{53}{subsubsection.5.10.1.6}%
+\contentsline {subsubsection}{\numberline {5.10.1.7}findAugmentingPath()}{53}{subsubsection.5.10.1.7}%
+\contentsline {subsubsection}{\numberline {5.10.1.8}findConnectedComponent()}{53}{subsubsection.5.10.1.8}%
+\contentsline {subsubsection}{\numberline {5.10.1.9}findMinResidualAlongPath()}{54}{subsubsection.5.10.1.9}%
+\contentsline {subsubsection}{\numberline {5.10.1.10}resetGraph()}{54}{subsubsection.5.10.1.10}%
+\contentsline {subsubsection}{\numberline {5.10.1.11}testAndVisit()}{54}{subsubsection.5.10.1.11}%
+\contentsline {section}{\numberline {5.11}src/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Water\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Network.cpp File Reference}{55}{section.5.11}%
 \contentsline {subsection}{\numberline {5.11.1}Function Documentation}{55}{subsection.5.11.1}%
 \contentsline {subsubsection}{\numberline {5.11.1.1}comparePipes()}{55}{subsubsection.5.11.1.1}%
 \contentsline {chapter}{Index}{57}{section*.42}%

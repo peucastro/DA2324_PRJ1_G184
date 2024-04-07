@@ -35,6 +35,8 @@ void \mbox{\hyperlink{Utils_8hpp_a0cf11d9d9e3226fa160682b451a7c029}{reset\+Graph
 \begin{DoxyCompactList}\small\item\em Function to create a super source node in the graph. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classNode}{Node}} \mbox{\hyperlink{Utils_8hpp_a62c474099c594006cc3104d5a2a0a313}{create\+Super\+Sink}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g)
 \begin{DoxyCompactList}\small\item\em Function to create a super sink node in the graph. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{Utils_8hpp_a6e3d02abda4de7cea70781814abfbf06}{compare\+Pipes}} (const std\+::pair$<$ \mbox{\hyperlink{classEdge}{Edge}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$, double $>$ \&a, const std\+::pair$<$ \mbox{\hyperlink{classEdge}{Edge}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$, double $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Compare function for sorting pipes based on their difference. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{Utils_8hpp_a5ccb2875cbf9060c3713025624732760}{dfs\+Visit\+Find\+CC}} (\mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$v, std\+::vector$<$ \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$ $>$ \&res)
 \begin{DoxyCompactList}\small\item\em Depth-\/first search visit function to find connected components. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$ \mbox{\hyperlink{Utils_8hpp_a51983c36be7537268ed5c7769a03aa44}{find\+Connected\+Component}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g, const std\+::string \&node\+\_\+code)
@@ -63,7 +65,29 @@ This function traverses the augmenting path from the target vertex to the source
 {\em f} & The flow value to augment along the path.\\
 \hline
 \end{DoxyParams}
-@complexity O(\+V) \mbox{\Hypertarget{Utils_8hpp_a62c474099c594006cc3104d5a2a0a313}\label{Utils_8hpp_a62c474099c594006cc3104d5a2a0a313}} 
+@complexity O(\+V) \mbox{\Hypertarget{Utils_8hpp_a6e3d02abda4de7cea70781814abfbf06}\label{Utils_8hpp_a6e3d02abda4de7cea70781814abfbf06}} 
+\index{Utils.hpp@{Utils.hpp}!comparePipes@{comparePipes}}
+\index{comparePipes@{comparePipes}!Utils.hpp@{Utils.hpp}}
+\doxysubsubsection{\texorpdfstring{comparePipes()}{comparePipes()}}
+{\footnotesize\ttfamily bool compare\+Pipes (\begin{DoxyParamCaption}\item[{const std\+::pair$<$ \mbox{\hyperlink{classEdge}{Edge}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$, double $>$ \&}]{a,  }\item[{const std\+::pair$<$ \mbox{\hyperlink{classEdge}{Edge}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$, double $>$ \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Compare function for sorting pipes based on their difference. 
+
+This function is used as a comparison criterion for sorting pipes based on their difference values. It takes two pairs containing a pointer to an edge representing a pipe and its corresponding difference value. It returns true if the difference of the first pair is greater than the difference of the second pair, indicating that the first pipe should be placed before the second pipe in the sorted sequence.
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & The first pair containing a pointer to an edge and its difference value. \\
+\hline
+{\em b} & The second pair containing a pointer to an edge and its difference value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the difference of the first pair is greater than the difference of the second pair, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Utils_8hpp_a62c474099c594006cc3104d5a2a0a313}\label{Utils_8hpp_a62c474099c594006cc3104d5a2a0a313}} 
 \index{Utils.hpp@{Utils.hpp}!createSuperSink@{createSuperSink}}
 \index{createSuperSink@{createSuperSink}!Utils.hpp@{Utils.hpp}}
 \doxysubsubsection{\texorpdfstring{createSuperSink()}{createSuperSink()}}

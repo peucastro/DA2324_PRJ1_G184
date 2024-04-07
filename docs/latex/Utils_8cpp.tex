@@ -27,6 +27,8 @@ void \mbox{\hyperlink{Utils_8cpp_a0cf11d9d9e3226fa160682b451a7c029}{reset\+Graph
 \begin{DoxyCompactList}\small\item\em Function to create a super source node in the graph. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classNode}{Node}} \mbox{\hyperlink{Utils_8cpp_a62c474099c594006cc3104d5a2a0a313}{create\+Super\+Sink}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g)
 \begin{DoxyCompactList}\small\item\em Function to create a super sink node in the graph. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{Utils_8cpp_a14934171d28762cf3e06772d3e5da467}{compare\+Pipes}} (const pair$<$ \mbox{\hyperlink{classEdge}{Edge}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$, double $>$ \&a, const pair$<$ \mbox{\hyperlink{classEdge}{Edge}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$, double $>$ \&b)
+\item 
 void \mbox{\hyperlink{Utils_8cpp_a90d49177de08a1fdb2d558850be95477}{dfs\+Visit\+Find\+CC}} (\mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$v, vector$<$ \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$ $>$ \&res)
 \item 
 \mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$ \mbox{\hyperlink{Utils_8cpp_a9224a420fa7da85650c4dc7010161947}{find\+Connected\+Component}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$g, const string \&node\+\_\+code)
@@ -55,7 +57,13 @@ This function traverses the augmenting path from the target vertex to the source
 {\em f} & The flow value to augment along the path.\\
 \hline
 \end{DoxyParams}
-@complexity O(\+V) \mbox{\Hypertarget{Utils_8cpp_a62c474099c594006cc3104d5a2a0a313}\label{Utils_8cpp_a62c474099c594006cc3104d5a2a0a313}} 
+@complexity O(\+V) \mbox{\Hypertarget{Utils_8cpp_a14934171d28762cf3e06772d3e5da467}\label{Utils_8cpp_a14934171d28762cf3e06772d3e5da467}} 
+\index{Utils.cpp@{Utils.cpp}!comparePipes@{comparePipes}}
+\index{comparePipes@{comparePipes}!Utils.cpp@{Utils.cpp}}
+\doxysubsubsection{\texorpdfstring{comparePipes()}{comparePipes()}}
+{\footnotesize\ttfamily bool compare\+Pipes (\begin{DoxyParamCaption}\item[{const pair$<$ \mbox{\hyperlink{classEdge}{Edge}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$, double $>$ \&}]{a,  }\item[{const pair$<$ \mbox{\hyperlink{classEdge}{Edge}}$<$ \mbox{\hyperlink{classNode}{Node}} $>$ $\ast$, double $>$ \&}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{Utils_8cpp_a62c474099c594006cc3104d5a2a0a313}\label{Utils_8cpp_a62c474099c594006cc3104d5a2a0a313}} 
 \index{Utils.cpp@{Utils.cpp}!createSuperSink@{createSuperSink}}
 \index{createSuperSink@{createSuperSink}!Utils.cpp@{Utils.cpp}}
 \doxysubsubsection{\texorpdfstring{createSuperSink()}{createSuperSink()}}

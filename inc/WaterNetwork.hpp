@@ -116,7 +116,7 @@ public:
      * @param g Pointer to the graph for which metrics are to be calculated.
      * @return A vector of pairs containing the calculated metrics.
      */
-    std::vector<std::pair<std::string, double>> calculateMetrics(Graph<Node> *g) const; // T2.3
+    std::vector<std::pair<std::string, double>> calculateMetrics(Graph<Node> *g) const;
 
     /**
      * @brief Evaluate the impact of removing a reservoir from the water supply network. (T3.1)
@@ -137,7 +137,7 @@ public:
      *
      * @throw std::runtime_error if the provided reservoir code is not valid or does not correspond to a reservoir node in the network.
      *
-     * @complexity The time complexity of this function is O(V^2 + VE + ElogV), where V is the number of vertices and E is the number of edges in the graph.
+     * @complexity The time complexity of this function is O(V * E^2), where V is the number of vertices and E is the number of edges in the graph.
      * This complexity arises from the operations performed to retrieve previous flow data, construct the subgraph, and calculate the current flow to each city.
      */
     void evaluateReservoirImpact(const std::string &reservoir_code) const;
@@ -154,7 +154,7 @@ public:
      * within this subgraph. Finally, the function prints the impact of removing the reservoir by comparing the previous
      * and current flows to each city and displaying any differences in water flow.
      *
-     * @complexity The time complexity of this function is O(V^3 + V^2E + VElogV), where V is the number of vertices and E is the number of edges in the graph.
+     * @complexity The time complexity of this function is O(V * E^2 + V^2), where V is the number of vertices and E is the number of edges in the graph.
      * This complexity arises from the operations performed to retrieve previous flow data, construct subgraphs for each reservoir,
      * calculate current flows, and print the impact for each reservoir.
      */
@@ -172,7 +172,7 @@ public:
      * within this subgraph. Finally, the function prints the impact of removing the pumping station by comparing the previous
      * and current flows to each city and displaying any differences in water flow.
      *
-     * @complexity The time complexity of this function is O(V^3 + V^2E + VElogV), where V is the number of vertices and E is the number of edges in the graph.
+     * @complexity The time complexity of this function is O(V * E^2 + V^2), where V is the number of vertices and E is the number of edges in the graph.
      * This complexity arises from the operations performed to retrieve previous flow data, construct subgraphs for each pumping station,
      * calculate current flows, and print the impact for each pumping station.
      */
@@ -198,7 +198,7 @@ public:
      *
      * @complexity The time complexity of this function depends on the size of the network and the number of pipelines connected to the specified city.
      * For each pipeline, it constructs a subgraph, which has a complexity of O(V + E), where V is the number of vertices and E is the number of edges.
-     * Thus, the overall time complexity is O(P * (V + E)), where P is the number of pipelines connected to the specified city.
+     * Thus, the overall time complexity is O(V * E + V * E^2), where V is the number of vertices and E is the number of edges in the graph.
      */
     void evaluatePipelineImpact(const std::string &city_code) const;
 

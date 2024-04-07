@@ -273,7 +273,7 @@ Private Attributes</h2></td></tr>
 <p>Evaluate the impact of removing all pumping stations from the water supply network, one at a time. (T3.1) </p>
 <p>This function assesses the consequences of removing each pumping station from the water supply network individually. It calculates the change in water flow to each city in the network before and after removing each pumping station.</p>
 <p>To begin, the function computes the initial water flow to each city using the multiSinkMaxFlow function. Then, for each pumping station node in the network, it constructs a subgraph that contains only the connected component of the network excluding the pumping station. Subsequently, it determines the current maximum flow of water to each city within this subgraph. Finally, the function prints the impact of removing the pumping station by comparing the previous and current flows to each city and displaying any differences in water flow.</p>
-<p>@complexity The time complexity of this function is O(V^3 + V^2E + VElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct subgraphs for each pumping station, calculate current flows, and print the impact for each pumping station. </p>
+<p>@complexity The time complexity of this function is O(V * E^2 + V^2), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct subgraphs for each pumping station, calculate current flows, and print the impact for each pumping station. </p>
 
 </div>
 </div>
@@ -295,7 +295,7 @@ Private Attributes</h2></td></tr>
 <p>Evaluate the impact of removing all reservoirs from the water supply network, one at a time. (T3.1) </p>
 <p>This function assesses the consequences of removing each reservoir from the water supply network individually. It calculates the change in water flow to each city in the network before and after removing each reservoir.</p>
 <p>To begin, the function computes the initial water flow to each city using the multiWaterNeeds function. Then, for each reservoir node in the network, it constructs a subgraph that contains only the connected component of the network including the reservoir. Subsequently, it determines the current maximum flow of water to each city within this subgraph. Finally, the function prints the impact of removing the reservoir by comparing the previous and current flows to each city and displaying any differences in water flow.</p>
-<p>@complexity The time complexity of this function is O(V^3 + V^2E + VElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct subgraphs for each reservoir, calculate current flows, and print the impact for each reservoir. </p>
+<p>@complexity The time complexity of this function is O(V * E^2 + V^2), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct subgraphs for each reservoir, calculate current flows, and print the impact for each reservoir. </p>
 
 </div>
 </div>
@@ -325,7 +325,7 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>@complexity The time complexity of this function depends on the size of the network and the number of pipelines connected to the specified city. For each pipeline, it constructs a subgraph, which has a complexity of O(V + E), where V is the number of vertices and E is the number of edges. Thus, the overall time complexity is O(P * (V + E)), where P is the number of pipelines connected to the specified city. </p>
+<p>@complexity The time complexity of this function depends on the size of the network and the number of pipelines connected to the specified city. For each pipeline, it constructs a subgraph, which has a complexity of O(V + E), where V is the number of vertices and E is the number of edges. Thus, the overall time complexity is O(V * E + V * E^2), where V is the number of vertices and E is the number of edges in the graph. </p>
 
 </div>
 </div>
@@ -361,7 +361,7 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>@complexity The time complexity of this function is O(V^2 + VE + ElogV), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct the subgraph, and calculate the current flow to each city. </p>
+<p>@complexity The time complexity of this function is O(V * E^2), where V is the number of vertices and E is the number of edges in the graph. This complexity arises from the operations performed to retrieve previous flow data, construct the subgraph, and calculate the current flow to each city. </p>
 
 </div>
 </div>

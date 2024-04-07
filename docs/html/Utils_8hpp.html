@@ -133,6 +133,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a62c474099c594006cc3104d5a2a0a313"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNode.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8hpp.html#a62c474099c594006cc3104d5a2a0a313">createSuperSink</a> (<a class="el" href="classGraph.html">Graph</a>&lt; <a class="el" href="classNode.html">Node</a> &gt; *g)</td></tr>
 <tr class="memdesc:a62c474099c594006cc3104d5a2a0a313"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to create a super sink node in the graph.  <a href="Utils_8hpp.html#a62c474099c594006cc3104d5a2a0a313">More...</a><br /></td></tr>
 <tr class="separator:a62c474099c594006cc3104d5a2a0a313"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e3d02abda4de7cea70781814abfbf06"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8hpp.html#a6e3d02abda4de7cea70781814abfbf06">comparePipes</a> (const std::pair&lt; <a class="el" href="classEdge.html">Edge</a>&lt; <a class="el" href="classNode.html">Node</a> &gt; *, double &gt; &amp;a, const std::pair&lt; <a class="el" href="classEdge.html">Edge</a>&lt; <a class="el" href="classNode.html">Node</a> &gt; *, double &gt; &amp;b)</td></tr>
+<tr class="memdesc:a6e3d02abda4de7cea70781814abfbf06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare function for sorting pipes based on their difference.  <a href="Utils_8hpp.html#a6e3d02abda4de7cea70781814abfbf06">More...</a><br /></td></tr>
+<tr class="separator:a6e3d02abda4de7cea70781814abfbf06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ccb2875cbf9060c3713025624732760"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8hpp.html#a5ccb2875cbf9060c3713025624732760">dfsVisitFindCC</a> (<a class="el" href="classVertex.html">Vertex</a>&lt; <a class="el" href="classNode.html">Node</a> &gt; *v, std::vector&lt; <a class="el" href="classVertex.html">Vertex</a>&lt; <a class="el" href="classNode.html">Node</a> &gt; * &gt; &amp;res)</td></tr>
 <tr class="memdesc:a5ccb2875cbf9060c3713025624732760"><td class="mdescLeft">&#160;</td><td class="mdescRight">Depth-first search visit function to find connected components.  <a href="Utils_8hpp.html#a5ccb2875cbf9060c3713025624732760">More...</a><br /></td></tr>
 <tr class="separator:a5ccb2875cbf9060c3713025624732760"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,6 +187,45 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <p>@complexity O(V) </p>
+
+</div>
+</div>
+<a id="a6e3d02abda4de7cea70781814abfbf06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e3d02abda4de7cea70781814abfbf06">&#9670;&nbsp;</a></span>comparePipes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool comparePipes </td>
+          <td>(</td>
+          <td class="paramtype">const std::pair&lt; <a class="el" href="classEdge.html">Edge</a>&lt; <a class="el" href="classNode.html">Node</a> &gt; *, double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::pair&lt; <a class="el" href="classEdge.html">Edge</a>&lt; <a class="el" href="classNode.html">Node</a> &gt; *, double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compare function for sorting pipes based on their difference. </p>
+<p>This function is used as a comparison criterion for sorting pipes based on their difference values. It takes two pairs containing a pointer to an edge representing a pipe and its corresponding difference value. It returns true if the difference of the first pair is greater than the difference of the second pair, indicating that the first pipe should be placed before the second pipe in the sorted sequence.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>The first pair containing a pointer to an edge and its difference value. </td></tr>
+    <tr><td class="paramname">b</td><td>The second pair containing a pointer to an edge and its difference value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the difference of the first pair is greater than the difference of the second pair, false otherwise. </dd></dl>
 
 </div>
 </div>

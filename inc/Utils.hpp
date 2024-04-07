@@ -118,6 +118,20 @@ Node createSuperSource(Graph<Node> *g);
 Node createSuperSink(Graph<Node> *g);
 
 /**
+ * @brief Compare function for sorting pipes based on their difference.
+ *
+ * This function is used as a comparison criterion for sorting pipes based on their difference values.
+ * It takes two pairs containing a pointer to an edge representing a pipe and its corresponding difference value.
+ * It returns true if the difference of the first pair is greater than the difference of the second pair, indicating
+ * that the first pipe should be placed before the second pipe in the sorted sequence.
+ *
+ * @param a The first pair containing a pointer to an edge and its difference value.
+ * @param b The second pair containing a pointer to an edge and its difference value.
+ * @return True if the difference of the first pair is greater than the difference of the second pair, false otherwise.
+ */
+bool comparePipes(const std::pair<Edge<Node> *, double> &a, const std::pair<Edge<Node> *, double> &b);
+
+/**
  * @brief Depth-first search visit function to find connected components.
  *
  * This function performs a depth-first search (DFS) traversal starting from a given vertex to find all
@@ -152,6 +166,5 @@ void dfsVisitFindCC(Vertex<Node> *v, std::vector<Vertex<Node> *> &res);
  * @complexity O(V + E), where V is the number of vertices and E is the number of edges in the graph.
  */
 Graph<Node> *findConnectedComponent(Graph<Node> *g, const std::string &node_code);
-
 
 #endif
