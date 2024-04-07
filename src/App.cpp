@@ -211,7 +211,7 @@ void App::maxFlowMenu()
             totalFlow += p.second;
         }
         cout << endl
-             << "Toal flow: " << totalFlow << endl
+             << "Total flow: " << totalFlow << endl
              << endl
              << "You can also check this information in the output folder (MaxFLow.csv)." << endl
              << "=================================================================================================" << endl;
@@ -459,25 +459,14 @@ void App::pipeImpactMenu()
 void App::stationImpactMenu()
 {
 
-    string answer;
     cout << "Can any pumping station be temporarily taken out of service without affecting the delivery capacity to all the cities?" << endl
-         << "The answer is yes (or no)! XX could be temporarily removed.\n"
-         << "================================================================================================= \n"
-         << "Do you want to check the impact of temporarily removing each pumping station? [Y/N] \n"
-         << "-> ";
-    cin >> answer;
-    answer = upperCase(answer);
+         << "Let's check the impact of temporarily removing each pumping station.\n"
+         << "================================================================================================= \n";
 
-    if (answer == "Y")
-    {
-
-        cout << endl
-             << "================================================================================================= \n"
-             << "Let's check the impact of temporarily removing each pumping station:" << endl;
         waternetwork.evaluateAllPumpingStationImpact();
         cout << endl
              << "=================================================================================================" << endl;
-    }
+
 
     goBackMainMenu();
 }

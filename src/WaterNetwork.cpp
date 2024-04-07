@@ -307,7 +307,9 @@ void WaterNetwork::evaluateReservoirImpact(const string &reservoir_code) const
     subgraph_vertex->setUsedDelivery(subgraph_vertex->getInfo().getMaxDelivery());
     vector<pair<string, double>> currentFlow = multiSinkMaxFlow(subgraph, false);
 
-    cout << "IMPACT OF REMOVING THE RESERVOIR " << reservoir_code << ":\n";
+    cout << "Impact of removing the reservoir " << reservoir_code << ":\n";
+    cout << "-------------------------------------------------------------------------------" << endl;
+    cout << setw(10) << left << "Cities" << setw(15) << left << "| Old Flow" << setw(15) << left << "| New Flow" << setw(15) << left << "| Difference "<< endl;
     for (size_t i = 0; i < currentFlow.size(); i++)
     {
         string currCity = currentFlow[i].first;
@@ -318,7 +320,7 @@ void WaterNetwork::evaluateReservoirImpact(const string &reservoir_code) const
         {
             double diff = it->second - currentFlow[i].second;
             if (diff != 0)
-                cout << "CITY: " << it->first << "  -->  OLD FLOW: " << it->second << "  ;  NEW FLOW: " << currentFlow[i].second << "  ;  DIFFERENCE: " << diff << endl;
+                cout << std::setw(15) << it->first << setw(15) << it->second << setw(15)  << currentFlow[i].second << setw(15) << diff << endl;
         }
     }
 
@@ -339,18 +341,20 @@ void WaterNetwork::evaluateAllReservoirImpact() const
             subgraph_vertex->setUsedDelivery(subgraph_vertex->getInfo().getMaxDelivery());
             currentFlow = multiSinkMaxFlow(subgraph, false);
 
-            cout << "IMPACT OF REMOVING THE RESERVOIR " << v->getInfo().getCode() << ":\n";
+            cout << "Impact of removing the reservoir " << v->getInfo().getCode() << ":\n";
+            cout << "-------------------------------------------------------------------------------" << endl;
+            cout << setw(10) << left << "Cities" << setw(15) << left << "| Old Flow" << setw(15) << left << "| New Flow" << setw(15) << left << "| Difference "<< endl;
             for (size_t i = 0; i < currentFlow.size(); i++)
             {
                 string currCity = currentFlow[i].first;
                 vector<pair<string, double>>::iterator it = find_if(previousFlow.begin(), previousFlow.end(),
                                                                     [currCity](const pair<string, double> &p)
                                                                     { return p.first == currCity; });
-                if (it != previousFlow.end())
+                                if (it != previousFlow.end())
                 {
                     double diff = it->second - currentFlow[i].second;
                     if (diff != 0)
-                        cout << "CITY: " << it->first << "  -->  OLD FLOW: " << it->second << "  ;  NEW FLOW: " << currentFlow[i].second << "  ;  DIFFERENCE: " << diff << endl;
+                        cout << std::setw(15) << it->first <<  setw(15) << it->second << setw(15) << currentFlow[i].second << setw(15) << diff << endl;
                 }
             }
 
@@ -362,8 +366,9 @@ void WaterNetwork::evaluateAllReservoirImpact() const
 
 void WaterNetwork::evaluateAllPumpingStationImpact() const
 {
+    int CityDeficit;
     vector<pair<string, double>> previousFlow = multiSinkMaxFlow(network, true);
-
+    vector<string> removable;
     vector<pair<string, double>> currentFlow;
     for (Vertex<Node> *v : network->getVertexSet())
     {
@@ -374,7 +379,9 @@ void WaterNetwork::evaluateAllPumpingStationImpact() const
             subgraph->removeVertex(ps);
             currentFlow = multiSinkMaxFlow(subgraph, false);
 
-            cout << "IMPACT OF REMOVING THE PUMPING STATION " << ps.getCode() << ":\n";
+            cout << "Impact of removing the pumping station " << v->getInfo().getCode() << ":\n";
+            cout << "-------------------------------------------------------------------------------" << endl;
+            cout << setw(10) << left << "Cities" << setw(15) << left << "| Old Flow" << setw(15) << left << "| New Flow" << setw(15) << left << "| Difference "<< endl;
             for (size_t i = 0; i < currentFlow.size(); i++)
             {
                 string currCity = currentFlow[i].first;
@@ -384,14 +391,26 @@ void WaterNetwork::evaluateAllPumpingStationImpact() const
                 if (it != previousFlow.end())
                 {
                     double diff = it->second - currentFlow[i].second;
-                    if (diff != 0)
-                        cout << "CITY: " << it->first << "  -->  OLD FLOW: " << it->second << "  ;  NEW FLOW: " << currentFlow[i].second << "  ;  DIFFERENCE: " << diff << endl;
+                    if (diff != 0) {
+                        cout << std::setw(15) << it->first << setw(15) << it->second << setw(15)
+                             << currentFlow[i].second << setw(15) << diff << endl;
+                        CityDeficit++;
+                    }
                 }
             }
-
+            if (!CityDeficit) removable.push_back(v->getInfo().getCode());
+            CityDeficit = 0;
             cout << endl;
         }
     }
+
+    if (!removable.empty()){
+        cout << "So, it is possible to temporarily remove a pumping station!" << endl;
+        cout << "Pumping Stations that could be removed:\n";
+        for (auto element : removable){
+            cout << element << endl;
+        }
+    }   else cout << "Unfortunately, it is not possible temporarily remove a pumping station without affecting the delivery capacity of the system.\n";
 }
 
 void WaterNetwork::evaluatePipelineImpact(const std::string &city_code) const
