@@ -187,11 +187,6 @@ vector<pair<string, double>> WaterNetwork::multiWaterNeeds(Graph<Node> *g, const
     return res;
 }
 
-bool comparePipes(const pair<Edge<Node> *, double> &a, const pair<Edge<Node> *, double> &b)
-{
-    return a.second > b.second;
-}
-
 vector<pair<string, double>> WaterNetwork::calculateMetrics(Graph<Node> *g) const
 {
     vector<pair<string, double>> res;
@@ -329,7 +324,7 @@ void WaterNetwork::evaluateReservoirImpact(const string &reservoir_code) const
 
 void WaterNetwork::evaluateAllReservoirImpact() const
 {
-    vector<pair<string, double>> previousFlow = multiWaterNeeds(network, true);
+    vector<pair<string, double>> previousFlow = multiSinkMaxFlow(network, true);
 
     vector<pair<string, double>> currentFlow;
     for (Vertex<Node> *v : network->getVertexSet())
@@ -415,14 +410,14 @@ void WaterNetwork::evaluateAllPumpingStationImpact() const
 
 void WaterNetwork::evaluatePipelineImpact(const std::string &city_code) const
 {
-    double previousCityDeficit;
-    vector<pair<string, double>> previousDeficit = multiWaterNeeds(network, true);
+    double previousCityFlow;
+    vector<pair<string, double>> previousFlow = multiSinkMaxFlow(network, true);
     Node city(city_code);
     Vertex<Node> *city_vertex = network->findVertex(city);
 
-    vector<pair<string, double>> currentDeficit;
+    vector<pair<string, double>> currentFlow;
     cout << "Pipelines that, if removed, will impact the city " << city_code << ':' << endl
-         << setw(10) << left << "Pipes" << setw(15) << left << "| Impact" << endl
+         << setw(15) << left << "Pipes" << setw(15) << left << "| Old Flow" << setw(15) << left << "| New Flow" << setw(15) << left << "| Difference "<< endl
          << "-------------------------------------------------------------------------------" << endl;
 
     for (Vertex<Node> *v : network->getVertexSet())
@@ -434,25 +429,25 @@ void WaterNetwork::evaluatePipelineImpact(const std::string &city_code) const
             pipe->setWeight(0);
 
             Graph<Node> *subgraph = findConnectedComponent(network, pipe->getOrig()->getInfo().getCode());
-            currentDeficit = multiWaterNeeds(subgraph, false);
+            currentFlow = multiSinkMaxFlow(subgraph, false);
 
-            for (pair<string, double> &p : previousDeficit)
+            for (pair<string, double> &p : previousFlow)
             {
                 string currCity = p.first;
                 if (currCity != city_code)
                     continue;
-                vector<pair<string, double>>::iterator it = find_if(currentDeficit.begin(), currentDeficit.end(),
-                                                                    [currCity](const pair<string, double> &pairInCurrentDeficit)
-                                                                    { return pairInCurrentDeficit.first == currCity; });
+                vector<pair<string, double>>::iterator it = find_if(currentFlow.begin(), currentFlow.end(),
+                                                                    [currCity](const pair<string, double> &p)
+                                                                    { return p.first == currCity; });
 
-                if (it == currentDeficit.end() || p.second - it->second == 0)
+                if (it == currentFlow.end() || p.second - it->second == 0)
                 {
                     continue;
-                    cout << setw(15) << currCity << setw(15) << "no" << setw(15) << "--" << '\n';
                 }
                 else
                 {
-                    cout << pipe->getOrig()->getInfo().getCode() << " -> " << setw(15) << pipe->getDest()->getInfo().getCode() << setw(15) << "yes" << setw(15) << p.second - it->second << '\n';
+                    double diff = it->second - p.second;
+                    cout << pipe->getOrig()->getInfo().getCode() << " -> " << setw(15) << pipe->getDest()->getInfo().getCode() << setw(15) << p.second << setw(15) << it->second << diff <<'\n';
                 }
             }
             v->setVisited(false);
